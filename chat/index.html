@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="A technical case study of Maple Chat: hybrid retrieval, knowledge-graph grounding, data operations, and failure-driven quality improvement."
+      content="A production case study of Maple Chat: why hybrid RAG needed evidence-role separation, why a knowledge graph was added, and what changed after both fixes."
     >
     <meta name="theme-color" content="#f5f2ea">
     <meta property="og:title" content="Maple Chat — Evidence-grounded RAG">
     <meta
       property="og:description"
-      content="A local-first Discord RAG system combining community evidence, official updates, and a reviewed knowledge graph."
+      content="See one production failure move from conflicting answers and invented terminology to a grounded, consistent result."
     >
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyun-s.github.io/Maple_projects_site/chat/">
@@ -42,6 +42,7 @@
         </a>
         <nav class="section-nav" aria-label="On this page">
           <a href="#overview">Overview</a>
+          <a href="#case-study">Case</a>
           <a href="#pipeline">Pipeline</a>
           <a href="#retrieval">Retrieval</a>
           <a href="#knowledge">Graph</a>
@@ -131,9 +132,136 @@
         </aside>
       </section>
 
+      <section class="section section-case" id="case-study" aria-labelledby="case-study-title">
+        <div class="section-heading">
+          <p class="section-index">02 / Production case</p>
+          <h2 id="case-study-title">One intent.<br>Two answers. Then one grounded result.</h2>
+          <p>
+            A manual Discord test exposed two linked failures: equivalent questions retrieved different
+            evidence and produced conflicting procedures, while the retrieved comments introduced shorthand
+            that the model expanded into nonexistent item names.
+          </p>
+        </div>
+
+        <div class="case-source-note">
+          <span>Incident record · SQ-2026-08-24-001 / 002</span>
+          <p>Prompts and item labels are descriptive English translations of the original Korean exchange; final-answer lines summarize the logged conclusions.</p>
+        </div>
+
+        <div class="case-prompt-panel">
+          <div class="case-panel-heading">
+            <span>Same intent</span>
+            <strong>Two ways to ask the question</strong>
+          </div>
+          <div class="case-prompt-grid">
+            <article>
+              <span class="case-letter">A</span>
+              <blockquote>“How should I upgrade Xenon armor myself?”</blockquote>
+            </article>
+            <article>
+              <span class="case-letter">B</span>
+              <blockquote>“What upgrade order should I use for Xenon armor?”</blockquote>
+            </article>
+          </div>
+        </div>
+
+        <div class="case-before" aria-label="Answers before the generalized fix">
+          <div class="case-before-heading">
+            <div>
+              <span>Before · operating-pipeline reproduction</span>
+              <h3>The phrasing changed the retrieved evidence—and the answer.</h3>
+            </div>
+            <strong class="case-status case-status-failed">Conflict reproduced</strong>
+          </div>
+          <div class="case-answer-grid">
+            <article>
+              <span>Answer A</span>
+              <p><b>Positive Chaos Scroll</b><i>→</i><b>Bonus Stats + Star Force</b></p>
+            </article>
+            <article>
+              <span>Answer B</span>
+              <p><b>Bonus Stats</b><i>→</i><b>Positive Chaos Scroll</b><i>→</i><b>Star Force</b></p>
+            </article>
+          </div>
+          <p class="case-root-cause">
+            <strong>Root cause.</strong> Each paraphrase surfaced a different evidence set, and assumptions copied from question posts
+            were allowed to behave like answer claims. No structured step compared the competing procedures.
+          </p>
+        </div>
+
+        <div class="case-rationale-grid">
+          <article class="case-rationale case-rag">
+            <div class="case-rationale-topline">
+              <span>01 / Why RAG</span>
+              <b>Evidence</b>
+            </div>
+            <h3>Current community advice needs a source, not model memory.</h3>
+            <p>
+              Procedures and patch context change. Hybrid retrieval is necessary to find current community reports,
+              preserve provenance, and expose disagreement instead of presenting an unsupported answer.
+            </p>
+            <div class="case-change">
+              <span>What changed</span>
+              <p><code>question_only</code> chunks provide context but cannot support claims. After hybrid retrieval and reranking, only the answer-bearing comment segment enters claim evidence, model context, and graph enrichment.</p>
+            </div>
+            <p class="case-limit"><strong>Necessary, not sufficient:</strong> relevant comments can still contain ambiguous shorthand and incorrect entity scope.</p>
+          </article>
+
+          <article class="case-rationale case-graph">
+            <div class="case-rationale-topline">
+              <span>02 / Why a knowledge graph</span>
+              <b>Identity</b>
+            </div>
+            <h3>Relevant text can still name the wrong thing.</h3>
+            <p>
+              The shorthand appeared inside retrieved comments—not in the prompts—so query-only entity linking missed it.
+              Free generation then invented expansions such as “Amazing Positivity,” “Amazing Pride,” and “Recommended Option.”
+            </p>
+            <div class="case-relations" aria-label="Relations used to ground the answer">
+              <p><code>shorthand</code><i>abbreviation_of</i><strong>reviewed item name</strong></p>
+              <p><code>Arc Innocence Scroll</code><i>has_effect</i><strong>reset options except Potential + Star Force</strong></p>
+              <p><code>Xenon</code><i>is_a</i><strong>Thief + Pirate</strong></p>
+            </div>
+            <p class="case-limit"><strong>What changed:</strong> link entities from both the question and accepted evidence, then reject or replace drafts that contradict reviewed relations.</p>
+          </article>
+        </div>
+
+        <div class="case-result" aria-label="Observed result after the combined fix">
+          <div class="case-result-heading">
+            <div>
+              <span>After · combined RAG + graph fix</span>
+              <h3>Both prompt variants converged on the same conclusion.</h3>
+            </div>
+            <strong class="case-status case-status-observed">Observed · 2026-08-25</strong>
+          </div>
+
+          <div class="case-result-grid">
+            <article>
+              <span>Prompt A · logged conclusion</span>
+              <p class="case-result-conclusion"><strong>No fixed order.</strong><small>Check the STR Bonus Stats prerequisite first.</small></p>
+            </article>
+            <article>
+              <span>Prompt B · logged conclusion</span>
+              <p class="case-result-conclusion"><strong>No fixed order.</strong><small>Check the STR Bonus Stats prerequisite first.</small></p>
+            </article>
+          </div>
+
+          <div class="case-outcome-grid">
+            <p><span>Consistency</span><strong>No contradictory absolute order</strong></p>
+            <p><span>Terminology</span><strong>Reviewed canonical names retained</strong></p>
+            <p><span>Hallucination guard</span><strong>Invented expansions absent</strong></p>
+          </div>
+
+          <p class="case-monitoring">
+            <strong>Monitoring, not closed.</strong> The operating pipeline passed one rollback smoke run per prompt.
+            Three repetitions per prompt and a Discord Gateway confirmation remain open.
+          </p>
+        </div>
+      </section>
+
       <section class="section section-night" id="pipeline" aria-labelledby="pipeline-title">
         <div class="section-heading inverse">
-          <p class="section-index">02 / Pipeline</p>
+          <p class="section-index">03 / Pipeline</p>
           <h2 id="pipeline-title">How one question becomes an answer</h2>
           <p>Each stage has an explicit boundary and can fail independently. If evidence is insufficient, the system declines to answer rather than relaxing those checks.</p>
         </div>
@@ -174,7 +302,7 @@
 
       <section class="section" id="retrieval" aria-labelledby="retrieval-title">
         <div class="section-heading centered">
-          <p class="section-index">03 / Hybrid RAG</p>
+          <p class="section-index">04 / Hybrid RAG</p>
           <h2 id="retrieval-title">No single score decides the evidence</h2>
           <p>Semantic recall, exact wording, rank fusion, reranking, and bounded quality signals each serve a distinct role.</p>
         </div>
@@ -220,7 +348,7 @@
       <section class="section section-violet" id="knowledge" aria-labelledby="knowledge-title">
         <div class="knowledge-layout">
           <div class="section-heading inverse">
-            <p class="section-index">04 / Knowledge graph</p>
+            <p class="section-index">05 / Knowledge graph</p>
             <h2 id="knowledge-title">Query relationships,<br>not just names</h2>
             <p>
               Job hierarchies, canonical item names, boss variants, and content modes are stored as
@@ -254,7 +382,7 @@
 
       <section class="section" id="operations" aria-labelledby="operations-title">
         <div class="section-heading">
-          <p class="section-index">05 / Operations</p>
+          <p class="section-index">06 / Operations</p>
           <h2 id="operations-title">Refresh the corpus.<br>Preserve the record.</h2>
           <p>
             These figures are a verified static snapshot of the operating database at
@@ -306,7 +434,7 @@
 
       <section class="section section-quality" id="quality" aria-labelledby="quality-title">
         <div class="section-heading centered">
-          <p class="section-index">06 / Quality loop</p>
+          <p class="section-index">07 / Quality loop</p>
           <h2 id="quality-title">Turn production failures<br>into system requirements</h2>
           <p>Each observed failure is recorded with its cause, system-level response, validation evidence, and remaining risk.</p>
         </div>
@@ -358,7 +486,7 @@
 
       <section class="section closing" aria-labelledby="closing-title">
         <div>
-          <p class="section-index">07 / Stack</p>
+          <p class="section-index">08 / Stack</p>
           <h2 id="closing-title">Small components.<br>Explicit contracts.</h2>
           <p>
             Python 3.12, PostgreSQL 16, pgvector, BGE-M3, BGE reranker, Qwen, discord.py.
