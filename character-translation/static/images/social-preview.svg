@@ -9,11 +9,11 @@
   <circle cx="80" cy="650" r="270" fill="#274a42" opacity=".12"/>
   <g transform="translate(86 82)">
     <path d="m28 0 5.2 11.3 10.9-3.8-3 11.5 10.5 4-9.3 7 5.2 10.5-11.8-1.1L28 46l-7.7-12.6-11.8 1.1L13.7 24 4.4 17l10.5-4-3-11.5 10.9 3.8L28 0Z" fill="#d95535"/>
-    <text x="72" y="31" fill="#17201e" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="2">MAPLE / EXPERIMENT LOG</text>
+    <text x="72" y="31" fill="#17201e" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="2">MAPLE / EVALUATION RECORD</text>
   </g>
   <text x="86" y="260" fill="#17201e" font-family="Arial, sans-serif" font-size="75" font-weight="700" letter-spacing="-4">Maple Character</text>
   <text x="86" y="350" fill="#d95535" font-family="Georgia, serif" font-size="82" font-style="italic">Translation</text>
-  <text x="90" y="425" fill="#55605c" font-family="Arial, sans-serif" font-size="24">Methods, protocols, benchmark results, and qualitative samples.</text>
+  <text x="90" y="425" fill="#55605c" font-family="Arial, sans-serif" font-size="24">Controlled methods, fixed protocols, and reviewed evidence.</text>
   <g transform="translate(90 495)">
     <rect width="178" height="42" rx="21" fill="#274a42"/><circle cx="22" cy="21" r="5" fill="#77b398"/>
     <text x="39" y="27" fill="#fff" font-family="Arial, sans-serif" font-size="14" font-weight="700">STATIC REPORT</text>

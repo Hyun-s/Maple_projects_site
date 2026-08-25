@@ -5,7 +5,7 @@
  * paths, and unapproved samples. See README.md for the result and sample schemas.
  */
 window.MAPLE_EXPERIMENT_DATA = {
-  siteUpdatedAt: "2026.07.22",
+  siteUpdatedAt: "2026.08.25",
 
   protocol: [
     { label: "Dataset source", value: "Maple Image Maker" },
@@ -29,8 +29,14 @@ window.MAPLE_EXPERIMENT_DATA = {
 
   changelog: [
     {
+      date: "2026-08-25",
+      title: "Evaluation record copy revised",
+      description:
+        "Reframed every section in consistent technical English without changing protocol or publication status.",
+    },
+    {
       date: "2026-07-22",
-      title: "Experiment page initialized",
+      title: "Evaluation record initialized",
       description:
         "Protocol, result table, and qualitative sample slots prepared. No benchmark results published.",
     },

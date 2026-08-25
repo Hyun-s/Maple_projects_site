@@ -72,6 +72,7 @@ for (const htmlFile of htmlFiles) {
 
 const publicTextFiles = requiredFiles.filter((file) => [".html", ".css", ".js", ".svg", ".xml", ".txt"].includes(extname(file)));
 const forbiddenPatterns = [
+  [/[\uAC00-\uD7AF]/u, "Korean text in the English-only public site"],
   [/\b(?:ghp|gho|github_pat)_[A-Za-z0-9_]+\b/, "GitHub token"],
   [/\b(?:api[_-]?key|secret[_-]?key|access[_-]?token)\s*[:=]\s*["'][^"']+["']/i, "possible secret"],
   [/\b(?:127\.0\.0\.1|localhost)(?::\d+)?\b/i, "loopback address"],

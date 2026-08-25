@@ -2,8 +2,8 @@
   <title id="title">Maple Chat</title><desc id="desc">Evidence-grounded local-first RAG with a knowledge graph.</desc>
   <rect width="1200" height="630" fill="#f5f2ea"/>
   <circle cx="1000" cy="120" r="270" fill="#5a4b83" opacity=".1"/><circle cx="1000" cy="120" r="180" fill="none" stroke="#5a4b83" opacity=".16"/>
-  <text x="84" y="100" fill="#a94129" font-family="Arial" font-size="22" font-weight="700" letter-spacing="4">LOCAL-FIRST · HYBRID RETRIEVAL · PROVENANCE</text>
-  <text x="84" y="277" fill="#18201f" font-family="Arial" font-size="90" font-weight="700" letter-spacing="-5">Community knowledge,</text>
+  <text x="84" y="100" fill="#a94129" font-family="Arial" font-size="22" font-weight="700" letter-spacing="4">LOCAL-FIRST RAG · HYBRID RETRIEVAL · KNOWLEDGE GRAPH</text>
+  <text x="84" y="277" fill="#18201f" font-family="Arial" font-size="90" font-weight="700" letter-spacing="-5">Community evidence,</text>
   <text x="84" y="380" fill="#d65a3a" font-family="Georgia" font-size="100" font-style="italic">grounded answers.</text>
   <g transform="translate(742 434)"><path d="M0 42h96M96 42l88-62M96 42l88 62" fill="none" stroke="#77717f" stroke-width="3"/><circle cx="0" cy="42" r="38" fill="#d65a3a"/><circle cx="96" cy="42" r="38" fill="#5a4b83"/><circle cx="184" cy="-20" r="38" fill="#d6b760"/><circle cx="184" cy="104" r="38" fill="#78ad9a"/><g fill="#fff" font-family="Arial" font-weight="700" font-size="18" text-anchor="middle"><text x="0" y="48">Q</text><text x="96" y="48">RAG</text><text x="184" y="-14">A</text><text x="184" y="110">KG</text></g></g>
   <text x="88" y="544" fill="#5f6865" font-family="Arial" font-size="22">Maple Chat · Evidence-grounded Discord RAG</text>
