@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hyun-s.github.io/Maple_projects_site/sitemap.xml

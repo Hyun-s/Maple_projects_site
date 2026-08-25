@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Maple Chat system map</title>
+  <desc id="desc">Community and official sources are sanitized, indexed, retrieved, grounded with a knowledge graph, and answered through a local model.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f4eee4"/><stop offset="1" stop-color="#ece7f1"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5Z" fill="#6b706e"/></marker>
+  </defs>
+  <rect width="1200" height="520" rx="28" fill="url(#bg)"/>
+  <g font-family="Arial, sans-serif">
+    <g transform="translate(56 80)">
+      <rect width="205" height="145" rx="20" fill="#fffaf4" stroke="#d6cec2"/>
+      <circle cx="39" cy="38" r="17" fill="#d65a3a"/><path d="M31 38h16M39 30v16" stroke="#fff" stroke-width="3"/>
+      <text x="26" y="90" fill="#18201f" font-size="20" font-weight="700">Community</text><text x="26" y="116" fill="#69706d" font-size="14">experience evidence</text>
+    </g>
+    <g transform="translate(56 296)">
+      <rect width="205" height="145" rx="20" fill="#fffaf4" stroke="#d6cec2"/>
+      <circle cx="39" cy="38" r="17" fill="#c8a64b"/><path d="M30 32h18v14H30z" fill="none" stroke="#fff" stroke-width="2"/>
+      <text x="26" y="90" fill="#18201f" font-size="20" font-weight="700">Official</text><text x="26" y="116" fill="#69706d" font-size="14">patches &amp; catalogs</text>
+    </g>
+    <path d="M273 152h83M273 368h83" stroke="#6b706e" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(374 127)"><rect width="190" height="270" rx="24" fill="#28564b"/><text x="28" y="55" fill="#a5d3c3" font-size="13" font-weight="700" letter-spacing="2">COLLECT / INDEX</text><text x="28" y="99" fill="#fff" font-size="26" font-weight="700">Sanitize</text><text x="28" y="132" fill="#fff" font-size="26" font-weight="700">Chunk</text><text x="28" y="165" fill="#fff" font-size="26" font-weight="700">Embed</text><path d="M28 201h134" stroke="#fff" opacity=".2"/><text x="28" y="230" fill="#fff" opacity=".65" font-size="13">PII boundary</text><text x="28" y="253" fill="#fff" opacity=".65" font-size="13">revisioned vectors</text></g>
+    <path d="M578 262h70" stroke="#6b706e" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(666 87)"><rect width="210" height="350" rx="28" fill="#302b4b"/><text x="28" y="50" fill="#c7b9ed" font-size="13" font-weight="700" letter-spacing="2">RETRIEVE / GROUND</text><circle cx="62" cy="116" r="32" fill="#d65a3a"/><text x="62" y="123" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">RRF</text><circle cx="148" cy="116" r="32" fill="#7968a8"/><text x="148" y="123" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">RERANK</text><path d="M62 149v57h86v-57M105 206v43" fill="none" stroke="#fff" opacity=".45"/><circle cx="105" cy="278" r="34" fill="#78ad9a"/><text x="105" y="273" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">EXACT</text><text x="105" y="290" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">GRAPH</text><text x="105" y="332" text-anchor="middle" fill="#fff" opacity=".55" font-size="12">≤ 8 evidence</text></g>
+    <path d="M891 262h64" stroke="#6b706e" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(973 127)"><rect width="171" height="270" rx="24" fill="#fffaf4" stroke="#d6cec2"/><circle cx="86" cy="72" r="37" fill="#d65a3a"/><path d="M70 72h32M86 56v32" stroke="#fff" stroke-width="4"/><text x="86" y="143" text-anchor="middle" fill="#18201f" font-size="24" font-weight="700">Local Qwen</text><text x="86" y="174" text-anchor="middle" fill="#69706d" font-size="13">structured answer</text><path d="M32 205h107" stroke="#d6cec2"/><text x="86" y="235" text-anchor="middle" fill="#5a4b83" font-size="13" font-weight="700">DISCORD</text></g>
+  </g>
+</svg>

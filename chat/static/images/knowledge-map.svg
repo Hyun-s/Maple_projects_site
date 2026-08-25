@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" role="img" aria-labelledby="title desc">
+  <title id="title">Knowledge graph example</title>
+  <desc id="desc">Xenon connects to thief and pirate classes, abbreviations connect to official item names, and Destiny mode connects to boss variants.</desc>
+  <rect width="720" height="620" rx="26" fill="#27233f"/>
+  <g fill="none" stroke="#bdb3d9" stroke-width="2" opacity=".45"><path d="M196 128L92 251M196 128l112 123M356 321l-98 128M356 321l120 117M565 164l-89 274M565 164l73 118M476 438l162-156"/></g>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(196 128)"><circle r="58" fill="#dd7050"/><text y="-4" fill="#fff" font-size="22" font-weight="700">제논</text><text y="20" fill="#fff" opacity=".7" font-size="12">JOB</text></g>
+    <g transform="translate(92 251)"><circle r="45" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="18" font-weight="700">도적</text></g>
+    <g transform="translate(308 251)"><circle r="45" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="18" font-weight="700">해적</text></g>
+    <text x="125" y="177" fill="#d7ccef" font-size="11">is_a</text><text x="268" y="177" fill="#d7ccef" font-size="11">is_a</text>
+    <g transform="translate(356 321)"><circle r="51" fill="#78ad9a"/><text y="-3" fill="#fff" font-size="19" font-weight="700">놀긍</text><text y="18" fill="#fff" opacity=".72" font-size="11">TERM</text></g>
+    <g transform="translate(258 449)"><rect x="-91" y="-43" width="182" height="86" rx="23" fill="#ddd5ed"/><text y="-6" fill="#302b4b" font-size="15" font-weight="700">놀라운 긍정의</text><text y="16" fill="#302b4b" font-size="15" font-weight="700">혼돈 주문서</text></g>
+    <text x="281" y="383" fill="#d7ccef" font-size="11">abbreviation_of</text>
+    <g transform="translate(565 164)"><circle r="57" fill="#9b86cf"/><text y="-4" fill="#fff" font-size="19" font-weight="700">데스티니</text><text y="18" fill="#fff" opacity=".72" font-size="11">MODE</text></g>
+    <g transform="translate(638 282)"><circle r="42" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="16" font-weight="700">세렌</text></g>
+    <g transform="translate(476 438)"><circle r="46" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="16" font-weight="700">카링</text></g>
+    <text x="615" y="220" fill="#d7ccef" font-size="11">applies_to</text><text x="513" y="313" fill="#d7ccef" font-size="11">applies_to</text>
+    <g transform="translate(600 520)"><rect x="-72" y="-30" width="144" height="60" rx="18" fill="#4a416b" stroke="#9b86cf"/><text y="5" fill="#fff" font-size="14">Boss variant</text></g>
+    <text x="556" y="489" fill="#d7ccef" font-size="11">has_variant</text>
+  </g>
+</svg>

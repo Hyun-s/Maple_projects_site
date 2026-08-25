@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A static experiment log for evaluating visual quality and identity preservation in MapleStory character image translation."
+    >
+    <meta name="theme-color" content="#f7f4ee">
+    <meta property="og:title" content="Maple Character Translation — Experiment Log">
+    <meta
+      property="og:description"
+      content="Methods, protocols, benchmark results, and qualitative comparisons for character image translation."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hyun-s.github.io/Maple_projects_site/character-translation/">
+    <meta property="og:image" content="https://hyun-s.github.io/Maple_projects_site/character-translation/static/images/social-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Maple Character Translation — Experiment Log</title>
+    <link rel="canonical" href="https://hyun-s.github.io/Maple_projects_site/character-translation/">
+    <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <script src="./static/js/site-data.js" defer></script>
+    <script src="./static/js/index.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="nav-shell">
+        <a class="wordmark" href="../" aria-label="Back to Maple Projects">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
+          <span>Maple / Projects</span>
+        </a>
+        <a class="wordmark page-wordmark" href="#top" aria-label="Maple Experiment Log, back to top">
+          <svg viewBox="0 0 28 28" aria-hidden="true">
+            <path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" />
+          </svg>
+          <span>Maple / Experiment Log</span>
+        </a>
+        <nav class="section-nav" aria-label="On this page">
+          <a href="#overview">Overview</a>
+          <a href="#methods">Methods</a>
+          <a href="#protocol">Protocol</a>
+          <a href="#results">Results</a>
+          <a href="#samples">Samples</a>
+          <a class="project-home-link" href="../">All Projects ↗</a>
+        </nav>
+      </div>
+      <div class="reading-progress" aria-hidden="true"><span></span></div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="page-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="eyebrow reveal">Private models · public evidence</p>
+          <h1 id="page-title" class="reveal reveal-delay-1">
+            Maple Character Translation
+            <span>Experiment Log</span>
+          </h1>
+          <p class="hero-copy reveal reveal-delay-2">
+            A static, reproducible record of translating in-game avatars into
+            anime illustrations and realistic portraits—while keeping model weights,
+            inference endpoints, and private data offline.
+          </p>
+          <div class="status-row reveal reveal-delay-3" role="group" aria-label="Project status">
+            <span><i class="status-dot status-dot-live"></i> Protocol ready</span>
+            <span><i class="status-dot"></i> Results pending</span>
+            <span><i class="status-dot"></i> No live inference</span>
+          </div>
+
+          <figure class="hero-figure reveal reveal-delay-3">
+            <img
+              src="./static/images/experiment-overview.svg"
+              alt="Overview of the experiment pipeline: an in-game avatar passes through three adaptation methods and is evaluated for quality and identity."
+              width="1200"
+              height="460"
+            >
+            <figcaption>
+              Figure 1. The shared evaluation path used for all model–method combinations.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="overview" aria-labelledby="overview-title">
+        <div class="section-heading">
+          <p class="section-index">01 / Overview</p>
+          <h2 id="overview-title">What are we trying to preserve?</h2>
+          <p>
+            Better stylization is not useful if the generated portrait no longer reads as
+            the same character. This experiment treats visual quality and character identity
+            as separate, equally visible objectives.
+          </p>
+        </div>
+
+        <div class="research-questions">
+          <article>
+            <span>RQ 01</span>
+            <h3>Translation quality</h3>
+            <p>Which model–method pair produces the most coherent anime and realistic images?</p>
+          </article>
+          <article>
+            <span>RQ 02</span>
+            <h3>Identity preservation</h3>
+            <p>How well are hairstyle, palette, outfit, accessories, and overall silhouette retained?</p>
+          </article>
+          <article>
+            <span>RQ 03</span>
+            <h3>Adaptation efficiency</h3>
+            <p>Do lightweight adaptation methods improve the trade-off over a zero-shot baseline?</p>
+          </article>
+        </div>
+
+        <aside class="privacy-note" aria-label="Publication boundary">
+          <div class="privacy-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2 4.5 5v5.5c0 5.1 3.1 9.6 7.5 11.5 4.4-1.9 7.5-6.4 7.5-11.5V5L12 2Zm0 3.1 4.5 1.8v3.6c0 3.6-1.9 6.9-4.5 8.4-2.6-1.5-4.5-4.8-4.5-8.4V6.9L12 5.1Zm-1 3.2v3.1H9.5v4.1h5v-4.1H13V8.3h-2Z" /></svg>
+          </div>
+          <div>
+            <strong>Publication boundary</strong>
+            <p>
+              This site contains only approved text, aggregate metrics, and selected samples.
+              It does not expose model artifacts, credentials, dataset archives, or API addresses.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section section-tinted" id="methods" aria-labelledby="methods-title">
+        <div class="section-heading centered">
+          <p class="section-index">02 / Methods</p>
+          <h2 id="methods-title">Three routes to the same target</h2>
+          <p>Every method is compared on the same benchmark split and evaluation pipeline.</p>
+        </div>
+
+        <div class="method-grid">
+          <article class="method-card">
+            <div class="method-topline"><span>A</span><small>No training</small></div>
+            <h3>Zero-shot prompting</h3>
+            <p>
+              The frozen base model receives the reference image, a style prompt, and a
+              negative prompt. This is the baseline for measuring adaptation gains.
+            </p>
+            <dl>
+              <div><dt>Updated parameters</dt><dd>0</dd></div>
+              <div><dt>Artifact required</dt><dd>No</dd></div>
+              <div><dt>Supported models</dt><dd>SDXL · FLUX</dd></div>
+            </dl>
+          </article>
+
+          <article class="method-card method-card-featured">
+            <div class="method-topline"><span>B</span><small>Lightweight tuning</small></div>
+            <h3>LoRA fine-tuning</h3>
+            <p>
+              Low-rank adapters are trained from input–target–prompt pairs. Base weights stay
+              frozen while a compact artifact learns the desired translation behavior.
+            </p>
+            <dl>
+              <div><dt>Updated parameters</dt><dd>Low-rank adapters</dd></div>
+              <div><dt>Artifact required</dt><dd>Yes</dd></div>
+              <div><dt>Supported models</dt><dd>SDXL · FLUX</dd></div>
+            </dl>
+          </article>
+
+          <article class="method-card">
+            <div class="method-topline"><span>C</span><small>Embedding tuning</small></div>
+            <h3>Null-token optimization</h3>
+            <p>
+              The diffusion model and text encoders remain frozen. Only a new token embedding
+              is optimized and prepended to the prompt at inference time.
+            </p>
+            <dl>
+              <div><dt>Updated parameters</dt><dd>Token rows only</dd></div>
+              <div><dt>Artifact required</dt><dd>Yes</dd></div>
+              <div><dt>Supported models</dt><dd>SDXL</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="protocol" aria-labelledby="protocol-title">
+        <div class="section-heading">
+          <p class="section-index">03 / Protocol</p>
+          <h2 id="protocol-title">A comparison designed to stay comparable</h2>
+          <p>
+            The protocol is recorded before results are published. Fields marked “Pending”
+            must be frozen when the first benchmark run is released.
+          </p>
+        </div>
+
+        <div class="protocol-layout">
+          <div class="protocol-list" id="protocol-list" aria-live="polite">
+            <div class="protocol-row"><span>Dataset source</span><strong>Maple Image Maker</strong></div>
+            <div class="protocol-row"><span>Dataset version</span><strong>Pending</strong></div>
+            <div class="protocol-row"><span>Benchmark split</span><strong>Pending</strong></div>
+            <div class="protocol-row"><span>Target styles</span><strong>Anime · Realistic</strong></div>
+            <div class="protocol-row"><span>Base models</span><strong>SDXL 1.0 · FLUX.1-dev</strong></div>
+            <div class="protocol-row"><span>Evaluation seed</span><strong>42 (initial)</strong></div>
+          </div>
+
+          <div class="protocol-principles">
+            <h3>Controls</h3>
+            <ol>
+              <li><span>01</span><p>Use one versioned benchmark split across all comparable runs.</p></li>
+              <li><span>02</span><p>Keep prompts, seeds, resolution, and inference settings explicit.</p></li>
+              <li><span>03</span><p>Publish aggregate metrics together with representative failures.</p></li>
+              <li><span>04</span><p>Never replace a published result without updating the change log.</p></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="metric-heading">
+          <h3>Evaluation signals</h3>
+          <p>Arrows indicate the preferred direction; they do not imply equal metric reliability.</p>
+        </div>
+        <div class="metric-grid">
+          <article><span>Quality</span><h4>Aesthetic <b>↑</b></h4><p>Learned preference estimate for visual appeal and composition.</p></article>
+          <article><span>Quality</span><h4>FID <b>↓</b></h4><p>Distribution distance between target and generated benchmark sets.</p></article>
+          <article><span>Quality</span><h4>Inception Score <b>↑</b></h4><p>Image recognizability and diversity signal for the generated set.</p></article>
+          <article><span>Identity</span><h4>CLIP similarity <b>↑</b></h4><p>Embedding similarity between the input character and generated image.</p></article>
+          <article><span>Identity</span><h4>LPIPS <b>↓</b></h4><p>Perceptual feature distance between input and generated image.</p></article>
+        </div>
+
+        <details class="formula-note">
+          <summary>Composite score definition</summary>
+          <div>
+            <p><b>Quality</b> = 0.5 × Aesthetic<sub>norm</sub> + 0.3 × exp(−FID / 100) + 0.2 × IS<sub>norm</sub></p>
+            <p><b>Identity</b> = 0.6 × CLIP<sub>norm</sub> + 0.4 × (1 − LPIPS<sub>clamped</sub>)</p>
+            <p><b>Overall</b> = harmonic mean(Quality, Identity)</p>
+            <small>
+              Aesthetic and IS are normalized against 10. CLIP [−1, 1] is mapped to [0, 1].
+              FID and IS are unstable on very small sample sets, so smoke-test runs are not published as benchmark evidence.
+            </small>
+          </div>
+        </details>
+      </section>
+
+      <section class="section section-results" id="results" aria-labelledby="results-title">
+        <div class="section-heading centered inverse">
+          <p class="section-index">04 / Quantitative results</p>
+          <h2 id="results-title">Results will appear here—without a live backend</h2>
+          <p>
+            The table is rendered from a small local data file committed with this site.
+            An empty table means no benchmark has been approved for publication yet.
+          </p>
+        </div>
+
+        <div class="result-summary" id="result-summary" aria-live="polite">
+          <div><span>Published runs</span><strong id="published-run-count">0</strong></div>
+          <div><span>Benchmark samples</span><strong id="benchmark-sample-count">—</strong></div>
+          <div><span>Last evaluated</span><strong id="last-evaluated">Pending</strong></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <caption class="sr-only">Published benchmark results</caption>
+            <thead>
+              <tr>
+                <th scope="col">Experiment</th>
+                <th scope="col">Model</th>
+                <th scope="col">Method</th>
+                <th scope="col">Style</th>
+                <th scope="col">Quality</th>
+                <th scope="col">Identity</th>
+                <th scope="col">Overall</th>
+              </tr>
+            </thead>
+            <tbody id="results-body">
+              <tr class="empty-table-row">
+                <td colspan="7">
+                  <span>Awaiting the first approved benchmark run</span>
+                  <small>No placeholder scores are shown.</small>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="result-placeholder" id="result-placeholder">
+          <div class="placeholder-plot" aria-hidden="true">
+            <i class="plot-bar-1"></i><i class="plot-bar-2"></i><i class="plot-bar-3"></i>
+            <i class="plot-bar-4"></i><i class="plot-bar-5"></i><i class="plot-bar-6"></i>
+          </div>
+          <div>
+            <span>Publication gate</span>
+            <h3>No inferred or fabricated scores</h3>
+            <p>
+              Quantitative cards and rankings activate only after verified run data is added to
+              <code>static/js/site-data.js</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="samples" aria-labelledby="samples-title">
+        <div class="section-heading">
+          <p class="section-index">05 / Qualitative samples</p>
+          <h2 id="samples-title">Look beyond a single score</h2>
+          <p>
+            Each published row should show the input, optional target, and generated output together.
+            Include difficult cases and visible failures—not only the best samples.
+          </p>
+        </div>
+
+        <div class="sample-toolbar" role="group" aria-label="Sample gallery status">
+          <div><i class="status-dot"></i><span id="sample-count">0 approved sample sets</span></div>
+          <small>Input · Target · Generated</small>
+        </div>
+
+        <div class="sample-gallery" id="sample-gallery" aria-live="polite">
+          <article class="sample-empty">
+            <div class="empty-triptych" aria-hidden="true">
+              <div><span>01</span><b>Input</b></div>
+              <div><span>02</span><b>Target</b></div>
+              <div><span>03</span><b>Generated</b></div>
+            </div>
+            <div class="sample-empty-copy">
+              <span>Sample slot 001</span>
+              <h3>Ready for approved images</h3>
+              <p>
+                Copy image files into <code>static/images/samples/</code>, then add one object to
+                <code>static/js/site-data.js</code>. The layout updates automatically.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-tinted" id="observations" aria-labelledby="observations-title">
+        <div class="section-heading centered">
+          <p class="section-index">06 / Observations</p>
+          <h2 id="observations-title">What the first run should answer</h2>
+          <p>These are analysis prompts, not findings. Replace them only after inspecting verified results.</p>
+        </div>
+        <div class="observation-grid">
+          <article><span>Quality</span><h3>Style coherence</h3><p>Does the output form a coherent portrait, or does it retain pixel-art artifacts and broken anatomy?</p></article>
+          <article><span>Identity</span><h3>Attribute retention</h3><p>Which methods preserve hair, eye color, outfit, weapon, and accessory details most consistently?</p></article>
+          <article><span>Trade-off</span><h3>Adaptation cost</h3><p>Are gains large enough to justify training time, artifact size, and inference overhead?</p></article>
+          <article><span>Failure audit</span><h3>Hard cases</h3><p>Do small sprites, overlapping accessories, rare colors, or complex weapons fail systematically?</p></article>
+        </div>
+      </section>
+
+      <section class="section closing" id="updates" aria-labelledby="updates-title">
+        <div>
+          <p class="section-index">07 / Record</p>
+          <h2 id="updates-title">Experiment record</h2>
+          <p>
+            Site updates are static and reviewable. Every public result should identify its dataset
+            version, experiment configuration, sample count, and evaluation date.
+          </p>
+        </div>
+        <div class="changelog" id="changelog">
+          <article>
+            <time datetime="2026-07-22">2026.07.22</time>
+            <div><strong>Experiment page initialized</strong><p>Protocol, result table, and qualitative sample slots prepared. No benchmark results published.</p></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <a class="wordmark footer-mark" href="#top">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
+          <span>Maple / Experiment Log</span>
+        </a>
+        <p>Static evidence only. Models and inference infrastructure remain private.</p>
+      </div>
+      <p class="footer-meta">Last site update · <span id="site-updated-at">2026.07.22</span></p>
+    </footer>
+  </body>
+</html>

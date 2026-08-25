@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Maple Projects</title>
+  <desc id="desc">Character translation and evidence grounded RAG project portfolio.</desc>
+  <rect width="1200" height="630" fill="#f7f4ed"/>
+  <g opacity=".32" stroke="#cfc7ba"><path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200"/><path d="M100 0v630M200 0v630M300 0v630M400 0v630M500 0v630M600 0v630M700 0v630M800 0v630M900 0v630M1000 0v630M1100 0v630"/></g>
+  <circle cx="947" cy="147" r="235" fill="none" stroke="#d85535" opacity=".14"/>
+  <circle cx="947" cy="147" r="162" fill="none" stroke="#d85535" opacity=".14"/>
+  <path d="M90 76l8 18 19-6-5 19 18 7-16 12 9 18-20-2-13 21-12-21-21 2 9-18-16-12 18-7-5-19 19 6 8-18Z" fill="#d85535"/>
+  <text x="150" y="112" fill="#18201f" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="4">MAPLE / PROJECTS</text>
+  <text x="90" y="318" fill="#18201f" font-family="Arial, sans-serif" font-size="94" font-weight="700" letter-spacing="-6">Build, measure,</text>
+  <text x="90" y="422" fill="#d85535" font-family="Georgia, serif" font-size="105" font-style="italic">explain.</text>
+  <rect x="822" y="246" width="250" height="140" rx="28" fill="#e9b098" transform="rotate(-4 822 246)"/>
+  <text x="858" y="300" fill="#5d2f21" font-family="Arial, sans-serif" font-size="18" font-weight="700">01 / VISION</text>
+  <text x="858" y="347" fill="#5d2f21" font-family="Arial, sans-serif" font-size="31" font-weight="700">TRANSLATION</text>
+  <rect x="866" y="403" width="250" height="140" rx="28" fill="#5a4b81" transform="rotate(4 866 403)"/>
+  <text x="902" y="459" fill="#fffdf9" font-family="Arial, sans-serif" font-size="18" font-weight="700">02 / KNOWLEDGE</text>
+  <text x="902" y="506" fill="#fffdf9" font-family="Arial, sans-serif" font-size="31" font-weight="700">EVIDENCE RAG</text>
+  <text x="93" y="554" fill="#65706c" font-family="Arial, sans-serif" font-size="21">Static project records · evidence before spectacle</text>
+</svg>

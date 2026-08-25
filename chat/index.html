@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Maple Chat의 하이브리드 RAG, 지식 그래프, 데이터 파이프라인과 품질 개선 과정을 설명하는 정적 프로젝트 페이지입니다."
+    >
+    <meta name="theme-color" content="#f5f2ea">
+    <meta property="og:title" content="Maple Chat — Evidence-grounded RAG">
+    <meta
+      property="og:description"
+      content="커뮤니티 경험, 공식 패치, 지식 그래프를 결합하는 로컬 우선 Discord RAG 시스템."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hyun-s.github.io/Maple_projects_site/chat/">
+    <meta property="og:image" content="https://hyun-s.github.io/Maple_projects_site/chat/static/images/social-preview.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Maple Chat — Evidence-grounded RAG</title>
+    <link rel="canonical" href="https://hyun-s.github.io/Maple_projects_site/chat/">
+    <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <script src="./static/js/index.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+
+    <header class="site-header" aria-label="주요 탐색">
+      <div class="nav-shell">
+        <a class="wordmark" href="../" aria-label="Maple Projects로 돌아가기">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path></svg>
+          <span>Maple / Projects</span>
+        </a>
+        <a class="wordmark page-wordmark" href="#top" aria-label="Maple Chat, 맨 위로">
+          <svg viewBox="0 0 28 28" aria-hidden="true">
+            <path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path>
+          </svg>
+          <span>Maple / Chat System</span>
+        </a>
+        <nav class="section-nav" aria-label="페이지 목차">
+          <a href="#overview">개요</a>
+          <a href="#pipeline">파이프라인</a>
+          <a href="#retrieval">검색</a>
+          <a href="#knowledge">지식 그래프</a>
+          <a href="#operations">운영</a>
+          <a href="#quality">품질</a>
+          <a class="project-home-link" href="../">전체 프로젝트 ↗</a>
+        </nav>
+      </div>
+      <div class="reading-progress" aria-hidden="true"><span></span></div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="page-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-orbit orbit-one" aria-hidden="true"></div>
+        <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="eyebrow reveal">Local-first · Hybrid retrieval · Provenance</p>
+          <h1 id="page-title" class="reveal reveal-delay-1">
+            커뮤니티 경험을
+            <span>근거 있는 답변으로</span>
+          </h1>
+          <p class="hero-copy reveal reveal-delay-2">
+            Maple Chat은 Inven의 경험 지식, Nexon 공식 패치, 검수된 도메인 지식 그래프를
+            함께 검색하고 로컬 Qwen으로 답하는 Discord Knowledge-Graph-Augmented RAG입니다.
+          </p>
+          <div class="status-row reveal reveal-delay-3" role="group" aria-label="프로젝트 상태">
+            <span><i class="status-dot status-dot-live"></i> Private guild 운영</span>
+            <span><i class="status-dot status-dot-graph"></i> Graph grounded</span>
+            <span><i class="status-dot"></i> Local inference</span>
+          </div>
+
+          <figure class="hero-figure reveal reveal-delay-3">
+            <img
+              src="./static/images/system-map.svg"
+              width="1200"
+              height="520"
+              alt="커뮤니티 게시글과 공식 지식이 각각 검색과 지식 그래프를 거쳐 로컬 생성 모델과 Discord 답변으로 이어지는 Maple Chat 시스템 구조"
+            >
+            <figcaption>
+              Figure 1. 비정형 경험 근거와 정형 관계를 분리한 뒤 답변 시점에 결합합니다.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="overview" aria-labelledby="overview-title">
+        <div class="section-heading">
+          <p class="section-index">01 / Overview</p>
+          <h2 id="overview-title">검색만 잘하는 봇을 넘어,<br>틀린 연결을 줄이는 시스템</h2>
+          <p>
+            벡터 유사도는 관련 글을 찾지만, 제논이 어느 직업군인지 또는 벨로나와 메이린이 같은
+            보스인지 보장하지 않습니다. Maple Chat은 검색과 엔티티 무결성을 서로 다른 계층에서
+            해결합니다.
+          </p>
+        </div>
+
+        <div class="question-grid">
+          <article>
+            <span>01 · Discover</span>
+            <h3>관련 경험을 찾는다</h3>
+            <p>Dense와 lexical 검색을 결합해 표현이 달라도 관련된 공략·후기·댓글을 찾습니다.</p>
+          </article>
+          <article>
+            <span>02 · Constrain</span>
+            <h3>대상을 바꾸지 않는다</h3>
+            <p>직업·보스·난이도를 entity로 고정해 다른 대상의 기록을 질문에 대입하지 않습니다.</p>
+          </article>
+          <article>
+            <span>03 · Explain</span>
+            <h3>근거와 한계를 함께 말한다</h3>
+            <p>성공 사례, 실패 경험, 공식 사실을 구분하고 답변에 사용한 출처 관계를 보존합니다.</p>
+          </article>
+        </div>
+
+        <aside class="boundary-note" aria-label="공개 및 개인정보 경계">
+          <div class="boundary-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2 4.5 5v5.5c0 5.1 3.1 9.6 7.5 11.5 4.4-1.9 7.5-6.4 7.5-11.5V5L12 2Zm0 3.1 4.5 1.8v3.6c0 3.6-1.9 6.9-4.5 8.4-2.6-1.5-4.5-4.8-4.5-8.4V6.9L12 5.1Zm-1 3.2v3.1H9.5v4.1h5v-4.1H13V8.3h-2Z"></path></svg>
+          </div>
+          <div>
+            <strong>Public page, private runtime</strong>
+            <p>
+              이 페이지는 승인된 집계와 설계만 공개합니다. Discord 토큰, 원문 닉네임, 데이터베이스
+              주소, 모델 endpoint, 수집 승인 문서와 corpus 원문은 포함하지 않습니다.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section section-night" id="pipeline" aria-labelledby="pipeline-title">
+        <div class="section-heading inverse">
+          <p class="section-index">02 / Pipeline</p>
+          <h2 id="pipeline-title">질문 하나가 답변이 되기까지</h2>
+          <p>수집부터 생성까지 모든 단계는 독립적으로 실패하고, 근거가 부족하면 닫힌 방향으로 종료됩니다.</p>
+        </div>
+
+        <ol class="pipeline-list">
+          <li>
+            <span class="pipeline-number">01</span>
+            <div><small>Collect</small><h3>권리 경계 안에서 수집</h3><p>승인된 7개 게시판의 글·댓글과 공식 패치노트를 별도 수집기로 가져옵니다.</p></div>
+            <b>GET only</b>
+          </li>
+          <li>
+            <span class="pipeline-number">02</span>
+            <div><small>Sanitize</small><h3>저장 전에 개인정보 정제</h3><p>이메일·전화번호를 마스킹하고 닉네임은 salted HMAC으로 변환합니다.</p></div>
+            <b>PII boundary</b>
+          </li>
+          <li>
+            <span class="pipeline-number">03</span>
+            <div><small>Index</small><h3>구조를 보존해 청크화</h3><p>제목·게시판·질문 문맥·댓글 역할을 담은 청크를 BGE-M3 1024차원 벡터로 만듭니다.</p></div>
+            <b>pgvector</b>
+          </li>
+          <li>
+            <span class="pipeline-number">04</span>
+            <div><small>Retrieve</small><h3>의미와 문자열을 함께 검색</h3><p>Dense와 pg_trgm 순위를 RRF로 합치고 BGE reranker로 최종 근거를 고릅니다.</p></div>
+            <b>Top 8</b>
+          </li>
+          <li>
+            <span class="pipeline-number">05</span>
+            <div><small>Ground</small><h3>지식 그래프로 identity 고정</h3><p>질문의 직업·보스·약어를 exact relation으로 조회하고 다른 entity의 유입을 막습니다.</p></div>
+            <b>Exact graph</b>
+          </li>
+          <li>
+            <span class="pipeline-number">06</span>
+            <div><small>Generate</small><h3>로컬 모델로 구조화해 답변</h3><p>공식 관계와 비신뢰 근거를 분리 전달하고, 실제 사용 출처와 token 지표를 기록합니다.</p></div>
+            <b>Local Qwen</b>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section" id="retrieval" aria-labelledby="retrieval-title">
+        <div class="section-heading centered">
+          <p class="section-index">03 / Hybrid RAG</p>
+          <h2 id="retrieval-title">한 가지 검색 점수에 맡기지 않는다</h2>
+          <p>의미 유사도, 문자열 일치, 재랭킹과 제한된 품질 신호를 단계별로 조합합니다.</p>
+        </div>
+
+        <div class="retrieval-grid">
+          <article>
+            <div class="card-label"><span>A</span><small>Semantic recall</small></div>
+            <h3>Dense retrieval</h3>
+            <p>질문과 청크를 같은 BGE-M3 공간에 놓고 cosine distance로 의미가 가까운 글을 찾습니다.</p>
+            <dl><div><dt>Dimension</dt><dd>1,024</dd></div><div><dt>Index</dt><dd>HNSW</dd></div></dl>
+          </article>
+          <article class="featured-card">
+            <div class="card-label"><span>B</span><small>Rank fusion</small></div>
+            <h3>RRF + reranker</h3>
+            <p>Dense와 lexical의 순위를 결합한 뒤 cross-encoder가 질문과 후보를 다시 함께 읽습니다.</p>
+            <dl><div><dt>Fusion</dt><dd>Reciprocal rank</dd></div><div><dt>Final evidence</dt><dd>≤ 8</dd></div></dl>
+          </article>
+          <article>
+            <div class="card-label"><span>C</span><small>Exact wording</small></div>
+            <h3>Lexical retrieval</h3>
+            <p>직업명·보스명·약어와 같은 정확한 표면어를 pg_trgm GIN 인덱스로 보완합니다.</p>
+            <dl><div><dt>Engine</dt><dd>pg_trgm</dd></div><div><dt>Signal</dt><dd>Trigram</dd></div></dl>
+          </article>
+        </div>
+
+        <div class="formula-band" aria-label="검색 결합 원리">
+          <div><span>Rank fusion</span><strong>RRF(dense, lexical)</strong></div>
+          <i aria-hidden="true">+</i>
+          <div><span>Quality prior</span><strong>bounded metadata boost</strong></div>
+          <i aria-hidden="true">→</i>
+          <div><span>Cross encoder</span><strong>query × evidence</strong></div>
+        </div>
+
+        <aside class="tradeoff-note">
+          <strong>검색 결과는 정답이 아니라 후보입니다.</strong>
+          <p>
+            추천 수와 최신성은 관련성을 압도하지 못하도록 제한합니다. 특정 직업과 보스가 질문에
+            함께 나오면 두 범위를 모두 만족하는 근거만 통과시킵니다.
+          </p>
+        </aside>
+      </section>
+
+      <section class="section section-violet" id="knowledge" aria-labelledby="knowledge-title">
+        <div class="knowledge-layout">
+          <div class="section-heading inverse">
+            <p class="section-index">04 / Knowledge graph</p>
+            <h2 id="knowledge-title">이름이 아니라 관계를 조회한다</h2>
+            <p>
+              직업 계층, 공식 명칭, 보스 난이도와 콘텐츠 모드를 versioned entity·relation으로
+              관리합니다. 벡터 검색이 관계를 추측하도록 두지 않습니다.
+            </p>
+
+            <div class="graph-legend" aria-label="지식 그래프 범례">
+              <span><i class="legend-job"></i> Job</span>
+              <span><i class="legend-boss"></i> Boss</span>
+              <span><i class="legend-term"></i> Term</span>
+              <span><i class="legend-mode"></i> Mode</span>
+            </div>
+          </div>
+          <figure class="graph-figure">
+            <img
+              src="./static/images/knowledge-map.svg"
+              width="720"
+              height="620"
+              alt="제논과 도적·해적, 놀긍과 공식 주문서명, 데스티니 모드와 세렌·칼로스·카링 관계를 보여주는 지식 그래프 예시"
+            >
+            <figcaption>Figure 2. 실제 답변에서 exact traversal하는 대표 관계.</figcaption>
+          </figure>
+        </div>
+
+        <div class="relation-strip">
+          <article><code>제논</code><span>is_a</span><strong>도적 · 해적</strong></article>
+          <article><code>놀긍</code><span>abbreviation_of</span><strong>놀라운 긍정의 혼돈 주문서</strong></article>
+          <article><code>카링 (데스티니)</code><span>uses_mode</span><strong>데스티니 모드</strong></article>
+        </div>
+      </section>
+
+      <section class="section" id="operations" aria-labelledby="operations-title">
+        <div class="section-heading">
+          <p class="section-index">05 / Operations</p>
+          <h2 id="operations-title">지속적으로 갱신하고,<br>변경 이력을 남긴다</h2>
+          <p>
+            다음 수치는 공개용 실시간 대시보드가 아니라 2026-08-25 17:49 KST 운영 DB의
+            검증된 정적 snapshot입니다.
+          </p>
+        </div>
+
+        <div class="snapshot-grid" aria-label="운영 데이터 스냅샷">
+          <article><span>Indexed articles</span><strong data-count="17746">17,746</strong><small>Inven 7 boards</small></article>
+          <article><span>Indexed comments</span><strong data-count="70373">70,373</strong><small>sanitized</small></article>
+          <article><span>Active vectors</span><strong data-count="90293">90,293</strong><small>1,024 dimensions</small></article>
+          <article><span>Graph relations</span><strong data-count="292">292</strong><small>7 provenance sources</small></article>
+        </div>
+
+        <div class="schedule-grid">
+          <article>
+            <span class="schedule-day">Daily · 04:00 KST</span>
+            <h3>최신 커뮤니티 갱신</h3>
+            <p>7개 게시판의 최신 1페이지를 순차 수집하고 변경된 source만 다시 색인합니다.</p>
+            <div class="schedule-meta"><span>Inven</span><span>Incremental</span><span>Single lock</span></div>
+          </article>
+          <article>
+            <span class="schedule-day">Thursday · 14:00 KST</span>
+            <h3>공식 패치노트 갱신</h3>
+            <p>최근 365일 window에서 신규·수정된 Nexon 업데이트 상세만 다시 가져옵니다.</p>
+            <div class="schedule-meta"><span>Nexon</span><span>365 days</span><span>Official</span></div>
+          </article>
+          <article>
+            <span class="schedule-day">Resumable · 10 pages</span>
+            <h3>과거 데이터 백필</h3>
+            <p>게시판별 checkpoint에서 200페이지까지 round-robin으로 진행하고 슬라이스마다 색인합니다.</p>
+            <div class="schedule-meta"><span>200-page target</span><span>No OCR</span><span>Checkpoint</span></div>
+          </article>
+        </div>
+
+        <div class="telemetry-panel">
+          <div>
+            <span>Answer telemetry</span>
+            <h3>느리다는 감각을 측정 가능한 값으로</h3>
+            <p>모델 생성 답변마다 사용량과 실제 처리 시간을 표시하고 같은 값을 구조화 로그에 남깁니다.</p>
+          </div>
+          <div class="telemetry-sample" aria-label="답변 처리 지표 예시">
+            <p><span>Input</span><strong>6,209 tok</strong><small>1,232.0 tok/s · TTFT 기반</small></p>
+            <p><span>Output</span><strong>254 tok</strong><small>4.4 tok/s</small></p>
+            <p><span>Total</span><strong>65.21 sec</strong><small>retrieval → persistence</small></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-quality" id="quality" aria-labelledby="quality-title">
+        <div class="section-heading centered">
+          <p class="section-index">06 / Quality loop</p>
+          <h2 id="quality-title">실패 사례를 기능 요구사항으로 바꾼다</h2>
+          <p>오답을 숨기지 않고 문제 정의, 해결 방식, 검증 결과와 남은 위험을 같은 형식으로 기록합니다.</p>
+        </div>
+
+        <div class="quality-timeline">
+          <article>
+            <div class="quality-marker"><span>01</span></div>
+            <div class="quality-copy">
+              <small>Inconsistent procedure</small>
+              <h3>같은 직작 질문에 다른 순서</h3>
+              <p>질문글의 가정을 답변 주장으로 재사용하던 문제를 발견했습니다.</p>
+            </div>
+            <div class="quality-resolution"><span>Resolution</span><p>질문 문맥과 댓글 주장을 구조적으로 분리</p></div>
+          </article>
+          <article>
+            <div class="quality-marker"><span>02</span></div>
+            <div class="quality-copy">
+              <small>Terminology drift</small>
+              <h3>놀긍을 잘못 풀어쓴 생성</h3>
+              <p>자유 생성이 약어의 공식 명칭을 바꾸는 문제를 확인했습니다.</p>
+            </div>
+            <div class="quality-resolution"><span>Resolution</span><p>abbreviation relation 검증 후 재생성 또는 graph fallback</p></div>
+          </article>
+          <article>
+            <div class="quality-marker"><span>03</span></div>
+            <div class="quality-copy">
+              <small>Entity collision</small>
+              <h3>벨로나와 메이린을 혼동</h3>
+              <p>유사한 보스 문맥이 다른 entity의 기록을 끌어오는 문제를 확인했습니다.</p>
+            </div>
+            <div class="quality-resolution"><span>Resolution</span><p>Job AND boss scope와 공식 boss variant graph</p></div>
+          </article>
+          <article>
+            <div class="quality-marker"><span>04</span></div>
+            <div class="quality-copy">
+              <small>Polysemy</small>
+              <h3>데스티니 보스 모드 누락</h3>
+              <p>하나의 표면어가 무기와 보스 모드 양쪽에 쓰이는 다의어 문제를 발견했습니다.</p>
+            </div>
+            <div class="quality-resolution"><span>Resolution</span><p>동일 span의 복수 entity와 문맥별 relation traversal</p></div>
+          </article>
+        </div>
+
+        <div class="quality-contract">
+          <span>Failure-driven contract</span>
+          <p><strong>문제 정의</strong> → 원인과 증거 분리 → 일반화된 해결 → 회귀 테스트 → 운영 재검증 → 남은 위험 기록</p>
+        </div>
+      </section>
+
+      <section class="section closing" aria-labelledby="closing-title">
+        <div>
+          <p class="section-index">07 / Stack</p>
+          <h2 id="closing-title">작게 연결하고,<br>끝까지 검증한다</h2>
+          <p>
+            Python 3.12, PostgreSQL 16, pgvector, BGE-M3, BGE reranker, Qwen, discord.py.
+            새 abstraction보다 명시적인 경계와 회귀 가능한 데이터를 우선합니다.
+          </p>
+        </div>
+        <div class="stack-list" aria-label="기술 스택">
+          <span>Python 3.12</span><span>PostgreSQL</span><span>pgvector</span><span>BGE-M3</span>
+          <span>Qwen</span><span>Discord.py</span><span>SQLAlchemy</span><span>Alembic</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <a class="wordmark footer-mark" href="#top">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path></svg>
+          <span>Maple / Chat System</span>
+        </a>
+        <p>Static architecture record. Runtime, credentials, and corpus remain private.</p>
+      </div>
+      <p class="footer-meta">Last site update · 2026.08.25</p>
+    </footer>
+  </body>
+</html>
