@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="A completed 10×10×10 MapleStory joint textual inversion experiment with held-out composition evaluation and a documented negative result."
+      content="Evaluation of joint textual inversion for compositional MapleStory outfit generation using 1,000 factorial renders and 100 held-out combinations."
     >
     <meta name="theme-color" content="#f7f4ee">
-    <meta property="og:title" content="Maple Joint Textual Inversion — Additional Experiment">
+    <meta property="og:title" content="Joint Textual Inversion for Compositional MapleStory Outfit Generation">
     <meta
       property="og:description"
-      content="1,000 KMS renders, 30 learned item tokens, 100 unseen combinations, and a reviewable negative result."
+      content="A controlled study of 30 learned item tokens on 100 held-out outfit combinations, including oracle and shuffled real-image controls."
     >
     <meta property="og:type" content="article">
     <meta
@@ -22,7 +22,7 @@
       property="og:image"
       content="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/qualitative-grid.png"
     >
-    <title>Maple Joint Textual Inversion — Additional Experiment</title>
+    <title>Joint Textual Inversion for Compositional MapleStory Outfit Generation</title>
     <link
       rel="canonical"
       href="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/"
@@ -32,20 +32,20 @@
     <link rel="stylesheet" href="./additional-experiments.css">
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header class="site-header" aria-label="Primary navigation">
+    <header class="site-header" aria-label="Main navigation">
       <div class="nav-shell">
-        <a class="wordmark" href="../" aria-label="Back to the character translation record">
+        <a class="wordmark" href="../" aria-label="Return to the character translation study">
           <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
-          <span>Maple / Additional Experiment</span>
+          <span>Maple / Joint Textual Inversion</span>
         </a>
         <nav class="section-nav" aria-label="On this page">
-          <a href="#protocol">Protocol</a>
-          <a href="#training">Training</a>
-          <a href="#results">Results</a>
-          <a href="#verdict">Verdict</a>
-          <a class="project-home-link" href="../">Evaluation Record ↗</a>
+          <a href="#protocol">Setup</a>
+          <a href="#training">Optimization</a>
+          <a href="#results">Evaluation</a>
+          <a href="#verdict">Discussion</a>
+          <a class="project-home-link" href="../">Project Overview ↗</a>
         </nav>
       </div>
     </header>
@@ -53,19 +53,20 @@
     <main id="main-content">
       <section class="experiment-hero" id="top" aria-labelledby="page-title">
         <div>
-          <p class="eyebrow">Completed 2026.08.29 · KMS 389 · Seed 42</p>
-          <h1 id="page-title">Can 30 learned tokens compose unseen Maple outfits?</h1>
+          <p class="eyebrow">Experiment 2026.08.29 · KMS v389 · Random seed 42</p>
+          <h1 id="page-title">Joint Textual Inversion for Compositional MapleStory Outfit Generation</h1>
           <p class="lead">
-            This end-to-end milestone rendered every combination of ten hats, ten tops, and ten
-            bottoms, trained joint SDXL textual inversion, and evaluated 100 combinations excluded
-            from training.
+            We evaluate whether jointly optimized item-token embeddings support the generation of
+            unseen hat–top–bottom combinations. The study uses a complete 10×10×10 factorial render
+            set and evaluates 100 combinations excluded from optimization.
           </p>
           <div class="verdict verdict-negative">
-            <span>Scientific verdict</span>
-            <strong>Negative result, published without selection</strong>
+            <span>Main finding</span>
+            <strong>Joint TI underperforms the shuffled real-image control</strong>
             <p>
-              The pipeline completed, but the learned model scored below a shuffled renderer
-              control on CLIP and LPIPS. Reliable cosmetic binding was not established.
+              The end-to-end pipeline completes successfully; however, Joint TI obtains lower CLIP
+              similarity and higher LPIPS than the shuffled control. The results therefore do not
+              support reliable cosmetic-item binding under this configuration.
             </p>
           </div>
         </div>
@@ -73,22 +74,23 @@
 
       <section class="experiment-section" id="protocol" aria-labelledby="protocol-title">
         <div class="section-heading">
-          <p class="section-index">01 / Protocol</p>
-          <h2 id="protocol-title">Full factorial data, combination-level holdout</h2>
+          <p class="section-index">01 / Experimental setup</p>
+          <h2 id="protocol-title">Factorial dataset construction and combination-level holdout</h2>
           <p>
-            All item IDs came from one pinned MapleStory.IO KMS snapshot. Character identity,
-            pose, canvas, rendering parameters, and random seeds stayed fixed.
+            The item vocabulary is obtained from a single pinned MapleStory.IO KMS snapshot. We
+            hold character identity, pose, canvas, rendering parameters, and random seeds fixed to
+            isolate variation in the equipped hat, top, and bottom.
           </p>
         </div>
         <dl class="fact-grid">
-          <div><dt>Rendered images</dt><dd>1,000</dd></div>
-          <div><dt>Unique combinations</dt><dd>1,000</dd></div>
-          <div><dt>Items</dt><dd>10 + 10 + 10</dd></div>
-          <div><dt>Appearances per item</dt><dd>100</dd></div>
-          <div><dt>Train / test</dt><dd>800 / 200</dd></div>
-          <div><dt>Combination overlap</dt><dd>0</dd></div>
-          <div><dt>Train item coverage</dt><dd>30 / 30</dd></div>
-          <div><dt>Canvas</dt><dd>256 px · white</dd></div>
+          <div><dt>Rendered samples</dt><dd>1,000</dd></div>
+          <div><dt>Distinct combinations</dt><dd>1,000</dd></div>
+          <div><dt>Item vocabulary</dt><dd>10 + 10 + 10</dd></div>
+          <div><dt>Samples per item</dt><dd>100</dd></div>
+          <div><dt>Training / test split</dt><dd>800 / 200</dd></div>
+          <div><dt>Combination intersection</dt><dd>0</dd></div>
+          <div><dt>Training vocabulary coverage</dt><dd>30 / 30</dd></div>
+          <div><dt>Image resolution</dt><dd>256 px · white</dd></div>
         </dl>
         <p class="hash-line">
           Dataset manifest SHA-256
@@ -98,84 +100,86 @@
 
       <section class="experiment-section section-tinted" id="training" aria-labelledby="training-title">
         <div class="section-heading">
-          <p class="section-index">02 / Training</p>
-          <h2 id="training-title">Only 30 rows across both SDXL text encoders may change</h2>
+          <p class="section-index">02 / Optimization</p>
+          <h2 id="training-title">Joint textual inversion with frozen SDXL backbones</h2>
           <p>
-            The VAE, UNet, and text-encoder bodies remained frozen. Non-item embedding rows were
-            restored after every optimizer update, leaving 61,440 effective learned parameters.
+            The VAE, UNet, and both text-encoder backbones remain frozen. After each optimizer step,
+            all embedding rows other than the 30 item identifiers are restored, yielding 61,440
+            trainable parameters across the two SDXL text encoders.
           </p>
         </div>
         <div class="two-column">
           <table class="detail-table">
             <tbody>
-              <tr><th scope="row">Base model</th><td>SDXL 1.0, pinned revision</td></tr>
-              <tr><th scope="row">Method</th><td>Dual-CLIP joint textual inversion</td></tr>
-              <tr><th scope="row">Optimizer</th><td>AdamW · constant 5e-4</td></tr>
-              <tr><th scope="row">Steps / batch</th><td>3,000 / 4</td></tr>
-              <tr><th scope="row">Precision</th><td>BF16</td></tr>
-              <tr><th scope="row">Duration</th><td>15.18 minutes</td></tr>
-              <tr><th scope="row">Peak CUDA allocation</th><td>9.11 GiB</td></tr>
+              <tr><th scope="row">Base model</th><td>Stable Diffusion XL 1.0, pinned revision</td></tr>
+              <tr><th scope="row">Optimization method</th><td>Joint textual inversion, dual text encoders</td></tr>
+              <tr><th scope="row">Optimizer / learning rate</th><td>AdamW / constant 5 × 10<sup>−4</sup></td></tr>
+              <tr><th scope="row">Iterations / batch size</th><td>3,000 / 4</td></tr>
+              <tr><th scope="row">Numerical precision</th><td>BF16</td></tr>
+              <tr><th scope="row">Wall-clock time</th><td>15.18 minutes</td></tr>
+              <tr><th scope="row">Peak allocated CUDA memory</th><td>9.11 GiB</td></tr>
             </tbody>
           </table>
           <div class="loss-card">
-            <span>Diffusion denoising MSE</span>
-            <div><small>First 50 mean</small><strong>0.03044</strong></div>
-            <div><small>Last 50 mean</small><strong>0.01838</strong></div>
-            <div><small>Minimum</small><strong>0.00256</strong></div>
-            <p>Final-step noise makes the single final loss less reliable than window means.</p>
+            <span>Training objective · denoising MSE</span>
+            <div><small>Mean, iterations 1–50</small><strong>0.03044</strong></div>
+            <div><small>Mean, iterations 2,951–3,000</small><strong>0.01838</strong></div>
+            <div><small>Minimum observed</small><strong>0.00256</strong></div>
+            <p>Window means are reported because the stochastic per-iteration loss is noisy.</p>
           </div>
         </div>
       </section>
 
       <section class="experiment-section" id="results" aria-labelledby="results-title">
         <div class="section-heading">
-          <p class="section-index">03 / Held-out results</p>
-          <h2 id="results-title">The controls pass; item-token composition does not</h2>
+          <p class="section-index">03 / Evaluation</p>
+          <h2 id="results-title">Joint TI does not exceed the shuffled real-image control</h2>
           <p>
-            The first 100 test combinations used 30 diffusion steps and CFG 7.0. Oracle verifies
-            exact matching. Shuffled assigns another real renderer image as a negative control.
+            We evaluate the first 100 of 200 held-out combinations using 30 denoising steps and a
+            classifier-free guidance scale of 7.0. Oracle and Shuffled provide positive and
+            negative controls, respectively, for interpreting the learned model output.
           </p>
         </div>
-        <div class="comparison-guide" aria-label="Definitions of the three evaluation backends">
+        <div class="comparison-guide" aria-label="Definitions of the three evaluation sources">
           <article>
-            <span>Model under test</span>
+            <span>Evaluated method</span>
             <h3>Joint TI</h3>
             <p>
-              Joint textual inversion. All 30 hat, top, and bottom identifier tokens were learned
-              together while the rest of SDXL stayed frozen. This is the only row produced by the
-              trained model.
+              Joint textual inversion optimizes 30 item-identifier embeddings in both SDXL text
+              encoders while freezing all remaining parameters. Each inference prompt specifies
+              one learned hat, top, and bottom identifier.
             </p>
           </article>
           <article>
-            <span>Perfect-match check</span>
+            <span>Positive control</span>
             <h3>Oracle</h3>
             <p>
-              Not a model output. The exact ground-truth image is copied and compared with itself.
-              Its perfect scores confirm that image loading, pairing, and metric code recognize an
-              exact match.
+              Each target image is compared with an identical copy. This upper-bound control is not
+              a model output; it verifies that the pairing and metric implementations recover the
+              expected score for an exact match.
             </p>
           </article>
           <article>
-            <span>Wrong-outfit control</span>
+            <span>Negative control</span>
             <h3>Shuffled</h3>
             <p>
-              Not a model output. Each target is paired with a different real renderer image using
-              a fixed, no-self-match shuffle. It exposes scores caused by the shared white
-              background, body, pose, and sprite style rather than the requested outfit.
+              Each target is compared with a different real rendered outfit obtained by a
+              deterministic derangement. This control is not a model output; it measures similarity
+              attributable to the shared background, body, pose, and rendering domain.
             </p>
           </article>
         </div>
         <p class="comparison-rule">
-          <strong>How to read the comparison:</strong> a convincing item-binding result should move
-          Joint TI toward Oracle and outperform Shuffled on identity-sensitive evidence. Here,
-          Joint TI falls below Shuffled on CLIP and LPIPS, so the run does not establish reliable
-          cosmetic binding.
+          <strong>Interpretation.</strong> Evidence for item binding would require Joint TI to
+          outperform Shuffled on semantic and perceptual metrics and move toward the Oracle upper
+          bound. Joint TI instead obtains lower CLIP similarity and higher LPIPS; therefore, this
+          experiment does not establish reliable cosmetic-item binding.
         </p>
         <div class="table-wrap">
           <table class="result-table">
             <thead>
               <tr>
-                <th scope="col">Backend</th>
+                <th scope="col">Evaluation source</th>
                 <th scope="col">Pixel similarity ↑</th>
                 <th scope="col">Foreground IoU ↑</th>
                 <th scope="col">CLIP ↑</th>
@@ -190,132 +194,134 @@
           </table>
         </div>
         <div class="sample-display-note">
-          <strong>Enlarged evidence view</strong>
+          <strong>Qualitative comparisons</strong>
           <p>
-            Each card uses a 3× CSS center zoom over the original 256 px file. No pixels were
-            regenerated or retouched. Select an image to open its complete uncropped frame.
+            Images are displayed with 3× CSS magnification from the original 256 px files. No image
+            post-processing is applied. Selecting an image opens the complete source frame.
           </p>
         </div>
         <div class="shared-prompt">
-          <span>Shared negative prompt</span>
+          <span>Common negative prompt</span>
           <code>photorealistic, 3d render, scenery, text, watermark, multiple characters</code>
         </div>
-        <div class="evidence-gallery" aria-label="Enlarged ground-truth and generated comparisons">
+        <div class="evidence-gallery" aria-label="Ground-truth and Joint TI qualitative comparisons">
           <article class="evidence-card">
-            <header><div><span>Sample 001</span><strong>Representative</strong></div><small>CLIP 0.596 · LPIPS 0.071</small></header>
+            <header><div><span>Sample 001</span><strong>Representative sample</strong></div><small>CLIP 0.596 · LPIPS 0.071</small></header>
             <dl class="sample-prompt">
               <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000001&gt; &lt;top_1040002&gt;</code></dd></div>
               <div class="sample-seed"><dt>Seed</dt><dd><code>43</code></dd></div>
             </dl>
             <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/01-target.png" target="_blank" rel="noopener"><img src="./samples/01-target.png" alt="Enlarged ground-truth Maple sprite for sample 001." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/01-generated.png" target="_blank" rel="noopener"><img src="./samples/01-generated.png" alt="Enlarged joint textual inversion output for sample 001." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
+              <figure><a class="zoom-frame target-frame" href="./samples/01-target.png" target="_blank" rel="noopener"><img src="./samples/01-target.png" alt="Ground-truth image for held-out sample 001." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/01-generated.png" target="_blank" rel="noopener"><img src="./samples/01-generated.png" alt="Joint textual inversion output for held-out sample 001." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
             </div>
           </article>
           <article class="evidence-card">
-            <header><div><span>Sample 002</span><strong>Representative</strong></div><small>CLIP 0.608 · LPIPS 0.114</small></header>
+            <header><div><span>Sample 002</span><strong>Representative sample</strong></div><small>CLIP 0.608 · LPIPS 0.114</small></header>
             <dl class="sample-prompt">
               <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060007&gt; &lt;hat_1000000&gt; &lt;top_1040001&gt;</code></dd></div>
               <div class="sample-seed"><dt>Seed</dt><dd><code>44</code></dd></div>
             </dl>
             <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/02-target.png" target="_blank" rel="noopener"><img src="./samples/02-target.png" alt="Enlarged ground-truth Maple sprite for sample 002." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/02-generated.png" target="_blank" rel="noopener"><img src="./samples/02-generated.png" alt="Enlarged joint textual inversion output for sample 002." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
+              <figure><a class="zoom-frame target-frame" href="./samples/02-target.png" target="_blank" rel="noopener"><img src="./samples/02-target.png" alt="Ground-truth image for held-out sample 002." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/02-generated.png" target="_blank" rel="noopener"><img src="./samples/02-generated.png" alt="Joint textual inversion output for held-out sample 002." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
             </div>
           </article>
           <article class="evidence-card">
-            <header><div><span>Sample 003</span><strong>Higher-scoring case</strong></div><small>CLIP 0.716 · LPIPS 0.159</small></header>
+            <header><div><span>Sample 003</span><strong>Higher CLIP similarity</strong></div><small>CLIP 0.716 · LPIPS 0.159</small></header>
             <dl class="sample-prompt">
               <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000005&gt; &lt;top_1040008&gt;</code></dd></div>
               <div class="sample-seed"><dt>Seed</dt><dd><code>45</code></dd></div>
             </dl>
             <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/03-target.png" target="_blank" rel="noopener"><img src="./samples/03-target.png" alt="Enlarged ground-truth Maple sprite for sample 003." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/03-generated.png" target="_blank" rel="noopener"><img src="./samples/03-generated.png" alt="Enlarged joint textual inversion output for sample 003." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
+              <figure><a class="zoom-frame target-frame" href="./samples/03-target.png" target="_blank" rel="noopener"><img src="./samples/03-target.png" alt="Ground-truth image for held-out sample 003." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/03-generated.png" target="_blank" rel="noopener"><img src="./samples/03-generated.png" alt="Joint textual inversion output for held-out sample 003." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
             </div>
           </article>
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 004</span><strong>Frame artifact</strong></div><small>CLIP 0.566 · LPIPS 0.518</small></header>
+            <header><div><span>Sample 004</span><strong>Boundary artifact</strong></div><small>CLIP 0.566 · LPIPS 0.518</small></header>
             <dl class="sample-prompt">
               <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060008&gt; &lt;hat_1000009&gt; &lt;top_1040000&gt;</code></dd></div>
               <div class="sample-seed"><dt>Seed</dt><dd><code>46</code></dd></div>
             </dl>
             <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/04-target.png" target="_blank" rel="noopener"><img src="./samples/04-target.png" alt="Enlarged ground-truth Maple sprite for sample 004." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/04-generated.png" target="_blank" rel="noopener"><img src="./samples/04-generated.png" alt="Enlarged joint textual inversion output with a frame artifact for sample 004." width="256" height="256"></a><figcaption>Joint TI · open full frame</figcaption></figure>
+              <figure><a class="zoom-frame target-frame" href="./samples/04-target.png" target="_blank" rel="noopener"><img src="./samples/04-target.png" alt="Ground-truth image for held-out sample 004." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/04-generated.png" target="_blank" rel="noopener"><img src="./samples/04-generated.png" alt="Joint textual inversion output with a boundary artifact for held-out sample 004." width="256" height="256"></a><figcaption>Joint TI output · full frame</figcaption></figure>
             </div>
           </article>
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 053</span><strong>Worst-20 case</strong></div><small>CLIP 0.418 · IoU 0.000</small></header>
+            <header><div><span>Sample 053</span><strong>Lowest CLIP quintile</strong></div><small>CLIP 0.418 · IoU 0.000</small></header>
             <dl class="sample-prompt">
               <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000007&gt; &lt;top_1040005&gt;</code></dd></div>
               <div class="sample-seed"><dt>Seed</dt><dd><code>95</code></dd></div>
             </dl>
             <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/05-target.png" target="_blank" rel="noopener"><img src="./samples/05-target.png" alt="Enlarged ground-truth Maple sprite for sample 053." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/05-generated.png" target="_blank" rel="noopener"><img src="./samples/05-generated.png" alt="Enlarged low-scoring joint textual inversion output for sample 053." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
+              <figure><a class="zoom-frame target-frame" href="./samples/05-target.png" target="_blank" rel="noopener"><img src="./samples/05-target.png" alt="Ground-truth image for held-out sample 053." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/05-generated.png" target="_blank" rel="noopener"><img src="./samples/05-generated.png" alt="Joint textual inversion output in the lowest CLIP quintile for held-out sample 053." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
             </div>
           </article>
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 085</span><strong>Lowest CLIP case</strong></div><small>CLIP 0.406 · IoU 0.000</small></header>
+            <header><div><span>Sample 085</span><strong>Minimum CLIP similarity</strong></div><small>CLIP 0.406 · IoU 0.000</small></header>
             <dl class="sample-prompt">
               <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060004&gt; &lt;hat_1000009&gt; &lt;top_1040004&gt;</code></dd></div>
               <div class="sample-seed"><dt>Seed</dt><dd><code>127</code></dd></div>
             </dl>
             <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/06-target.png" target="_blank" rel="noopener"><img src="./samples/06-target.png" alt="Enlarged ground-truth Maple sprite for sample 085." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/06-generated.png" target="_blank" rel="noopener"><img src="./samples/06-generated.png" alt="Enlarged lowest-CLIP joint textual inversion output for sample 085." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
+              <figure><a class="zoom-frame target-frame" href="./samples/06-target.png" target="_blank" rel="noopener"><img src="./samples/06-target.png" alt="Ground-truth image for held-out sample 085." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/06-generated.png" target="_blank" rel="noopener"><img src="./samples/06-generated.png" alt="Joint textual inversion output with the minimum CLIP similarity for held-out sample 085." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
             </div>
           </article>
         </div>
         <div class="summary-figure">
           <figure>
-            <img src="./metrics.png" alt="Bar chart comparing pixel similarity and CLIP similarity for diffusion, oracle, and shuffled controls." width="640" height="360">
+            <img src="./metrics.png" alt="Held-out pixel similarity and CLIP similarity for Joint TI, Oracle, and Shuffled evaluation sources." width="640" height="360">
             <figcaption>
-              Aggregate pixel similarity and CLIP across 100 held-out combinations. Oracle is the
-              exact-copy ceiling, Shuffled is the wrong-real-outfit control, and Diffusion is the
-              Joint-TI model output.
+              Mean pixel similarity and CLIP similarity over 100 held-out combinations. Oracle
+              denotes the exact-copy upper bound, Shuffled denotes the real-image negative control,
+              and Joint TI denotes the learned model output.
             </figcaption>
           </figure>
           <details class="full-audit">
-            <summary>Open the 12-row control audit: 4 Oracle + 4 Shuffled + 4 Joint TI</summary>
+            <summary>Qualitative audit (12 rows: 4 per evaluation source)</summary>
             <div class="audit-explanation">
               <p>
-                The sheet takes the first four held-out records from each backend and interleaves
-                them for a compact visual check. Every row places the correct ground truth on the
-                left and that backend's comparison image on the right.
+                The audit interleaves the first four held-out records from each evaluation source.
+                Each row shows the ground-truth target on the left and the corresponding comparison
+                image on the right.
               </p>
               <ul>
-                <li><strong>Oracle:</strong> right image is the same ground truth.</li>
-                <li><strong>Shuffled:</strong> right image is a different real outfit.</li>
-                <li><strong>Joint TI:</strong> right image is generated from the learned item-token prompt.</li>
+                <li><strong>Oracle:</strong> the comparison is an identical copy of the target.</li>
+                <li><strong>Shuffled:</strong> the comparison is a different real rendered outfit.</li>
+                <li><strong>Joint TI:</strong> the comparison is generated from the learned item-token prompt.</li>
               </ul>
-              <p>The row label reports backend, pixel similarity, foreground IoU, and CLIP.</p>
+              <p>Each row reports the evaluation source, pixel similarity, foreground IoU, and CLIP similarity.</p>
             </div>
-            <img src="./qualitative-grid.png" alt="Twelve ground-truth and generated Maple character pairs across oracle, shuffled, and joint textual inversion outputs." width="384" height="2640">
+            <img src="./qualitative-grid.png" alt="Twelve ground-truth and comparison pairs sampled equally from Oracle, Shuffled, and Joint TI evaluation sources." width="384" height="2640">
           </details>
         </div>
       </section>
 
       <section class="experiment-section verdict-section" id="verdict" aria-labelledby="verdict-title">
         <div class="section-heading inverse">
-          <p class="section-index">04 / Verdict</p>
-          <h2 id="verdict-title">Pipeline completion is not evidence of compositional identity</h2>
+          <p class="section-index">04 / Discussion</p>
+          <h2 id="verdict-title">The observed performance does not establish compositional item binding</h2>
           <p>
-            The learned outputs often resemble generic chibi characters, but their requested
-            hat, top, and bottom identities are weaker than another real outfit selected at random.
-            Some outputs also introduce frame artifacts.
+            Joint TI captures broad chibi-character appearance but does not preserve the requested
+            hat, top, and bottom identities relative to the shuffled real-image control. Boundary
+            artifacts are additionally observed in a subset of outputs. These results distinguish
+            successful pipeline execution from evidence of compositional generalization.
           </p>
         </div>
         <ol class="next-list">
-          <li><span>01</span><p>Separate data scale from repeated-exposure compute with fixed-step and fixed-epoch controls.</p></li>
-          <li><span>02</span><p>Render category-only paired targets and add item retrieval accuracy instead of relying on white-background pixels.</p></li>
-          <li><span>03</span><p>Compare joint TI, independent TI, and LoRA plus learned identifiers under the exact same split and seeds.</p></li>
-          <li><span>04</span><p>Test a domain-LoRA-first condition to isolate sprite-domain mismatch from token-binding failure.</p></li>
+          <li><span>01</span><p>Disentangle dataset scale from optimization exposure using matched-iteration and matched-epoch ablations.</p></li>
+          <li><span>02</span><p>Construct category-isolated paired targets and report item-retrieval accuracy with category-specific masks.</p></li>
+          <li><span>03</span><p>Compare joint TI, independently optimized TI, and LoRA with learned identifiers under identical splits and sampling seeds.</p></li>
+          <li><span>04</span><p>Evaluate domain LoRA before identifier learning to separate sprite-domain adaptation from token-binding capacity.</p></li>
         </ol>
         <p class="scope-note">
-          Metric scope: CLIP and LPIPS compare the whole normalized image. No per-item mask was used;
-          category-conditioned summaries are therefore not localized garment scores.
+          Evaluation limitation. CLIP and LPIPS are computed over the complete normalized image,
+          without item-specific masks. Category-conditioned summaries therefore do not constitute
+          localized garment measurements.
         </p>
       </section>
     </main>
@@ -324,11 +330,11 @@
       <div>
         <a class="wordmark footer-mark" href="../">
           <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
-          <span>Maple / Evaluation Record</span>
+          <span>Maple / Experiment Report</span>
         </a>
-        <p>Static evidence only. Dataset archives and learned weights remain offline.</p>
+        <p>Static experiment report. Dataset files and learned embeddings are retained offline.</p>
       </div>
-      <p class="footer-meta">Experiment completed · 2026.08.29</p>
+      <p class="footer-meta">Experiment finalized · 2026.08.29</p>
     </footer>
   </body>
 </html>

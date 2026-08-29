@@ -394,7 +394,7 @@
   border-radius: 999px;
   color: var(--white);
   background: rgba(23, 32, 30, 0.75);
-  content: "3× · open full";
+  content: "3× · source image";
   font-size: 0.62rem;
   font-weight: 750;
   pointer-events: none;
