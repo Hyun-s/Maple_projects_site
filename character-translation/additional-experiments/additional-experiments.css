@@ -668,6 +668,7 @@
     gap: 4px;
   }
 
+  .evidence-pair,
   .evidence-triplet {
     grid-template-columns: 1fr;
   }

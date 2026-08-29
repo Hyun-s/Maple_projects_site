@@ -11,7 +11,7 @@
     <meta property="og:title" content="SDXL and FLUX Textual Inversion for Compositional Outfit Generation">
     <meta
       property="og:description"
-      content="A controlled negative-result study with matched data, prompts, seeds, exact-match and shuffled controls, and reproducible optimization records."
+      content="A controlled FLUX prompt ablation with anime-style samples, fixed embeddings and seeds, exact-match and shuffled controls, and reproducible records."
     >
     <meta property="og:type" content="article">
     <meta
@@ -54,17 +54,17 @@
           <h1 id="page-title">Textual Inversion Under SDXL and FLUX for Compositional Outfit Generation</h1>
           <p class="lead">
             We test whether jointly optimized item-token embeddings recover unseen hat–top–bottom
-            combinations. SDXL and FLUX.1-dev are evaluated on the same factorial renders,
-            combination split, prompts, and sample seeds.
+            combinations. The final FLUX sampling pass removes the game-specific prefix and uses a
+            direct anime-style prompt on the same factorial renders, split, and sample seeds.
           </p>
           <div class="verdict verdict-negative">
             <span>Main finding</span>
-            <strong>Changing the backbone from SDXL to FLUX does not recover item binding</strong>
+            <strong>Anime-style prompting changes appearance, not item identity</strong>
             <p>
-              Both learned models remain below the shuffled real-image control. FLUX increases
-              pixel similarity but reduces foreground IoU and CLIP similarity and increases LPIPS
-              relative to SDXL. The qualitative outputs confirm that the pixel gain is dominated
-              by the shared white background rather than the requested outfit identities.
+              The new outputs are recognizable anime characters rather than icons or empty frames,
+              but they do not reproduce the requested hat, top, and bottom. CLIP increases only
+              from 0.4537 to 0.4642, while foreground IoU decreases to 0.0503 and LPIPS increases
+              to 0.5015. Prompt wording alone does not repair the failed item binding.
             </p>
           </div>
         </div>
@@ -157,53 +157,40 @@
       <section class="experiment-section" id="results" aria-labelledby="results-title">
         <div class="section-heading">
           <p class="section-index">03 / Evaluation</p>
-          <h2 id="results-title">FLUX degrades semantic and foreground correspondence</h2>
+          <h2 id="results-title">Anime-style sampling produces characters but not the requested outfits</h2>
           <p>
-            The first 100 held-out combinations are generated with 30 inference steps. SDXL uses
-            CFG 7.0 and its registered negative prompt; FLUX uses guidance 3.5 and no negative
-            prompt. Both use the same positive item-token prompt and sample seed for each row.
+            We freeze the completed FLUX embeddings and change only the inference prompt. The same
+            100 held-out combinations and seeds are sampled with 30 inference steps, guidance 3.5,
+            and no negative prompt.
           </p>
         </div>
-        <div class="comparison-guide" aria-label="Definitions of the four evaluation sources">
+        <div class="comparison-guide" aria-label="Definitions of the prompt ablation and controls">
           <article>
             <span>Positive control</span>
             <h3>Oracle exact match</h3>
-            <p>
-              Each target is compared with an identical copy. This is not a model output; it checks
-              that pairing and metric implementations recover the expected upper bound.
-            </p>
+            <p>An identical target copy verifies pairing and the expected metric upper bound.</p>
           </article>
           <article>
             <span>Negative control</span>
             <h3>Shuffled real image</h3>
-            <p>
-              Each target is compared with a different real render selected by deterministic
-              derangement. It measures similarity caused by the shared body, pose, and background.
-            </p>
+            <p>A different real render measures similarity caused by the shared body, pose, and background.</p>
           </article>
           <article>
-            <span>Learned model</span>
-            <h3>SDXL textual inversion</h3>
-            <p>
-              Thirty item embeddings are optimized across both SDXL CLIP encoders while the VAE,
-              UNet, text-encoder backbones, and all other embedding rows remain frozen.
-            </p>
+            <span>Prompt ablation</span>
+            <h3>FLUX original prompt</h3>
+            <p>The completed embedding run sampled with the original training-caption prompt.</p>
           </article>
           <article>
-            <span>Learned model</span>
-            <h3>FLUX textual inversion</h3>
-            <p>
-              The same 30 item identifiers are optimized in the FLUX CLIP-L and T5 embedding spaces
-              while the transformer, VAE, text encoders, and all non-item rows remain frozen.
-            </p>
+            <span>Requested sampling</span>
+            <h3>FLUX anime-style prompt</h3>
+            <p>The same frozen embeddings sampled with <code>an anime-style character wearing {tokens}</code>.</p>
           </article>
         </div>
         <p class="comparison-rule">
-          <strong>Decision rule.</strong> Evidence for item binding should exceed the shuffled
-          real-image control on semantic and perceptual measures and move toward the oracle upper
-          bound. Neither learned model satisfies this criterion. FLUX further lowers CLIP from
-          0.5809 to 0.4537 and foreground IoU from 0.1793 to 0.0631 while increasing LPIPS from
-          0.3641 to 0.4332.
+          <strong>Result.</strong> The anime-style prompt produces coherent anime characters, but
+          it does not recover the requested item identities. Relative to the original FLUX prompt,
+          CLIP changes from 0.4537 to 0.4642, foreground IoU falls from 0.0631 to 0.0503, and LPIPS
+          rises from 0.4332 to 0.5015. The prompt changes style rather than binding.
         </p>
         <div class="table-wrap">
           <table class="result-table">
@@ -220,115 +207,97 @@
               <tr><th scope="row">Oracle exact-match control</th><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.0000</td></tr>
               <tr><th scope="row">Shuffled real-image control</th><td>0.9903</td><td>0.7559</td><td>0.7257</td><td>0.0472</td></tr>
               <tr><th scope="row">SDXL textual inversion</th><td>0.8761</td><td>0.1793</td><td>0.5809</td><td>0.3641</td></tr>
-              <tr class="negative-row"><th scope="row">FLUX textual inversion</th><td>0.9122</td><td>0.0631</td><td>0.4537</td><td>0.4332</td></tr>
+              <tr><th scope="row">FLUX original prompt</th><td>0.9122</td><td>0.0631</td><td>0.4537</td><td>0.4332</td></tr>
+              <tr class="negative-row"><th scope="row">FLUX anime-style prompt</th><td>0.8952</td><td>0.0503</td><td>0.4642</td><td>0.5015</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="sample-display-note">
-          <strong>Matched qualitative comparisons</strong>
+          <strong>Actual anime-style samples</strong>
           <p>
-            Every card shows the same held-out target, positive prompt, and seed for both models.
-            The character-centered frames are magnified 2.4×; full-frame failure examples remain
-            uncropped. Select any image to open its complete 256×256 source.
+            Every card shows the held-out target and the newly sampled FLUX image. Ground-truth
+            sprites are magnified 2.4×; generated images remain uncropped. Select either image to
+            open its complete 256×256 source.
           </p>
         </div>
-        <div class="generation-notes" aria-label="Model-specific generation settings">
-          <p><strong>SDXL:</strong> CFG 7.0 · negative prompt <code>photorealistic, 3d render, scenery, text, watermark, multiple characters</code></p>
-          <p><strong>FLUX:</strong> guidance 3.5 · no negative prompt</p>
+        <div class="generation-notes" aria-label="Anime-style sampling settings">
+          <p><strong>Exact prompt template:</strong> <code>an anime-style character wearing {tokens}</code></p>
+          <p><strong>FLUX sampling:</strong> guidance 3.5 · 30 steps · no negative prompt · seeds 43–142</p>
         </div>
 
-        <div class="evidence-gallery" aria-label="Matched ground-truth, SDXL, and FLUX comparisons">
+        <div class="evidence-gallery" aria-label="Ground truth and FLUX anime-style comparisons">
           <article class="evidence-card">
-            <header><div><span>Sample 001</span><strong>Representative paired comparison</strong></div><small>Seed 43</small></header>
-            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000001&gt; &lt;top_1040002&gt;</code></dd></div></dl>
-            <div class="evidence-triplet">
+            <header><div><span>Sample 001</span><strong>Anime character, incorrect outfit identity</strong></div><small>Seed 43</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>an anime-style character wearing &lt;bottom_1060001&gt; &lt;hat_1000001&gt; &lt;top_1040002&gt;</code></dd></div></dl>
+            <div class="evidence-pair">
               <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/01-target.png" target="_blank" rel="noopener"><img src="./samples/01-target.png" alt="Ground truth for held-out sample 001." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame magnified-frame" href="./samples/01-sdxl.png" target="_blank" rel="noopener"><img src="./samples/01-sdxl.png" alt="SDXL textual inversion output for sample 001." width="256" height="256"></a><figcaption>SDXL · CLIP 0.596 · IoU 0.611</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/01-flux.png" target="_blank" rel="noopener"><img src="./samples/01-flux.png" alt="FLUX textual inversion output for sample 001, depicting an unrelated icon." width="256" height="256"></a><figcaption>FLUX · CLIP 0.441 · IoU 0.027</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/01-flux.png" target="_blank" rel="noopener"><img src="./samples/01-flux.png" alt="Anime-style FLUX output for sample 001." width="256" height="256"></a><figcaption>FLUX anime-style · CLIP 0.459 · IoU 0.021</figcaption></figure>
             </div>
           </article>
-
           <article class="evidence-card">
-            <header><div><span>Sample 002</span><strong>Representative paired comparison</strong></div><small>Seed 44</small></header>
-            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060007&gt; &lt;hat_1000000&gt; &lt;top_1040001&gt;</code></dd></div></dl>
-            <div class="evidence-triplet">
+            <header><div><span>Sample 002</span><strong>Generic anime outfit substitution</strong></div><small>Seed 44</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>an anime-style character wearing &lt;bottom_1060007&gt; &lt;hat_1000000&gt; &lt;top_1040001&gt;</code></dd></div></dl>
+            <div class="evidence-pair">
               <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/02-target.png" target="_blank" rel="noopener"><img src="./samples/02-target.png" alt="Ground truth for held-out sample 002." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame magnified-frame" href="./samples/02-sdxl.png" target="_blank" rel="noopener"><img src="./samples/02-sdxl.png" alt="SDXL textual inversion output for sample 002." width="256" height="256"></a><figcaption>SDXL · CLIP 0.608 · IoU 0.462</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/02-flux.png" target="_blank" rel="noopener"><img src="./samples/02-flux.png" alt="FLUX textual inversion output for sample 002, depicting an unrelated ghost icon." width="256" height="256"></a><figcaption>FLUX · CLIP 0.472 · IoU 0.028</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/02-flux.png" target="_blank" rel="noopener"><img src="./samples/02-flux.png" alt="Anime-style FLUX output for sample 002." width="256" height="256"></a><figcaption>FLUX anime-style · CLIP 0.487 · IoU 0.082</figcaption></figure>
             </div>
           </article>
-
           <article class="evidence-card">
-            <header><div><span>Sample 003</span><strong>Highest SDXL CLIP among displayed rows</strong></div><small>Seed 45</small></header>
-            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000005&gt; &lt;top_1040008&gt;</code></dd></div></dl>
-            <div class="evidence-triplet">
+            <header><div><span>Sample 003</span><strong>Style compliance without item compliance</strong></div><small>Seed 45</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>an anime-style character wearing &lt;bottom_1060001&gt; &lt;hat_1000005&gt; &lt;top_1040008&gt;</code></dd></div></dl>
+            <div class="evidence-pair">
               <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/03-target.png" target="_blank" rel="noopener"><img src="./samples/03-target.png" alt="Ground truth for held-out sample 003." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame magnified-frame" href="./samples/03-sdxl.png" target="_blank" rel="noopener"><img src="./samples/03-sdxl.png" alt="SDXL textual inversion output for sample 003." width="256" height="256"></a><figcaption>SDXL · CLIP 0.716 · IoU 0.356</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/03-flux.png" target="_blank" rel="noopener"><img src="./samples/03-flux.png" alt="Nearly blank FLUX textual inversion output for sample 003." width="256" height="256"></a><figcaption>FLUX · CLIP 0.504 · IoU 0.026</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/03-flux.png" target="_blank" rel="noopener"><img src="./samples/03-flux.png" alt="Anime-style FLUX output for sample 003." width="256" height="256"></a><figcaption>FLUX anime-style · CLIP 0.443 · IoU 0.014</figcaption></figure>
             </div>
           </article>
-
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 004</span><strong>Distinct failure modes</strong></div><small>Seed 46</small></header>
-            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060008&gt; &lt;hat_1000009&gt; &lt;top_1040000&gt;</code></dd></div></dl>
-            <div class="evidence-triplet">
+            <header><div><span>Sample 004</span><strong>Large pose and garment mismatch</strong></div><small>Seed 46</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>an anime-style character wearing &lt;bottom_1060008&gt; &lt;hat_1000009&gt; &lt;top_1040000&gt;</code></dd></div></dl>
+            <div class="evidence-pair">
               <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/04-target.png" target="_blank" rel="noopener"><img src="./samples/04-target.png" alt="Ground truth for held-out sample 004." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/04-sdxl.png" target="_blank" rel="noopener"><img src="./samples/04-sdxl.png" alt="Full-frame SDXL textual inversion output with a boundary artifact for sample 004." width="256" height="256"></a><figcaption>SDXL · CLIP 0.566 · LPIPS 0.518</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/04-flux.png" target="_blank" rel="noopener"><img src="./samples/04-flux.png" alt="Full-frame FLUX textual inversion output depicting an unrelated illustration for sample 004." width="256" height="256"></a><figcaption>FLUX · CLIP 0.501 · LPIPS 0.632</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/04-flux.png" target="_blank" rel="noopener"><img src="./samples/04-flux.png" alt="Anime-style FLUX output for sample 004." width="256" height="256"></a><figcaption>FLUX anime-style · CLIP 0.356 · LPIPS 0.629</figcaption></figure>
             </div>
           </article>
-
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 053</span><strong>Empty SDXL output versus icon-like FLUX output</strong></div><small>Seed 95</small></header>
-            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000007&gt; &lt;top_1040005&gt;</code></dd></div></dl>
-            <div class="evidence-triplet">
+            <header><div><span>Sample 053</span><strong>Anime prior dominates learned identifiers</strong></div><small>Seed 95</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>an anime-style character wearing &lt;bottom_1060001&gt; &lt;hat_1000007&gt; &lt;top_1040005&gt;</code></dd></div></dl>
+            <div class="evidence-pair">
               <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/05-target.png" target="_blank" rel="noopener"><img src="./samples/05-target.png" alt="Ground truth for held-out sample 053." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/05-sdxl.png" target="_blank" rel="noopener"><img src="./samples/05-sdxl.png" alt="Nearly blank SDXL textual inversion output for sample 053." width="256" height="256"></a><figcaption>SDXL · CLIP 0.418 · IoU 0.000</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/05-flux.png" target="_blank" rel="noopener"><img src="./samples/05-flux.png" alt="FLUX textual inversion output depicting an unrelated icon for sample 053." width="256" height="256"></a><figcaption>FLUX · CLIP 0.443 · IoU 0.159</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/05-flux.png" target="_blank" rel="noopener"><img src="./samples/05-flux.png" alt="Anime-style FLUX output for sample 053." width="256" height="256"></a><figcaption>FLUX anime-style · CLIP 0.469 · LPIPS 0.664</figcaption></figure>
             </div>
           </article>
-
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 085</span><strong>Low-correspondence paired failure</strong></div><small>Seed 127</small></header>
-            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060004&gt; &lt;hat_1000009&gt; &lt;top_1040004&gt;</code></dd></div></dl>
-            <div class="evidence-triplet">
+            <header><div><span>Sample 085</span><strong>Generic school-uniform substitution</strong></div><small>Seed 127</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>an anime-style character wearing &lt;bottom_1060004&gt; &lt;hat_1000009&gt; &lt;top_1040004&gt;</code></dd></div></dl>
+            <div class="evidence-pair">
               <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/06-target.png" target="_blank" rel="noopener"><img src="./samples/06-target.png" alt="Ground truth for held-out sample 085." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/06-sdxl.png" target="_blank" rel="noopener"><img src="./samples/06-sdxl.png" alt="Nearly blank SDXL textual inversion output for sample 085." width="256" height="256"></a><figcaption>SDXL · CLIP 0.406 · IoU 0.000</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/06-flux.png" target="_blank" rel="noopener"><img src="./samples/06-flux.png" alt="FLUX textual inversion output depicting an unrelated tree icon for sample 085." width="256" height="256"></a><figcaption>FLUX · CLIP 0.491 · IoU 0.080</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/06-flux.png" target="_blank" rel="noopener"><img src="./samples/06-flux.png" alt="Anime-style FLUX output for sample 085." width="256" height="256"></a><figcaption>FLUX anime-style · CLIP 0.419 · IoU 0.069</figcaption></figure>
             </div>
           </article>
         </div>
 
         <div class="summary-figure">
           <figure>
-            <img src="./metrics.png" alt="Pixel similarity, foreground IoU, CLIP, and LPIPS for oracle, shuffled real-image control, SDXL textual inversion, and FLUX textual inversion." width="1800" height="980">
+            <img src="./metrics.png" alt="Prompt ablation metrics for oracle, shuffled real-image control, SDXL textual inversion, the original FLUX prompt, and the FLUX anime-style prompt." width="1800" height="1080">
             <figcaption>
-              Mean scores over the same 100 unseen combinations. Pixel similarity is inflated by
-              the common white background; the foreground, semantic, perceptual, and qualitative
-              evidence determines the negative verdict.
+              The anime-style prompt changes the output domain but remains below the shuffled
+              control and does not improve foreground or perceptual correspondence.
             </figcaption>
           </figure>
           <details class="full-audit">
-            <summary>Open the complete 16-row audit sheet</summary>
+            <summary>Open the complete 12-row anime-style audit sheet</summary>
             <div class="audit-explanation">
-              <p>
-                The sheet contains four rows from each evaluation source. Every row places the
-                held-out target on the left and the evaluated comparison on the right.
-              </p>
+              <p>The sheet contains four rows from each source, with the target on the left and comparison on the right.</p>
               <ul>
-                <li><strong>Oracle exact-match control:</strong> an identical target copy; verifies the metric upper bound.</li>
-                <li><strong>Shuffled real-image control:</strong> a different real outfit; measures shared-domain similarity.</li>
-                <li><strong>SDXL textual inversion:</strong> output from the SDXL learned item-token prompt.</li>
-                <li><strong>FLUX textual inversion:</strong> output from the FLUX learned item-token prompt.</li>
+                <li><strong>Oracle exact-match control:</strong> identical target copy.</li>
+                <li><strong>Shuffled real-image control:</strong> different real rendered outfit.</li>
+                <li><strong>FLUX anime-style prompt:</strong> newly sampled output using the prompt shown above.</li>
               </ul>
-              <p>
-                The label below each pair reports the source, sample index, pixel similarity,
-                foreground IoU, and CLIP similarity. Select the sheet to open the full-resolution image.
-              </p>
+              <p>Each label reports source, sample index, pixel similarity, foreground IoU, and CLIP.</p>
             </div>
-            <a href="./qualitative-grid.png" target="_blank" rel="noopener" aria-label="Open the full-resolution 16-row audit sheet">
-              <img src="./qualitative-grid.png" alt="Sixteen ground-truth and comparison pairs: four each for oracle, shuffled real-image control, SDXL textual inversion, and FLUX textual inversion." width="640" height="6368">
+            <a href="./qualitative-grid.png" target="_blank" rel="noopener" aria-label="Open the full-resolution 12-row anime-style audit sheet">
+              <img src="./qualitative-grid.png" alt="Twelve target and comparison pairs: four each for oracle, shuffled real-image control, and FLUX anime-style prompting." width="640" height="4776">
             </a>
           </details>
         </div>
@@ -337,12 +306,12 @@
       <section class="experiment-section verdict-section" id="verdict" aria-labelledby="verdict-title">
         <div class="section-heading inverse">
           <p class="section-index">04 / Discussion</p>
-          <h2 id="verdict-title">Embedding-only adaptation is insufficient in both backbones</h2>
+          <h2 id="verdict-title">Prompt engineering cannot replace item-identity learning</h2>
           <p>
-            The completed runs separate pipeline validity from scientific success. Token loading,
-            held-out generation, target matching, and metric emission are correct, but neither
-            backbone binds the requested hat, top, and bottom reliably. FLUX frequently leaves the
-            MapleStory sprite domain entirely.
+            The requested prompt now produces the intended anime visual domain, confirming that
+            sampling itself is responsive. However, the generated garments are generic and do not
+            correspond to the learned identifiers. The next intervention must change supervision
+            or trainable capacity rather than adding more style words.
           </p>
         </div>
         <ol class="next-list">
