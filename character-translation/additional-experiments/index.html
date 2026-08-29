@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A completed 10×10×10 MapleStory joint textual inversion experiment with held-out composition evaluation and a documented negative result."
+    >
+    <meta name="theme-color" content="#f7f4ee">
+    <meta property="og:title" content="Maple Joint Textual Inversion — Additional Experiment">
+    <meta
+      property="og:description"
+      content="1,000 KMS renders, 30 learned item tokens, 100 unseen combinations, and a reviewable negative result."
+    >
+    <meta property="og:type" content="article">
+    <meta
+      property="og:url"
+      content="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/"
+    >
+    <meta
+      property="og:image"
+      content="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/qualitative-grid.png"
+    >
+    <title>Maple Joint Textual Inversion — Additional Experiment</title>
+    <link
+      rel="canonical"
+      href="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/"
+    >
+    <link rel="icon" href="../static/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="./additional-experiments.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="nav-shell">
+        <a class="wordmark" href="../" aria-label="Back to the character translation record">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
+          <span>Maple / Additional Experiment</span>
+        </a>
+        <nav class="section-nav" aria-label="On this page">
+          <a href="#protocol">Protocol</a>
+          <a href="#training">Training</a>
+          <a href="#results">Results</a>
+          <a href="#verdict">Verdict</a>
+          <a class="project-home-link" href="../">Evaluation Record ↗</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="experiment-hero" id="top" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Completed 2026.08.29 · KMS 389 · Seed 42</p>
+          <h1 id="page-title">Can 30 learned tokens compose unseen Maple outfits?</h1>
+          <p class="lead">
+            This end-to-end milestone rendered every combination of ten hats, ten tops, and ten
+            bottoms, trained joint SDXL textual inversion, and evaluated 100 combinations excluded
+            from training.
+          </p>
+          <div class="verdict verdict-negative">
+            <span>Scientific verdict</span>
+            <strong>Negative result, published without selection</strong>
+            <p>
+              The pipeline completed, but the learned model scored below a shuffled renderer
+              control on CLIP and LPIPS. Reliable cosmetic binding was not established.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="experiment-section" id="protocol" aria-labelledby="protocol-title">
+        <div class="section-heading">
+          <p class="section-index">01 / Protocol</p>
+          <h2 id="protocol-title">Full factorial data, combination-level holdout</h2>
+          <p>
+            All item IDs came from one pinned MapleStory.IO KMS snapshot. Character identity,
+            pose, canvas, rendering parameters, and random seeds stayed fixed.
+          </p>
+        </div>
+        <dl class="fact-grid">
+          <div><dt>Rendered images</dt><dd>1,000</dd></div>
+          <div><dt>Unique combinations</dt><dd>1,000</dd></div>
+          <div><dt>Items</dt><dd>10 + 10 + 10</dd></div>
+          <div><dt>Appearances per item</dt><dd>100</dd></div>
+          <div><dt>Train / test</dt><dd>800 / 200</dd></div>
+          <div><dt>Combination overlap</dt><dd>0</dd></div>
+          <div><dt>Train item coverage</dt><dd>30 / 30</dd></div>
+          <div><dt>Canvas</dt><dd>256 px · white</dd></div>
+        </dl>
+        <p class="hash-line">
+          Dataset manifest SHA-256
+          <code>e2e1842de5a7c94073b171397ea760d1b6c6f57cb01a0970d2798f2483472ae5</code>
+        </p>
+      </section>
+
+      <section class="experiment-section section-tinted" id="training" aria-labelledby="training-title">
+        <div class="section-heading">
+          <p class="section-index">02 / Training</p>
+          <h2 id="training-title">Only 30 rows across both SDXL text encoders may change</h2>
+          <p>
+            The VAE, UNet, and text-encoder bodies remained frozen. Non-item embedding rows were
+            restored after every optimizer update, leaving 61,440 effective learned parameters.
+          </p>
+        </div>
+        <div class="two-column">
+          <table class="detail-table">
+            <tbody>
+              <tr><th scope="row">Base model</th><td>SDXL 1.0, pinned revision</td></tr>
+              <tr><th scope="row">Method</th><td>Dual-CLIP joint textual inversion</td></tr>
+              <tr><th scope="row">Optimizer</th><td>AdamW · constant 5e-4</td></tr>
+              <tr><th scope="row">Steps / batch</th><td>3,000 / 4</td></tr>
+              <tr><th scope="row">Precision</th><td>BF16</td></tr>
+              <tr><th scope="row">Duration</th><td>15.18 minutes</td></tr>
+              <tr><th scope="row">Peak CUDA allocation</th><td>9.11 GiB</td></tr>
+            </tbody>
+          </table>
+          <div class="loss-card">
+            <span>Diffusion denoising MSE</span>
+            <div><small>First 50 mean</small><strong>0.03044</strong></div>
+            <div><small>Last 50 mean</small><strong>0.01838</strong></div>
+            <div><small>Minimum</small><strong>0.00256</strong></div>
+            <p>Final-step noise makes the single final loss less reliable than window means.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="experiment-section" id="results" aria-labelledby="results-title">
+        <div class="section-heading">
+          <p class="section-index">03 / Held-out results</p>
+          <h2 id="results-title">The controls pass; item-token composition does not</h2>
+          <p>
+            The first 100 test combinations used 30 diffusion steps and CFG 7.0. Oracle verifies
+            exact matching. Shuffled assigns another real renderer image as a negative control.
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th scope="col">Backend</th>
+                <th scope="col">Pixel similarity ↑</th>
+                <th scope="col">Foreground IoU ↑</th>
+                <th scope="col">CLIP ↑</th>
+                <th scope="col">LPIPS ↓</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Oracle</th><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.0000</td></tr>
+              <tr><th scope="row">Shuffled</th><td>0.9903</td><td>0.7559</td><td>0.7257</td><td>0.0472</td></tr>
+              <tr class="negative-row"><th scope="row">Joint TI</th><td>0.8761</td><td>0.1793</td><td>0.5809</td><td>0.3641</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="figure-grid">
+          <figure>
+            <img src="./metrics.png" alt="Bar chart comparing pixel similarity and CLIP similarity for diffusion, oracle, and shuffled controls." width="640" height="360">
+            <figcaption>Aggregate metrics across 100 held-out combinations.</figcaption>
+          </figure>
+          <figure class="tall-figure">
+            <img src="./qualitative-grid.png" alt="Twelve ground-truth and generated Maple character pairs across oracle, shuffled, and joint textual inversion outputs." width="384" height="2640">
+            <figcaption>Fixed examples include controls and learned-model failures.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="experiment-section verdict-section" id="verdict" aria-labelledby="verdict-title">
+        <div class="section-heading inverse">
+          <p class="section-index">04 / Verdict</p>
+          <h2 id="verdict-title">Pipeline completion is not evidence of compositional identity</h2>
+          <p>
+            The learned outputs often resemble generic chibi characters, but their requested
+            hat, top, and bottom identities are weaker than another real outfit selected at random.
+            Some outputs also introduce frame artifacts.
+          </p>
+        </div>
+        <ol class="next-list">
+          <li><span>01</span><p>Separate data scale from repeated-exposure compute with fixed-step and fixed-epoch controls.</p></li>
+          <li><span>02</span><p>Render category-only paired targets and add item retrieval accuracy instead of relying on white-background pixels.</p></li>
+          <li><span>03</span><p>Compare joint TI, independent TI, and LoRA plus learned identifiers under the exact same split and seeds.</p></li>
+          <li><span>04</span><p>Test a domain-LoRA-first condition to isolate sprite-domain mismatch from token-binding failure.</p></li>
+        </ol>
+        <p class="scope-note">
+          Metric scope: CLIP and LPIPS compare the whole normalized image. No per-item mask was used;
+          category-conditioned summaries are therefore not localized garment scores.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <a class="wordmark footer-mark" href="../">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
+          <span>Maple / Evaluation Record</span>
+        </a>
+        <p>Static evidence only. Dataset archives and learned weights remain offline.</p>
+      </div>
+      <p class="footer-meta">Experiment completed · 2026.08.29</p>
+    </footer>
+  </body>
+</html>

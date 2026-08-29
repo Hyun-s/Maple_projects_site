@@ -4,7 +4,12 @@ import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const htmlFiles = ["index.html", "character-translation/index.html", "chat/index.html"];
+const htmlFiles = [
+  "index.html",
+  "character-translation/index.html",
+  "character-translation/additional-experiments/index.html",
+  "chat/index.html",
+];
 const scriptFiles = [
   "static/js/index.js",
   "character-translation/static/js/index.js",
@@ -21,6 +26,9 @@ const requiredFiles = [
   "character-translation/static/css/index.css",
   "character-translation/static/images/experiment-overview.svg",
   "character-translation/static/images/social-preview.png",
+  "character-translation/additional-experiments/additional-experiments.css",
+  "character-translation/additional-experiments/metrics.png",
+  "character-translation/additional-experiments/qualitative-grid.png",
   "chat/static/css/index.css",
   "chat/static/images/favicon.svg",
   "chat/static/images/system-map.svg",

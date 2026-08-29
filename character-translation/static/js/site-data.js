@@ -1,6 +1,6 @@
 /* Generated from a verified local evaluation. Public data only. */
 window.MAPLE_EXPERIMENT_DATA = {
-  "siteUpdatedAt": "2026.08.28",
+  "siteUpdatedAt": "2026.08.29",
   "protocol": [
     {
       "label": "Dataset source",
@@ -6246,6 +6246,11 @@ window.MAPLE_EXPERIMENT_DATA = {
     }
   ],
   "changelog": [
+    {
+      "date": "2026-08-29",
+      "title": "Published joint textual inversion milestone",
+      "description": "Added a separate 10×10×10 compositional inversion report with 1,000 KMS renders, 30 learned tokens, held-out controls, and a documented negative result."
+    },
     {
       "date": "2026-08-28",
       "title": "Published SDXL Learned Token v1",
