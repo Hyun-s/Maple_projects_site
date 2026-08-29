@@ -34,6 +34,7 @@ jobs:
           cp -R static _site/
           cp character-translation/index.html _site/character-translation/
           cp -R character-translation/static _site/character-translation/
+          cp -R character-translation/additional-experiments _site/character-translation/
           cp chat/index.html _site/chat/
           cp -R chat/static _site/chat/
 
