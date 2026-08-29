@@ -161,9 +161,17 @@
             regenerated or retouched. Select an image to open its complete uncropped frame.
           </p>
         </div>
+        <div class="shared-prompt">
+          <span>Shared negative prompt</span>
+          <code>photorealistic, 3d render, scenery, text, watermark, multiple characters</code>
+        </div>
         <div class="evidence-gallery" aria-label="Enlarged ground-truth and generated comparisons">
           <article class="evidence-card">
             <header><div><span>Sample 001</span><strong>Representative</strong></div><small>CLIP 0.596 · LPIPS 0.071</small></header>
+            <dl class="sample-prompt">
+              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000001&gt; &lt;top_1040002&gt;</code></dd></div>
+              <div class="sample-seed"><dt>Seed</dt><dd><code>43</code></dd></div>
+            </dl>
             <div class="evidence-pair">
               <figure><a class="zoom-frame target-frame" href="./samples/01-target.png" target="_blank" rel="noopener"><img src="./samples/01-target.png" alt="Enlarged ground-truth Maple sprite for sample 001." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
               <figure><a class="zoom-frame" href="./samples/01-generated.png" target="_blank" rel="noopener"><img src="./samples/01-generated.png" alt="Enlarged joint textual inversion output for sample 001." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
@@ -171,6 +179,10 @@
           </article>
           <article class="evidence-card">
             <header><div><span>Sample 002</span><strong>Representative</strong></div><small>CLIP 0.608 · LPIPS 0.114</small></header>
+            <dl class="sample-prompt">
+              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060007&gt; &lt;hat_1000000&gt; &lt;top_1040001&gt;</code></dd></div>
+              <div class="sample-seed"><dt>Seed</dt><dd><code>44</code></dd></div>
+            </dl>
             <div class="evidence-pair">
               <figure><a class="zoom-frame target-frame" href="./samples/02-target.png" target="_blank" rel="noopener"><img src="./samples/02-target.png" alt="Enlarged ground-truth Maple sprite for sample 002." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
               <figure><a class="zoom-frame" href="./samples/02-generated.png" target="_blank" rel="noopener"><img src="./samples/02-generated.png" alt="Enlarged joint textual inversion output for sample 002." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
@@ -178,6 +190,10 @@
           </article>
           <article class="evidence-card">
             <header><div><span>Sample 003</span><strong>Higher-scoring case</strong></div><small>CLIP 0.716 · LPIPS 0.159</small></header>
+            <dl class="sample-prompt">
+              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000005&gt; &lt;top_1040008&gt;</code></dd></div>
+              <div class="sample-seed"><dt>Seed</dt><dd><code>45</code></dd></div>
+            </dl>
             <div class="evidence-pair">
               <figure><a class="zoom-frame target-frame" href="./samples/03-target.png" target="_blank" rel="noopener"><img src="./samples/03-target.png" alt="Enlarged ground-truth Maple sprite for sample 003." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
               <figure><a class="zoom-frame" href="./samples/03-generated.png" target="_blank" rel="noopener"><img src="./samples/03-generated.png" alt="Enlarged joint textual inversion output for sample 003." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
@@ -185,6 +201,10 @@
           </article>
           <article class="evidence-card evidence-card-failure">
             <header><div><span>Sample 004</span><strong>Frame artifact</strong></div><small>CLIP 0.566 · LPIPS 0.518</small></header>
+            <dl class="sample-prompt">
+              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060008&gt; &lt;hat_1000009&gt; &lt;top_1040000&gt;</code></dd></div>
+              <div class="sample-seed"><dt>Seed</dt><dd><code>46</code></dd></div>
+            </dl>
             <div class="evidence-pair">
               <figure><a class="zoom-frame target-frame" href="./samples/04-target.png" target="_blank" rel="noopener"><img src="./samples/04-target.png" alt="Enlarged ground-truth Maple sprite for sample 004." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
               <figure><a class="zoom-frame" href="./samples/04-generated.png" target="_blank" rel="noopener"><img src="./samples/04-generated.png" alt="Enlarged joint textual inversion output with a frame artifact for sample 004." width="256" height="256"></a><figcaption>Joint TI · open full frame</figcaption></figure>
@@ -192,6 +212,10 @@
           </article>
           <article class="evidence-card evidence-card-failure">
             <header><div><span>Sample 053</span><strong>Worst-20 case</strong></div><small>CLIP 0.418 · IoU 0.000</small></header>
+            <dl class="sample-prompt">
+              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000007&gt; &lt;top_1040005&gt;</code></dd></div>
+              <div class="sample-seed"><dt>Seed</dt><dd><code>95</code></dd></div>
+            </dl>
             <div class="evidence-pair">
               <figure><a class="zoom-frame target-frame" href="./samples/05-target.png" target="_blank" rel="noopener"><img src="./samples/05-target.png" alt="Enlarged ground-truth Maple sprite for sample 053." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
               <figure><a class="zoom-frame" href="./samples/05-generated.png" target="_blank" rel="noopener"><img src="./samples/05-generated.png" alt="Enlarged low-scoring joint textual inversion output for sample 053." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>
@@ -199,6 +223,10 @@
           </article>
           <article class="evidence-card evidence-card-failure">
             <header><div><span>Sample 085</span><strong>Lowest CLIP case</strong></div><small>CLIP 0.406 · IoU 0.000</small></header>
+            <dl class="sample-prompt">
+              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060004&gt; &lt;hat_1000009&gt; &lt;top_1040004&gt;</code></dd></div>
+              <div class="sample-seed"><dt>Seed</dt><dd><code>127</code></dd></div>
+            </dl>
             <div class="evidence-pair">
               <figure><a class="zoom-frame target-frame" href="./samples/06-target.png" target="_blank" rel="noopener"><img src="./samples/06-target.png" alt="Enlarged ground-truth Maple sprite for sample 085." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
               <figure><a class="zoom-frame" href="./samples/06-generated.png" target="_blank" rel="noopener"><img src="./samples/06-generated.png" alt="Enlarged lowest-CLIP joint textual inversion output for sample 085." width="256" height="256"></a><figcaption>Joint TI</figcaption></figure>

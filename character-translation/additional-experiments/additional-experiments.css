@@ -142,6 +142,18 @@
   color: var(--ink-soft);
 }
 
+.experiment-section .detail-table tbody td,
+.experiment-section .result-table tbody th,
+.experiment-section .result-table tbody td {
+  color: var(--ink);
+  background: var(--white);
+}
+
+.experiment-section .result-table thead th {
+  color: var(--white);
+  background: var(--night);
+}
+
 .loss-card {
   padding: 30px;
   border-radius: var(--radius-md);
@@ -175,7 +187,9 @@
   font-variant-numeric: tabular-nums;
 }
 
-.negative-row {
+.experiment-section .result-table .negative-row th,
+.experiment-section .result-table .negative-row td {
+  color: var(--ink);
   background: var(--maple-pale);
 }
 
@@ -196,6 +210,33 @@
 .sample-display-note p {
   margin: 0;
   color: var(--ink-soft);
+}
+
+.shared-prompt {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: baseline;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+}
+
+.shared-prompt span,
+.sample-prompt dt {
+  color: var(--maple-dark);
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.shared-prompt code,
+.sample-prompt code {
+  color: var(--ink);
+  overflow-wrap: anywhere;
 }
 
 .evidence-gallery {
@@ -244,6 +285,35 @@
 .evidence-card header small {
   color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
+}
+
+.sample-prompt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 14px;
+  margin: 0 0 16px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+
+.sample-prompt div {
+  min-width: 0;
+}
+
+.sample-prompt dt,
+.sample-prompt dd {
+  margin: 0;
+}
+
+.sample-prompt dd {
+  margin-top: 5px;
+  line-height: 1.45;
+}
+
+.sample-prompt .sample-seed {
+  min-width: 54px;
 }
 
 .evidence-pair {
