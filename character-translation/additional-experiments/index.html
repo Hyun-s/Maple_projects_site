@@ -136,6 +136,41 @@
             exact matching. Shuffled assigns another real renderer image as a negative control.
           </p>
         </div>
+        <div class="comparison-guide" aria-label="Definitions of the three evaluation backends">
+          <article>
+            <span>Model under test</span>
+            <h3>Joint TI</h3>
+            <p>
+              Joint textual inversion. All 30 hat, top, and bottom identifier tokens were learned
+              together while the rest of SDXL stayed frozen. This is the only row produced by the
+              trained model.
+            </p>
+          </article>
+          <article>
+            <span>Perfect-match check</span>
+            <h3>Oracle</h3>
+            <p>
+              Not a model output. The exact ground-truth image is copied and compared with itself.
+              Its perfect scores confirm that image loading, pairing, and metric code recognize an
+              exact match.
+            </p>
+          </article>
+          <article>
+            <span>Wrong-outfit control</span>
+            <h3>Shuffled</h3>
+            <p>
+              Not a model output. Each target is paired with a different real renderer image using
+              a fixed, no-self-match shuffle. It exposes scores caused by the shared white
+              background, body, pose, and sprite style rather than the requested outfit.
+            </p>
+          </article>
+        </div>
+        <p class="comparison-rule">
+          <strong>How to read the comparison:</strong> a convincing item-binding result should move
+          Joint TI toward Oracle and outperform Shuffled on identity-sensitive evidence. Here,
+          Joint TI falls below Shuffled on CLIP and LPIPS, so the run does not establish reliable
+          cosmetic binding.
+        </p>
         <div class="table-wrap">
           <table class="result-table">
             <thead>
@@ -236,10 +271,27 @@
         <div class="summary-figure">
           <figure>
             <img src="./metrics.png" alt="Bar chart comparing pixel similarity and CLIP similarity for diffusion, oracle, and shuffled controls." width="640" height="360">
-            <figcaption>Aggregate metrics across 100 held-out combinations.</figcaption>
+            <figcaption>
+              Aggregate pixel similarity and CLIP across 100 held-out combinations. Oracle is the
+              exact-copy ceiling, Shuffled is the wrong-real-outfit control, and Diffusion is the
+              Joint-TI model output.
+            </figcaption>
           </figure>
           <details class="full-audit">
-            <summary>Open the complete 12-row oracle, shuffled, and Joint-TI audit sheet</summary>
+            <summary>Open the 12-row control audit: 4 Oracle + 4 Shuffled + 4 Joint TI</summary>
+            <div class="audit-explanation">
+              <p>
+                The sheet takes the first four held-out records from each backend and interleaves
+                them for a compact visual check. Every row places the correct ground truth on the
+                left and that backend's comparison image on the right.
+              </p>
+              <ul>
+                <li><strong>Oracle:</strong> right image is the same ground truth.</li>
+                <li><strong>Shuffled:</strong> right image is a different real outfit.</li>
+                <li><strong>Joint TI:</strong> right image is generated from the learned item-token prompt.</li>
+              </ul>
+              <p>The row label reports backend, pixel similarity, foreground IoU, and CLIP.</p>
+            </div>
             <img src="./qualitative-grid.png" alt="Twelve ground-truth and generated Maple character pairs across oracle, shuffled, and joint textual inversion outputs." width="384" height="2640">
           </details>
         </div>
