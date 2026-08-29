@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Evaluation of joint textual inversion for compositional MapleStory outfit generation using 1,000 factorial renders and 100 held-out combinations."
+      content="Controlled SDXL and FLUX.1-dev textual inversion study on 1,000 MapleStory outfit renders and 100 held-out combinations."
     >
     <meta name="theme-color" content="#f7f4ee">
-    <meta property="og:title" content="Joint Textual Inversion for Compositional MapleStory Outfit Generation">
+    <meta property="og:title" content="SDXL and FLUX Textual Inversion for Compositional Outfit Generation">
     <meta
       property="og:description"
-      content="A controlled study of 30 learned item tokens on 100 held-out outfit combinations, including oracle and shuffled real-image controls."
+      content="A controlled negative-result study with matched data, prompts, seeds, exact-match and shuffled controls, and reproducible optimization records."
     >
     <meta property="og:type" content="article">
     <meta
@@ -20,13 +20,10 @@
     >
     <meta
       property="og:image"
-      content="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/qualitative-grid.png"
+      content="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/metrics.png"
     >
-    <title>Joint Textual Inversion for Compositional MapleStory Outfit Generation</title>
-    <link
-      rel="canonical"
-      href="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/"
-    >
+    <title>SDXL and FLUX Textual Inversion for Compositional Outfit Generation</title>
+    <link rel="canonical" href="https://hyun-s.github.io/Maple_projects_site/character-translation/additional-experiments/">
     <link rel="icon" href="../static/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../static/css/index.css">
     <link rel="stylesheet" href="./additional-experiments.css">
@@ -38,7 +35,7 @@
       <div class="nav-shell">
         <a class="wordmark" href="../" aria-label="Return to the character translation study">
           <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
-          <span>Maple / Joint Textual Inversion</span>
+          <span>Maple / Textual Inversion Study</span>
         </a>
         <nav class="section-nav" aria-label="On this page">
           <a href="#protocol">Setup</a>
@@ -53,20 +50,21 @@
     <main id="main-content">
       <section class="experiment-hero" id="top" aria-labelledby="page-title">
         <div>
-          <p class="eyebrow">Experiment 2026.08.29 · KMS v389 · Random seed 42</p>
-          <h1 id="page-title">Joint Textual Inversion for Compositional MapleStory Outfit Generation</h1>
+          <p class="eyebrow">Controlled backbone study · KMS v389 · Random seed 42</p>
+          <h1 id="page-title">Textual Inversion Under SDXL and FLUX for Compositional Outfit Generation</h1>
           <p class="lead">
-            We evaluate whether jointly optimized item-token embeddings support the generation of
-            unseen hat–top–bottom combinations. The study uses a complete 10×10×10 factorial render
-            set and evaluates 100 combinations excluded from optimization.
+            We test whether jointly optimized item-token embeddings recover unseen hat–top–bottom
+            combinations. SDXL and FLUX.1-dev are evaluated on the same factorial renders,
+            combination split, prompts, and sample seeds.
           </p>
           <div class="verdict verdict-negative">
             <span>Main finding</span>
-            <strong>Joint TI underperforms the shuffled real-image control</strong>
+            <strong>Changing the backbone from SDXL to FLUX does not recover item binding</strong>
             <p>
-              The end-to-end pipeline completes successfully; however, Joint TI obtains lower CLIP
-              similarity and higher LPIPS than the shuffled control. The results therefore do not
-              support reliable cosmetic-item binding under this configuration.
+              Both learned models remain below the shuffled real-image control. FLUX increases
+              pixel similarity but reduces foreground IoU and CLIP similarity and increases LPIPS
+              relative to SDXL. The qualitative outputs confirm that the pixel gain is dominated
+              by the shared white background rather than the requested outfit identities.
             </p>
           </div>
         </div>
@@ -75,11 +73,12 @@
       <section class="experiment-section" id="protocol" aria-labelledby="protocol-title">
         <div class="section-heading">
           <p class="section-index">01 / Experimental setup</p>
-          <h2 id="protocol-title">Factorial dataset construction and combination-level holdout</h2>
+          <h2 id="protocol-title">Factorial rendering with a combination-level holdout</h2>
           <p>
-            The item vocabulary is obtained from a single pinned MapleStory.IO KMS snapshot. We
-            hold character identity, pose, canvas, rendering parameters, and random seeds fixed to
-            isolate variation in the equipped hat, top, and bottom.
+            A pinned MapleStory.IO KMS snapshot supplies ten hats, ten tops, and ten bottoms. We
+            render the complete 10×10×10 Cartesian product while holding character identity, pose,
+            canvas, and background fixed. The exact rendered files and split are reused for both
+            backbones.
           </p>
         </div>
         <dl class="fact-grid">
@@ -90,7 +89,7 @@
           <div><dt>Training / test split</dt><dd>800 / 200</dd></div>
           <div><dt>Combination intersection</dt><dd>0</dd></div>
           <div><dt>Training vocabulary coverage</dt><dd>30 / 30</dd></div>
-          <div><dt>Image resolution</dt><dd>256 px · white</dd></div>
+          <div><dt>Evaluation subset</dt><dd>100 fixed rows</dd></div>
         </dl>
         <p class="hash-line">
           Dataset manifest SHA-256
@@ -101,79 +100,110 @@
       <section class="experiment-section section-tinted" id="training" aria-labelledby="training-title">
         <div class="section-heading">
           <p class="section-index">02 / Optimization</p>
-          <h2 id="training-title">Joint textual inversion with frozen SDXL backbones</h2>
+          <h2 id="training-title">Embedding-only optimization with frozen image backbones</h2>
           <p>
-            The VAE, UNet, and both text-encoder backbones remain frozen. After each optimizer step,
-            all embedding rows other than the 30 item identifiers are restored, yielding 61,440
-            trainable parameters across the two SDXL text encoders.
+            Each model receives 30 new identifiers. Only the corresponding embedding rows are
+            retained after an optimizer update; the VAE, denoiser or transformer, text-encoder
+            backbones, and all non-item embedding rows remain unchanged. LoRA is not used in either
+            condition.
           </p>
         </div>
-        <div class="two-column">
-          <table class="detail-table">
+        <div class="table-wrap training-table-wrap">
+          <table class="result-table model-table">
+            <thead>
+              <tr>
+                <th scope="col">Optimization property</th>
+                <th scope="col">SDXL textual inversion</th>
+                <th scope="col">FLUX textual inversion</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><th scope="row">Base model</th><td>Stable Diffusion XL 1.0, pinned revision</td></tr>
-              <tr><th scope="row">Optimization method</th><td>Joint textual inversion, dual text encoders</td></tr>
-              <tr><th scope="row">Optimizer / learning rate</th><td>AdamW / constant 5 × 10<sup>−4</sup></td></tr>
-              <tr><th scope="row">Iterations / batch size</th><td>3,000 / 4</td></tr>
-              <tr><th scope="row">Numerical precision</th><td>BF16</td></tr>
-              <tr><th scope="row">Wall-clock time</th><td>15.18 minutes</td></tr>
-              <tr><th scope="row">Peak allocated CUDA memory</th><td>9.11 GiB</td></tr>
+              <tr><th scope="row">Base model revision</th><td>SDXL 1.0 · <code>4621659…e94a7b</code></td><td>FLUX.1-dev · <code>3de623f…f2eb21</code></td></tr>
+              <tr><th scope="row">Text encoders</th><td>CLIP-L + CLIP-G</td><td>CLIP-L + T5</td></tr>
+              <tr><th scope="row">Effective parameters</th><td>61,440</td><td>145,920</td></tr>
+              <tr><th scope="row">Objective</th><td>Denoising MSE</td><td>Rectified-flow velocity MSE</td></tr>
+              <tr><th scope="row">Optimizer / schedule</th><td>AdamW / constant</td><td>AdamW / constant</td></tr>
+              <tr><th scope="row">Learning rate</th><td>5 × 10<sup>−4</sup></td><td>5 × 10<sup>−4</sup></td></tr>
+              <tr><th scope="row">Steps / batch / precision</th><td>3,000 / 4 / BF16</td><td>3,000 / 4 / BF16</td></tr>
+              <tr><th scope="row">LoRA</th><td>Not used</td><td>Not used</td></tr>
+              <tr><th scope="row">Wall-clock time</th><td>15.18 min</td><td>86.89 min</td></tr>
+              <tr><th scope="row">Peak allocated CUDA memory</th><td>9.11 GiB</td><td>40.57 GiB</td></tr>
             </tbody>
           </table>
-          <div class="loss-card">
-            <span>Training objective · denoising MSE</span>
-            <div><small>Mean, iterations 1–50</small><strong>0.03044</strong></div>
-            <div><small>Mean, iterations 2,951–3,000</small><strong>0.01838</strong></div>
-            <div><small>Minimum observed</small><strong>0.00256</strong></div>
-            <p>Window means are reported because the stochastic per-iteration loss is noisy.</p>
-          </div>
         </div>
+        <div class="loss-grid">
+          <article class="loss-card">
+            <span>SDXL · denoising MSE</span>
+            <div><small>Mean, steps 1–50</small><strong>0.03044</strong></div>
+            <div><small>Mean, steps 2,951–3,000</small><strong>0.01838</strong></div>
+            <div><small>Minimum observed</small><strong>0.00256</strong></div>
+          </article>
+          <article class="loss-card loss-card-flux">
+            <span>FLUX · rectified-flow velocity MSE</span>
+            <div><small>Mean, steps 1–50</small><strong>0.21842</strong></div>
+            <div><small>Mean, steps 2,951–3,000</small><strong>0.13095</strong></div>
+            <div><small>Minimum observed</small><strong>0.05905</strong></div>
+          </article>
+        </div>
+        <figure class="optimization-figure">
+          <img src="./loss-curves.png" alt="Separate 50-step moving-average optimization traces for SDXL denoising MSE and FLUX rectified-flow velocity MSE." width="1800" height="780">
+          <figcaption>
+            The objectives have different definitions and scales; convergence is interpreted within
+            each backbone rather than by comparing absolute loss values across backbones.
+          </figcaption>
+        </figure>
       </section>
 
       <section class="experiment-section" id="results" aria-labelledby="results-title">
         <div class="section-heading">
           <p class="section-index">03 / Evaluation</p>
-          <h2 id="results-title">Joint TI does not exceed the shuffled real-image control</h2>
+          <h2 id="results-title">FLUX degrades semantic and foreground correspondence</h2>
           <p>
-            We evaluate the first 100 of 200 held-out combinations using 30 denoising steps and a
-            classifier-free guidance scale of 7.0. Oracle and Shuffled provide positive and
-            negative controls, respectively, for interpreting the learned model output.
+            The first 100 held-out combinations are generated with 30 inference steps. SDXL uses
+            CFG 7.0 and its registered negative prompt; FLUX uses guidance 3.5 and no negative
+            prompt. Both use the same positive item-token prompt and sample seed for each row.
           </p>
         </div>
-        <div class="comparison-guide" aria-label="Definitions of the three evaluation sources">
-          <article>
-            <span>Evaluated method</span>
-            <h3>Joint TI</h3>
-            <p>
-              Joint textual inversion optimizes 30 item-identifier embeddings in both SDXL text
-              encoders while freezing all remaining parameters. Each inference prompt specifies
-              one learned hat, top, and bottom identifier.
-            </p>
-          </article>
+        <div class="comparison-guide" aria-label="Definitions of the four evaluation sources">
           <article>
             <span>Positive control</span>
-            <h3>Oracle</h3>
+            <h3>Oracle exact match</h3>
             <p>
-              Each target image is compared with an identical copy. This upper-bound control is not
-              a model output; it verifies that the pairing and metric implementations recover the
-              expected score for an exact match.
+              Each target is compared with an identical copy. This is not a model output; it checks
+              that pairing and metric implementations recover the expected upper bound.
             </p>
           </article>
           <article>
             <span>Negative control</span>
-            <h3>Shuffled</h3>
+            <h3>Shuffled real image</h3>
             <p>
-              Each target is compared with a different real rendered outfit obtained by a
-              deterministic derangement. This control is not a model output; it measures similarity
-              attributable to the shared background, body, pose, and rendering domain.
+              Each target is compared with a different real render selected by deterministic
+              derangement. It measures similarity caused by the shared body, pose, and background.
+            </p>
+          </article>
+          <article>
+            <span>Learned model</span>
+            <h3>SDXL textual inversion</h3>
+            <p>
+              Thirty item embeddings are optimized across both SDXL CLIP encoders while the VAE,
+              UNet, text-encoder backbones, and all other embedding rows remain frozen.
+            </p>
+          </article>
+          <article>
+            <span>Learned model</span>
+            <h3>FLUX textual inversion</h3>
+            <p>
+              The same 30 item identifiers are optimized in the FLUX CLIP-L and T5 embedding spaces
+              while the transformer, VAE, text encoders, and all non-item rows remain frozen.
             </p>
           </article>
         </div>
         <p class="comparison-rule">
-          <strong>Interpretation.</strong> Evidence for item binding would require Joint TI to
-          outperform Shuffled on semantic and perceptual metrics and move toward the Oracle upper
-          bound. Joint TI instead obtains lower CLIP similarity and higher LPIPS; therefore, this
-          experiment does not establish reliable cosmetic-item binding.
+          <strong>Decision rule.</strong> Evidence for item binding should exceed the shuffled
+          real-image control on semantic and perceptual measures and move toward the oracle upper
+          bound. Neither learned model satisfies this criterion. FLUX further lowers CLIP from
+          0.5809 to 0.4537 and foreground IoU from 0.1793 to 0.0631 while increasing LPIPS from
+          0.3641 to 0.4332.
         </p>
         <div class="table-wrap">
           <table class="result-table">
@@ -187,116 +217,119 @@
               </tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Oracle</th><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.0000</td></tr>
-              <tr><th scope="row">Shuffled</th><td>0.9903</td><td>0.7559</td><td>0.7257</td><td>0.0472</td></tr>
-              <tr class="negative-row"><th scope="row">Joint TI</th><td>0.8761</td><td>0.1793</td><td>0.5809</td><td>0.3641</td></tr>
+              <tr><th scope="row">Oracle exact-match control</th><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.0000</td></tr>
+              <tr><th scope="row">Shuffled real-image control</th><td>0.9903</td><td>0.7559</td><td>0.7257</td><td>0.0472</td></tr>
+              <tr><th scope="row">SDXL textual inversion</th><td>0.8761</td><td>0.1793</td><td>0.5809</td><td>0.3641</td></tr>
+              <tr class="negative-row"><th scope="row">FLUX textual inversion</th><td>0.9122</td><td>0.0631</td><td>0.4537</td><td>0.4332</td></tr>
             </tbody>
           </table>
         </div>
+
         <div class="sample-display-note">
-          <strong>Qualitative comparisons</strong>
+          <strong>Matched qualitative comparisons</strong>
           <p>
-            Images are displayed with 3× CSS magnification from the original 256 px files. No image
-            post-processing is applied. Selecting an image opens the complete source frame.
+            Every card shows the same held-out target, positive prompt, and seed for both models.
+            The character-centered frames are magnified 2.4×; full-frame failure examples remain
+            uncropped. Select any image to open its complete 256×256 source.
           </p>
         </div>
-        <div class="shared-prompt">
-          <span>Common negative prompt</span>
-          <code>photorealistic, 3d render, scenery, text, watermark, multiple characters</code>
+        <div class="generation-notes" aria-label="Model-specific generation settings">
+          <p><strong>SDXL:</strong> CFG 7.0 · negative prompt <code>photorealistic, 3d render, scenery, text, watermark, multiple characters</code></p>
+          <p><strong>FLUX:</strong> guidance 3.5 · no negative prompt</p>
         </div>
-        <div class="evidence-gallery" aria-label="Ground-truth and Joint TI qualitative comparisons">
+
+        <div class="evidence-gallery" aria-label="Matched ground-truth, SDXL, and FLUX comparisons">
           <article class="evidence-card">
-            <header><div><span>Sample 001</span><strong>Representative sample</strong></div><small>CLIP 0.596 · LPIPS 0.071</small></header>
-            <dl class="sample-prompt">
-              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000001&gt; &lt;top_1040002&gt;</code></dd></div>
-              <div class="sample-seed"><dt>Seed</dt><dd><code>43</code></dd></div>
-            </dl>
-            <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/01-target.png" target="_blank" rel="noopener"><img src="./samples/01-target.png" alt="Ground-truth image for held-out sample 001." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/01-generated.png" target="_blank" rel="noopener"><img src="./samples/01-generated.png" alt="Joint textual inversion output for held-out sample 001." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
+            <header><div><span>Sample 001</span><strong>Representative paired comparison</strong></div><small>Seed 43</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000001&gt; &lt;top_1040002&gt;</code></dd></div></dl>
+            <div class="evidence-triplet">
+              <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/01-target.png" target="_blank" rel="noopener"><img src="./samples/01-target.png" alt="Ground truth for held-out sample 001." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame magnified-frame" href="./samples/01-sdxl.png" target="_blank" rel="noopener"><img src="./samples/01-sdxl.png" alt="SDXL textual inversion output for sample 001." width="256" height="256"></a><figcaption>SDXL · CLIP 0.596 · IoU 0.611</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/01-flux.png" target="_blank" rel="noopener"><img src="./samples/01-flux.png" alt="FLUX textual inversion output for sample 001, depicting an unrelated icon." width="256" height="256"></a><figcaption>FLUX · CLIP 0.441 · IoU 0.027</figcaption></figure>
             </div>
           </article>
+
           <article class="evidence-card">
-            <header><div><span>Sample 002</span><strong>Representative sample</strong></div><small>CLIP 0.608 · LPIPS 0.114</small></header>
-            <dl class="sample-prompt">
-              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060007&gt; &lt;hat_1000000&gt; &lt;top_1040001&gt;</code></dd></div>
-              <div class="sample-seed"><dt>Seed</dt><dd><code>44</code></dd></div>
-            </dl>
-            <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/02-target.png" target="_blank" rel="noopener"><img src="./samples/02-target.png" alt="Ground-truth image for held-out sample 002." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/02-generated.png" target="_blank" rel="noopener"><img src="./samples/02-generated.png" alt="Joint textual inversion output for held-out sample 002." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
+            <header><div><span>Sample 002</span><strong>Representative paired comparison</strong></div><small>Seed 44</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060007&gt; &lt;hat_1000000&gt; &lt;top_1040001&gt;</code></dd></div></dl>
+            <div class="evidence-triplet">
+              <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/02-target.png" target="_blank" rel="noopener"><img src="./samples/02-target.png" alt="Ground truth for held-out sample 002." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame magnified-frame" href="./samples/02-sdxl.png" target="_blank" rel="noopener"><img src="./samples/02-sdxl.png" alt="SDXL textual inversion output for sample 002." width="256" height="256"></a><figcaption>SDXL · CLIP 0.608 · IoU 0.462</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/02-flux.png" target="_blank" rel="noopener"><img src="./samples/02-flux.png" alt="FLUX textual inversion output for sample 002, depicting an unrelated ghost icon." width="256" height="256"></a><figcaption>FLUX · CLIP 0.472 · IoU 0.028</figcaption></figure>
             </div>
           </article>
+
           <article class="evidence-card">
-            <header><div><span>Sample 003</span><strong>Higher CLIP similarity</strong></div><small>CLIP 0.716 · LPIPS 0.159</small></header>
-            <dl class="sample-prompt">
-              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000005&gt; &lt;top_1040008&gt;</code></dd></div>
-              <div class="sample-seed"><dt>Seed</dt><dd><code>45</code></dd></div>
-            </dl>
-            <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/03-target.png" target="_blank" rel="noopener"><img src="./samples/03-target.png" alt="Ground-truth image for held-out sample 003." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/03-generated.png" target="_blank" rel="noopener"><img src="./samples/03-generated.png" alt="Joint textual inversion output for held-out sample 003." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
+            <header><div><span>Sample 003</span><strong>Highest SDXL CLIP among displayed rows</strong></div><small>Seed 45</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000005&gt; &lt;top_1040008&gt;</code></dd></div></dl>
+            <div class="evidence-triplet">
+              <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/03-target.png" target="_blank" rel="noopener"><img src="./samples/03-target.png" alt="Ground truth for held-out sample 003." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame magnified-frame" href="./samples/03-sdxl.png" target="_blank" rel="noopener"><img src="./samples/03-sdxl.png" alt="SDXL textual inversion output for sample 003." width="256" height="256"></a><figcaption>SDXL · CLIP 0.716 · IoU 0.356</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/03-flux.png" target="_blank" rel="noopener"><img src="./samples/03-flux.png" alt="Nearly blank FLUX textual inversion output for sample 003." width="256" height="256"></a><figcaption>FLUX · CLIP 0.504 · IoU 0.026</figcaption></figure>
             </div>
           </article>
+
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 004</span><strong>Boundary artifact</strong></div><small>CLIP 0.566 · LPIPS 0.518</small></header>
-            <dl class="sample-prompt">
-              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060008&gt; &lt;hat_1000009&gt; &lt;top_1040000&gt;</code></dd></div>
-              <div class="sample-seed"><dt>Seed</dt><dd><code>46</code></dd></div>
-            </dl>
-            <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/04-target.png" target="_blank" rel="noopener"><img src="./samples/04-target.png" alt="Ground-truth image for held-out sample 004." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/04-generated.png" target="_blank" rel="noopener"><img src="./samples/04-generated.png" alt="Joint textual inversion output with a boundary artifact for held-out sample 004." width="256" height="256"></a><figcaption>Joint TI output · full frame</figcaption></figure>
+            <header><div><span>Sample 004</span><strong>Distinct failure modes</strong></div><small>Seed 46</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060008&gt; &lt;hat_1000009&gt; &lt;top_1040000&gt;</code></dd></div></dl>
+            <div class="evidence-triplet">
+              <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/04-target.png" target="_blank" rel="noopener"><img src="./samples/04-target.png" alt="Ground truth for held-out sample 004." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/04-sdxl.png" target="_blank" rel="noopener"><img src="./samples/04-sdxl.png" alt="Full-frame SDXL textual inversion output with a boundary artifact for sample 004." width="256" height="256"></a><figcaption>SDXL · CLIP 0.566 · LPIPS 0.518</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/04-flux.png" target="_blank" rel="noopener"><img src="./samples/04-flux.png" alt="Full-frame FLUX textual inversion output depicting an unrelated illustration for sample 004." width="256" height="256"></a><figcaption>FLUX · CLIP 0.501 · LPIPS 0.632</figcaption></figure>
             </div>
           </article>
+
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 053</span><strong>Lowest CLIP quintile</strong></div><small>CLIP 0.418 · IoU 0.000</small></header>
-            <dl class="sample-prompt">
-              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000007&gt; &lt;top_1040005&gt;</code></dd></div>
-              <div class="sample-seed"><dt>Seed</dt><dd><code>95</code></dd></div>
-            </dl>
-            <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/05-target.png" target="_blank" rel="noopener"><img src="./samples/05-target.png" alt="Ground-truth image for held-out sample 053." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/05-generated.png" target="_blank" rel="noopener"><img src="./samples/05-generated.png" alt="Joint textual inversion output in the lowest CLIP quintile for held-out sample 053." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
+            <header><div><span>Sample 053</span><strong>Empty SDXL output versus icon-like FLUX output</strong></div><small>Seed 95</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060001&gt; &lt;hat_1000007&gt; &lt;top_1040005&gt;</code></dd></div></dl>
+            <div class="evidence-triplet">
+              <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/05-target.png" target="_blank" rel="noopener"><img src="./samples/05-target.png" alt="Ground truth for held-out sample 053." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/05-sdxl.png" target="_blank" rel="noopener"><img src="./samples/05-sdxl.png" alt="Nearly blank SDXL textual inversion output for sample 053." width="256" height="256"></a><figcaption>SDXL · CLIP 0.418 · IoU 0.000</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/05-flux.png" target="_blank" rel="noopener"><img src="./samples/05-flux.png" alt="FLUX textual inversion output depicting an unrelated icon for sample 053." width="256" height="256"></a><figcaption>FLUX · CLIP 0.443 · IoU 0.159</figcaption></figure>
             </div>
           </article>
+
           <article class="evidence-card evidence-card-failure">
-            <header><div><span>Sample 085</span><strong>Minimum CLIP similarity</strong></div><small>CLIP 0.406 · IoU 0.000</small></header>
-            <dl class="sample-prompt">
-              <div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060004&gt; &lt;hat_1000009&gt; &lt;top_1040004&gt;</code></dd></div>
-              <div class="sample-seed"><dt>Seed</dt><dd><code>127</code></dd></div>
-            </dl>
-            <div class="evidence-pair">
-              <figure><a class="zoom-frame target-frame" href="./samples/06-target.png" target="_blank" rel="noopener"><img src="./samples/06-target.png" alt="Ground-truth image for held-out sample 085." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
-              <figure><a class="zoom-frame" href="./samples/06-generated.png" target="_blank" rel="noopener"><img src="./samples/06-generated.png" alt="Joint textual inversion output with the minimum CLIP similarity for held-out sample 085." width="256" height="256"></a><figcaption>Joint TI output</figcaption></figure>
+            <header><div><span>Sample 085</span><strong>Low-correspondence paired failure</strong></div><small>Seed 127</small></header>
+            <dl class="sample-prompt"><div><dt>Prompt</dt><dd><code>a maplestory character wearing &lt;bottom_1060004&gt; &lt;hat_1000009&gt; &lt;top_1040004&gt;</code></dd></div></dl>
+            <div class="evidence-triplet">
+              <figure><a class="zoom-frame magnified-frame target-frame" href="./samples/06-target.png" target="_blank" rel="noopener"><img src="./samples/06-target.png" alt="Ground truth for held-out sample 085." width="256" height="256"></a><figcaption>Ground truth</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/06-sdxl.png" target="_blank" rel="noopener"><img src="./samples/06-sdxl.png" alt="Nearly blank SDXL textual inversion output for sample 085." width="256" height="256"></a><figcaption>SDXL · CLIP 0.406 · IoU 0.000</figcaption></figure>
+              <figure><a class="zoom-frame" href="./samples/06-flux.png" target="_blank" rel="noopener"><img src="./samples/06-flux.png" alt="FLUX textual inversion output depicting an unrelated tree icon for sample 085." width="256" height="256"></a><figcaption>FLUX · CLIP 0.491 · IoU 0.080</figcaption></figure>
             </div>
           </article>
         </div>
+
         <div class="summary-figure">
           <figure>
-            <img src="./metrics.png" alt="Held-out pixel similarity and CLIP similarity for Joint TI, Oracle, and Shuffled evaluation sources." width="640" height="360">
+            <img src="./metrics.png" alt="Pixel similarity, foreground IoU, CLIP, and LPIPS for oracle, shuffled real-image control, SDXL textual inversion, and FLUX textual inversion." width="1800" height="980">
             <figcaption>
-              Mean pixel similarity and CLIP similarity over 100 held-out combinations. Oracle
-              denotes the exact-copy upper bound, Shuffled denotes the real-image negative control,
-              and Joint TI denotes the learned model output.
+              Mean scores over the same 100 unseen combinations. Pixel similarity is inflated by
+              the common white background; the foreground, semantic, perceptual, and qualitative
+              evidence determines the negative verdict.
             </figcaption>
           </figure>
           <details class="full-audit">
-            <summary>Qualitative audit (12 rows: 4 per evaluation source)</summary>
+            <summary>Open the complete 16-row audit sheet</summary>
             <div class="audit-explanation">
               <p>
-                The audit interleaves the first four held-out records from each evaluation source.
-                Each row shows the ground-truth target on the left and the corresponding comparison
-                image on the right.
+                The sheet contains four rows from each evaluation source. Every row places the
+                held-out target on the left and the evaluated comparison on the right.
               </p>
               <ul>
-                <li><strong>Oracle:</strong> the comparison is an identical copy of the target.</li>
-                <li><strong>Shuffled:</strong> the comparison is a different real rendered outfit.</li>
-                <li><strong>Joint TI:</strong> the comparison is generated from the learned item-token prompt.</li>
+                <li><strong>Oracle exact-match control:</strong> an identical target copy; verifies the metric upper bound.</li>
+                <li><strong>Shuffled real-image control:</strong> a different real outfit; measures shared-domain similarity.</li>
+                <li><strong>SDXL textual inversion:</strong> output from the SDXL learned item-token prompt.</li>
+                <li><strong>FLUX textual inversion:</strong> output from the FLUX learned item-token prompt.</li>
               </ul>
-              <p>Each row reports the evaluation source, pixel similarity, foreground IoU, and CLIP similarity.</p>
+              <p>
+                The label below each pair reports the source, sample index, pixel similarity,
+                foreground IoU, and CLIP similarity. Select the sheet to open the full-resolution image.
+              </p>
             </div>
-            <img src="./qualitative-grid.png" alt="Twelve ground-truth and comparison pairs sampled equally from Oracle, Shuffled, and Joint TI evaluation sources." width="384" height="2640">
+            <a href="./qualitative-grid.png" target="_blank" rel="noopener" aria-label="Open the full-resolution 16-row audit sheet">
+              <img src="./qualitative-grid.png" alt="Sixteen ground-truth and comparison pairs: four each for oracle, shuffled real-image control, SDXL textual inversion, and FLUX textual inversion." width="640" height="6368">
+            </a>
           </details>
         </div>
       </section>
@@ -304,24 +337,24 @@
       <section class="experiment-section verdict-section" id="verdict" aria-labelledby="verdict-title">
         <div class="section-heading inverse">
           <p class="section-index">04 / Discussion</p>
-          <h2 id="verdict-title">The observed performance does not establish compositional item binding</h2>
+          <h2 id="verdict-title">Embedding-only adaptation is insufficient in both backbones</h2>
           <p>
-            Joint TI captures broad chibi-character appearance but does not preserve the requested
-            hat, top, and bottom identities relative to the shuffled real-image control. Boundary
-            artifacts are additionally observed in a subset of outputs. These results distinguish
-            successful pipeline execution from evidence of compositional generalization.
+            The completed runs separate pipeline validity from scientific success. Token loading,
+            held-out generation, target matching, and metric emission are correct, but neither
+            backbone binds the requested hat, top, and bottom reliably. FLUX frequently leaves the
+            MapleStory sprite domain entirely.
           </p>
         </div>
         <ol class="next-list">
-          <li><span>01</span><p>Disentangle dataset scale from optimization exposure using matched-iteration and matched-epoch ablations.</p></li>
-          <li><span>02</span><p>Construct category-isolated paired targets and report item-retrieval accuracy with category-specific masks.</p></li>
-          <li><span>03</span><p>Compare joint TI, independently optimized TI, and LoRA with learned identifiers under identical splits and sampling seeds.</p></li>
-          <li><span>04</span><p>Evaluate domain LoRA before identifier learning to separate sprite-domain adaptation from token-binding capacity.</p></li>
+          <li><span>01</span><p>Add category-isolated paired targets and renderer-derived item masks before further model comparisons.</p></li>
+          <li><span>02</span><p>Report category retrieval accuracy in addition to whole-image CLIP, LPIPS, and foreground IoU.</p></li>
+          <li><span>03</span><p>Evaluate domain LoRA followed by frozen-domain textual inversion to separate domain adaptation from identifier binding.</p></li>
+          <li><span>04</span><p>Compare learned identifiers plus LoRA against embedding-only adaptation under the same split, prompts, and seeds.</p></li>
         </ol>
         <p class="scope-note">
           Evaluation limitation. CLIP and LPIPS are computed over the complete normalized image,
-          without item-specific masks. Category-conditioned summaries therefore do not constitute
-          localized garment measurements.
+          without item-specific masks. Category-conditioned summaries are therefore not localized
+          garment measurements.
         </p>
       </section>
     </main>
@@ -334,7 +367,7 @@
         </a>
         <p>Static experiment report. Dataset files and learned embeddings are retained offline.</p>
       </div>
-      <p class="footer-meta">Experiment finalized · 2026.08.29</p>
+      <p class="footer-meta">Experiment report finalized · 2026.08.30</p>
     </footer>
   </body>
 </html>

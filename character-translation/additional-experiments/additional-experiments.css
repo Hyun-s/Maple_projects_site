@@ -112,6 +112,19 @@
   margin-top: 42px;
 }
 
+.training-table-wrap {
+  margin-top: 42px;
+}
+
+.model-table th:first-child {
+  width: 28%;
+}
+
+.model-table code {
+  color: inherit;
+  font-size: 0.8em;
+}
+
 .detail-table,
 .result-table {
   width: 100%;
@@ -161,6 +174,17 @@
   background: var(--night);
 }
 
+.loss-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.loss-card-flux {
+  background: #7f3427;
+}
+
 .loss-card div {
   display: flex;
   align-items: baseline;
@@ -178,6 +202,26 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
+.optimization-figure {
+  margin: 28px 0 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--white);
+}
+
+.optimization-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.optimization-figure figcaption {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
 .result-table thead {
   color: var(--white);
   background: var(--night);
@@ -189,7 +233,7 @@
 
 .comparison-guide {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin: 34px 0 16px;
 }
@@ -274,6 +318,31 @@
   background: var(--white);
 }
 
+.generation-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.generation-notes p {
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+  background: var(--white);
+}
+
+.generation-notes strong,
+.generation-notes code {
+  color: var(--ink);
+}
+
+.generation-notes code {
+  overflow-wrap: anywhere;
+}
+
 .shared-prompt span,
 .sample-prompt dt {
   color: var(--maple-dark);
@@ -291,7 +360,7 @@
 
 .evidence-gallery {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
   margin-top: 28px;
 }
@@ -366,13 +435,22 @@
   min-width: 54px;
 }
 
-.evidence-pair {
+.evidence-pair,
+.evidence-triplet {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
-.evidence-pair figure {
+.evidence-pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.evidence-triplet {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.evidence-pair figure,
+.evidence-triplet figure {
   margin: 0;
 }
 
@@ -394,7 +472,7 @@
   border-radius: 999px;
   color: var(--white);
   background: rgba(23, 32, 30, 0.75);
-  content: "3× · source image";
+  content: "Open source";
   font-size: 0.62rem;
   font-weight: 750;
   pointer-events: none;
@@ -404,7 +482,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(3);
+  transform: scale(1);
   transition: transform 180ms ease;
 }
 
@@ -412,9 +490,22 @@
   image-rendering: pixelated;
 }
 
+.magnified-frame::after {
+  content: "2.4× · open source";
+}
+
+.magnified-frame img {
+  transform: scale(2.4);
+}
+
 .zoom-frame:hover img,
 .zoom-frame:focus-visible img {
-  transform: scale(3.25);
+  transform: scale(1.06);
+}
+
+.magnified-frame:hover img,
+.magnified-frame:focus-visible img {
+  transform: scale(2.55);
 }
 
 .zoom-frame:focus-visible {
@@ -422,7 +513,8 @@
   outline-offset: 3px;
 }
 
-.evidence-pair figcaption {
+.evidence-pair figcaption,
+.evidence-triplet figcaption {
   margin-top: 8px;
   color: var(--ink-soft);
   font-size: 0.76rem;
@@ -435,7 +527,7 @@
 }
 
 .summary-figure > figure {
-  max-width: 760px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid var(--line);
@@ -455,7 +547,7 @@
 }
 
 .full-audit {
-  max-width: 760px;
+  max-width: 920px;
   margin: 18px auto 0;
   padding: 18px 20px;
   border: 1px solid var(--line);
@@ -495,8 +587,12 @@
 }
 
 .full-audit img {
-  max-width: 520px;
+  max-width: 640px;
   margin: 22px auto 0;
+}
+
+.full-audit > a {
+  display: block;
 }
 
 .verdict-section {
@@ -544,8 +640,9 @@
   }
 
   .two-column,
+  .loss-grid,
   .comparison-guide,
-  .evidence-gallery,
+  .generation-notes,
   .next-list {
     grid-template-columns: 1fr;
   }
@@ -569,6 +666,15 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .evidence-triplet {
+    grid-template-columns: 1fr;
+  }
+
+  .zoom-frame {
+    max-width: 420px;
+    margin: 0 auto;
   }
 }
 
