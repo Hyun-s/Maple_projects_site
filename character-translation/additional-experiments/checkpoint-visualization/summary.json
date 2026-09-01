@@ -1269,5 +1269,682 @@
         }
       ]
     }
-  ]
+  ],
+  "diagnostics": {
+    "schema_version": 1,
+    "conclusion": "no_visual_evidence_of_item_identity_recovery",
+    "scope": {
+      "qualitative_combinations": 4,
+      "checkpoints": 30,
+      "prompt_conditions": 2
+    },
+    "loss": {
+      "optimizer_steps": 90000,
+      "initial_loss": 0.15492936968803406,
+      "final_loss": 0.13647082448005676,
+      "minimum_loss": 0.05517938733100891,
+      "mean_last_50_loss": 0.10586003050208091,
+      "checkpoint_steps": [
+        3000,
+        6000,
+        9000,
+        12000,
+        15000,
+        18000,
+        21000,
+        24000,
+        27000,
+        30000,
+        33000,
+        36000,
+        39000,
+        42000,
+        45000,
+        48000,
+        51000,
+        54000,
+        57000,
+        60000,
+        63000,
+        66000,
+        69000,
+        72000,
+        75000,
+        78000,
+        81000,
+        84000,
+        87000,
+        90000
+      ],
+      "checkpoint_block_mean": [
+        0.15116762708251674,
+        0.12577422349527478,
+        0.12361611861238878,
+        0.1212796867551903,
+        0.12062740602344274,
+        0.11897149948899945,
+        0.11801023867974679,
+        0.11779705177247524,
+        0.11735074037065109,
+        0.11802978467072049,
+        0.11769564895704389,
+        0.11635165470217665,
+        0.1169924478319784,
+        0.11760504951700568,
+        0.11768634655947487,
+        0.11609023487071196,
+        0.11428251639008521,
+        0.11505331964666644,
+        0.11869712852562467,
+        0.117097419389834,
+        0.11618140440806747,
+        0.11698133169611295,
+        0.11747709009423853,
+        0.11547467707966765,
+        0.11656806254138549,
+        0.11618079900244872,
+        0.11384193470701576,
+        0.11858238409707944,
+        0.11705117004364729,
+        0.11619498647501071
+      ],
+      "checkpoint_tail_100_mean": [
+        0.12702017650008202,
+        0.12787970043718816,
+        0.12376979991793632,
+        0.12315914116799831,
+        0.1232836526632309,
+        0.132175764888525,
+        0.11886679902672767,
+        0.12216010078787803,
+        0.10995152890682221,
+        0.11241007782518864,
+        0.12351342886686326,
+        0.11830365881323815,
+        0.10920807138085366,
+        0.12264887213706971,
+        0.1165294385701418,
+        0.11222306221723556,
+        0.11635546289384364,
+        0.11550743103027344,
+        0.10950943134725094,
+        0.10981331750750542,
+        0.11494475573301316,
+        0.12011463150382042,
+        0.12998044483363627,
+        0.12132911875844002,
+        0.10826207622885704,
+        0.11269314378499985,
+        0.10504795499145984,
+        0.10905236098915339,
+        0.11446676231920719,
+        0.10978099673986436
+      ],
+      "first_3000_mean": 0.15116762708251674,
+      "post_18000_mean": 0.11680265320234857,
+      "plateau_start_step": 18000
+    },
+    "embeddings": {
+      "checkpoint_steps": [
+        3000,
+        6000,
+        9000,
+        12000,
+        15000,
+        18000,
+        21000,
+        24000,
+        27000,
+        30000,
+        33000,
+        36000,
+        39000,
+        42000,
+        45000,
+        48000,
+        51000,
+        54000,
+        57000,
+        60000,
+        63000,
+        66000,
+        69000,
+        72000,
+        75000,
+        78000,
+        81000,
+        84000,
+        87000,
+        90000
+      ],
+      "encoders": {
+        "clip_l": {
+          "baseline_step": 3000,
+          "baseline_mean_norm": 0.6316111087799072,
+          "trajectory": [
+            {
+              "step": 3000,
+              "mean_norm": 0.6316111087799072,
+              "maximum_norm": 0.6748633980751038,
+              "mean_cosine_to_3000": 1.000000238418579,
+              "mean_l2_drift_from_3000": 0.0,
+              "relative_l2_drift_percent": 0.0
+            },
+            {
+              "step": 6000,
+              "mean_norm": 0.6934893727302551,
+              "maximum_norm": 0.7589111924171448,
+              "mean_cosine_to_3000": 0.926108717918396,
+              "mean_l2_drift_from_3000": 0.2611023783683777,
+              "relative_l2_drift_percent": 41.33910482872176
+            },
+            {
+              "step": 9000,
+              "mean_norm": 0.7301132678985596,
+              "maximum_norm": 0.7905073761940002,
+              "mean_cosine_to_3000": 0.878566563129425,
+              "mean_l2_drift_from_3000": 0.34838950634002686,
+              "relative_l2_drift_percent": 55.15886302459375
+            },
+            {
+              "step": 12000,
+              "mean_norm": 0.7556493878364563,
+              "maximum_norm": 0.8130972981452942,
+              "mean_cosine_to_3000": 0.8446449637413025,
+              "mean_l2_drift_from_3000": 0.403986394405365,
+              "relative_l2_drift_percent": 63.961255397447275
+            },
+            {
+              "step": 15000,
+              "mean_norm": 0.7749412059783936,
+              "maximum_norm": 0.8385469317436218,
+              "mean_cosine_to_3000": 0.8179490566253662,
+              "mean_l2_drift_from_3000": 0.4451572000980377,
+              "relative_l2_drift_percent": 70.47963436836231
+            },
+            {
+              "step": 18000,
+              "mean_norm": 0.7914080023765564,
+              "maximum_norm": 0.8480345606803894,
+              "mean_cosine_to_3000": 0.79640132188797,
+              "mean_l2_drift_from_3000": 0.4779702425003052,
+              "relative_l2_drift_percent": 75.67476820089621
+            },
+            {
+              "step": 21000,
+              "mean_norm": 0.803810179233551,
+              "maximum_norm": 0.8569461703300476,
+              "mean_cosine_to_3000": 0.7810181975364685,
+              "mean_l2_drift_from_3000": 0.5012722015380859,
+              "relative_l2_drift_percent": 79.36405718170491
+            },
+            {
+              "step": 24000,
+              "mean_norm": 0.8150032162666321,
+              "maximum_norm": 0.8664592504501343,
+              "mean_cosine_to_3000": 0.7690280675888062,
+              "mean_l2_drift_from_3000": 0.5202084183692932,
+              "relative_l2_drift_percent": 82.3621388442942
+            },
+            {
+              "step": 27000,
+              "mean_norm": 0.8240135312080383,
+              "maximum_norm": 0.8692895174026489,
+              "mean_cosine_to_3000": 0.7576615214347839,
+              "mean_l2_drift_from_3000": 0.5370330214500427,
+              "relative_l2_drift_percent": 85.0258986874752
+            },
+            {
+              "step": 30000,
+              "mean_norm": 0.8323437571525574,
+              "maximum_norm": 0.8756716847419739,
+              "mean_cosine_to_3000": 0.7479882836341858,
+              "mean_l2_drift_from_3000": 0.5516769886016846,
+              "relative_l2_drift_percent": 87.34440875610427
+            },
+            {
+              "step": 33000,
+              "mean_norm": 0.8393007516860962,
+              "maximum_norm": 0.8829967975616455,
+              "mean_cosine_to_3000": 0.7392978072166443,
+              "mean_l2_drift_from_3000": 0.5644373297691345,
+              "relative_l2_drift_percent": 89.36469323021672
+            },
+            {
+              "step": 36000,
+              "mean_norm": 0.8446979522705078,
+              "maximum_norm": 0.8898580074310303,
+              "mean_cosine_to_3000": 0.7322543859481812,
+              "mean_l2_drift_from_3000": 0.5745736956596375,
+              "relative_l2_drift_percent": 90.96953610736045
+            },
+            {
+              "step": 39000,
+              "mean_norm": 0.8513620495796204,
+              "maximum_norm": 0.896803081035614,
+              "mean_cosine_to_3000": 0.7258074879646301,
+              "mean_l2_drift_from_3000": 0.584960401058197,
+              "relative_l2_drift_percent": 92.61401405497347
+            },
+            {
+              "step": 42000,
+              "mean_norm": 0.8555647730827332,
+              "maximum_norm": 0.8972097635269165,
+              "mean_cosine_to_3000": 0.7205116152763367,
+              "mean_l2_drift_from_3000": 0.5926412343978882,
+              "relative_l2_drift_percent": 93.83008407542138
+            },
+            {
+              "step": 45000,
+              "mean_norm": 0.8608494997024536,
+              "maximum_norm": 0.9014661908149719,
+              "mean_cosine_to_3000": 0.7149543166160583,
+              "mean_l2_drift_from_3000": 0.6012917160987854,
+              "relative_l2_drift_percent": 95.19967393548694
+            },
+            {
+              "step": 48000,
+              "mean_norm": 0.8646022081375122,
+              "maximum_norm": 0.9094958305358887,
+              "mean_cosine_to_3000": 0.7112013101577759,
+              "mean_l2_drift_from_3000": 0.6072579622268677,
+              "relative_l2_drift_percent": 96.14428147090653
+            },
+            {
+              "step": 51000,
+              "mean_norm": 0.8674249053001404,
+              "maximum_norm": 0.914450466632843,
+              "mean_cosine_to_3000": 0.7073936462402344,
+              "mean_l2_drift_from_3000": 0.6125847101211548,
+              "relative_l2_drift_percent": 96.98764027512024
+            },
+            {
+              "step": 54000,
+              "mean_norm": 0.8701637387275696,
+              "maximum_norm": 0.9162889122962952,
+              "mean_cosine_to_3000": 0.7038679718971252,
+              "mean_l2_drift_from_3000": 0.6176117062568665,
+              "relative_l2_drift_percent": 97.78354080090776
+            },
+            {
+              "step": 57000,
+              "mean_norm": 0.8733483552932739,
+              "maximum_norm": 0.9206935167312622,
+              "mean_cosine_to_3000": 0.7005143761634827,
+              "mean_l2_drift_from_3000": 0.6227719783782959,
+              "relative_l2_drift_percent": 98.60054228325939
+            },
+            {
+              "step": 60000,
+              "mean_norm": 0.8759645223617554,
+              "maximum_norm": 0.9254288077354431,
+              "mean_cosine_to_3000": 0.6977332830429077,
+              "mean_l2_drift_from_3000": 0.627051591873169,
+              "relative_l2_drift_percent": 99.27811324985306
+            },
+            {
+              "step": 63000,
+              "mean_norm": 0.8786084651947021,
+              "maximum_norm": 0.927558183670044,
+              "mean_cosine_to_3000": 0.6946346759796143,
+              "mean_l2_drift_from_3000": 0.6316152215003967,
+              "relative_l2_drift_percent": 100.00065114758628
+            },
+            {
+              "step": 66000,
+              "mean_norm": 0.8811183571815491,
+              "maximum_norm": 0.9279307126998901,
+              "mean_cosine_to_3000": 0.6921820044517517,
+              "mean_l2_drift_from_3000": 0.635529637336731,
+              "relative_l2_drift_percent": 100.62040209590252
+            },
+            {
+              "step": 69000,
+              "mean_norm": 0.8825613856315613,
+              "maximum_norm": 0.9241999983787537,
+              "mean_cosine_to_3000": 0.6895488500595093,
+              "mean_l2_drift_from_3000": 0.6388587951660156,
+              "relative_l2_drift_percent": 101.14749191161455
+            },
+            {
+              "step": 72000,
+              "mean_norm": 0.8844743371009827,
+              "maximum_norm": 0.9295812249183655,
+              "mean_cosine_to_3000": 0.6871393918991089,
+              "mean_l2_drift_from_3000": 0.6422993540763855,
+              "relative_l2_drift_percent": 101.69221933368539
+            },
+            {
+              "step": 75000,
+              "mean_norm": 0.8860543370246887,
+              "maximum_norm": 0.9308826327323914,
+              "mean_cosine_to_3000": 0.6847347021102905,
+              "mean_l2_drift_from_3000": 0.6454847455024719,
+              "relative_l2_drift_percent": 102.1965472946422
+            },
+            {
+              "step": 78000,
+              "mean_norm": 0.8875476121902466,
+              "maximum_norm": 0.9298350214958191,
+              "mean_cosine_to_3000": 0.6830739378929138,
+              "mean_l2_drift_from_3000": 0.6479943990707397,
+              "relative_l2_drift_percent": 102.59388887609661
+            },
+            {
+              "step": 81000,
+              "mean_norm": 0.889123260974884,
+              "maximum_norm": 0.9339599609375,
+              "mean_cosine_to_3000": 0.6812106370925903,
+              "mean_l2_drift_from_3000": 0.6507319808006287,
+              "relative_l2_drift_percent": 103.02731724552115
+            },
+            {
+              "step": 84000,
+              "mean_norm": 0.8917670845985413,
+              "maximum_norm": 0.9352064728736877,
+              "mean_cosine_to_3000": 0.6792383193969727,
+              "mean_l2_drift_from_3000": 0.6543039679527283,
+              "relative_l2_drift_percent": 103.59285307958835
+            },
+            {
+              "step": 87000,
+              "mean_norm": 0.8926973342895508,
+              "maximum_norm": 0.9390085339546204,
+              "mean_cosine_to_3000": 0.6776772737503052,
+              "mean_l2_drift_from_3000": 0.6563212275505066,
+              "relative_l2_drift_percent": 103.91223625219833
+            },
+            {
+              "step": 90000,
+              "mean_norm": 0.8935468196868896,
+              "maximum_norm": 0.9414597153663635,
+              "mean_cosine_to_3000": 0.6761243343353271,
+              "mean_l2_drift_from_3000": 0.6582431793212891,
+              "relative_l2_drift_percent": 104.21652978726536
+            }
+          ]
+        },
+        "t5": {
+          "baseline_step": 3000,
+          "baseline_mean_norm": 395.5482482910156,
+          "trajectory": [
+            {
+              "step": 3000,
+              "mean_norm": 395.5482482910156,
+              "maximum_norm": 496.6715087890625,
+              "mean_cosine_to_3000": 1.000001072883606,
+              "mean_l2_drift_from_3000": 0.0,
+              "relative_l2_drift_percent": 0.0
+            },
+            {
+              "step": 6000,
+              "mean_norm": 395.5482482910156,
+              "maximum_norm": 496.6715393066406,
+              "mean_cosine_to_3000": 1.000001072883606,
+              "mean_l2_drift_from_3000": 0.08903627097606659,
+              "relative_l2_drift_percent": 0.022509585457842853
+            },
+            {
+              "step": 9000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000009536743164,
+              "mean_l2_drift_from_3000": 0.12140357494354248,
+              "relative_l2_drift_percent": 0.030692482008976705
+            },
+            {
+              "step": 12000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.6715393066406,
+              "mean_cosine_to_3000": 1.0000009536743164,
+              "mean_l2_drift_from_3000": 0.1483144909143448,
+              "relative_l2_drift_percent": 0.037495929145216635
+            },
+            {
+              "step": 15000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000009536743164,
+              "mean_l2_drift_from_3000": 0.1518324464559555,
+              "relative_l2_drift_percent": 0.03838531635823305
+            },
+            {
+              "step": 18000,
+              "mean_norm": 395.5482482910156,
+              "maximum_norm": 496.6715393066406,
+              "mean_cosine_to_3000": 1.0000009536743164,
+              "mean_l2_drift_from_3000": 0.15662196278572083,
+              "relative_l2_drift_percent": 0.03959617150686755
+            },
+            {
+              "step": 21000,
+              "mean_norm": 395.5482482910156,
+              "maximum_norm": 496.6715393066406,
+              "mean_cosine_to_3000": 1.0000008344650269,
+              "mean_l2_drift_from_3000": 0.1627109795808792,
+              "relative_l2_drift_percent": 0.04113555812315678
+            },
+            {
+              "step": 24000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.6715393066406,
+              "mean_cosine_to_3000": 1.0000008344650269,
+              "mean_l2_drift_from_3000": 0.17351309955120087,
+              "relative_l2_drift_percent": 0.04386648159886238
+            },
+            {
+              "step": 27000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.6715393066406,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.178724005818367,
+              "relative_l2_drift_percent": 0.045183869879477985
+            },
+            {
+              "step": 30000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.18124426901340485,
+              "relative_l2_drift_percent": 0.04582102683970389
+            },
+            {
+              "step": 33000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.18216687440872192,
+              "relative_l2_drift_percent": 0.04605427408559696
+            },
+            {
+              "step": 36000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.1884373128414154,
+              "relative_l2_drift_percent": 0.04763952656991087
+            },
+            {
+              "step": 39000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.19606517255306244,
+              "relative_l2_drift_percent": 0.049567953694693634
+            },
+            {
+              "step": 42000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.20124223828315735,
+              "relative_l2_drift_percent": 0.05087678662530644
+            },
+            {
+              "step": 45000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.20311421155929565,
+              "relative_l2_drift_percent": 0.05135004703897943
+            },
+            {
+              "step": 48000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.20836707949638367,
+              "relative_l2_drift_percent": 0.05267804380290981
+            },
+            {
+              "step": 51000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000005960464478,
+              "mean_l2_drift_from_3000": 0.20795659720897675,
+              "relative_l2_drift_percent": 0.052574268273835816
+            },
+            {
+              "step": 54000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.20939534902572632,
+              "relative_l2_drift_percent": 0.05293800438516124
+            },
+            {
+              "step": 57000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000005960464478,
+              "mean_l2_drift_from_3000": 0.21890373528003693,
+              "relative_l2_drift_percent": 0.05534185430622448
+            },
+            {
+              "step": 60000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000005960464478,
+              "mean_l2_drift_from_3000": 0.22581858932971954,
+              "relative_l2_drift_percent": 0.05709002386064889
+            },
+            {
+              "step": 63000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.2293882519006729,
+              "relative_l2_drift_percent": 0.05799248331695448
+            },
+            {
+              "step": 66000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.2288496494293213,
+              "relative_l2_drift_percent": 0.0578563172553732
+            },
+            {
+              "step": 69000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.22893790900707245,
+              "relative_l2_drift_percent": 0.057878630482174856
+            },
+            {
+              "step": 72000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.22402261197566986,
+              "relative_l2_drift_percent": 0.05663597625411561
+            },
+            {
+              "step": 75000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000005960464478,
+              "mean_l2_drift_from_3000": 0.22256354987621307,
+              "relative_l2_drift_percent": 0.05626710542590167
+            },
+            {
+              "step": 78000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000005960464478,
+              "mean_l2_drift_from_3000": 0.22541840374469757,
+              "relative_l2_drift_percent": 0.05698885147858147
+            },
+            {
+              "step": 81000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.6716003417969,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.22290700674057007,
+              "relative_l2_drift_percent": 0.056353936012521866
+            },
+            {
+              "step": 84000,
+              "mean_norm": 395.5483093261719,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000007152557373,
+              "mean_l2_drift_from_3000": 0.2226668894290924,
+              "relative_l2_drift_percent": 0.056293231076394584
+            },
+            {
+              "step": 87000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000005960464478,
+              "mean_l2_drift_from_3000": 0.2248004525899887,
+              "relative_l2_drift_percent": 0.05683262498601609
+            },
+            {
+              "step": 90000,
+              "mean_norm": 395.54827880859375,
+              "maximum_norm": 496.67156982421875,
+              "mean_cosine_to_3000": 1.0000005960464478,
+              "mean_l2_drift_from_3000": 0.22901731729507446,
+              "relative_l2_drift_percent": 0.0578987059820273
+            }
+          ]
+        }
+      }
+    },
+    "foreground": {
+      "image_count": 1000,
+      "mean_non_white_pixel_percent": 2.718916320800781,
+      "median_non_white_pixel_percent": 2.729034423828125,
+      "mean_foreground_bbox_area_percent": 4.730224609375,
+      "median_foreground_width_pixels": 43.5,
+      "median_foreground_height_pixels": 69.0,
+      "canvas_width_pixels": 256,
+      "canvas_height_pixels": 256
+    },
+    "evidence_assets": {
+      "loss_trajectory": "diagnostics/loss-trajectory.svg",
+      "embedding_drift": "diagnostics/embedding-drift.svg",
+      "failure_progression": "diagnostics/failure-progression.png",
+      "foreground_scale": "diagnostics/foreground-scale.png"
+    },
+    "references": [
+      {
+        "label": "Official Diffusers FLUX DreamBooth and LoRA training guide",
+        "url": "https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/README_flux.md"
+      },
+      {
+        "label": "Official Diffusers LoRA training documentation",
+        "url": "https://huggingface.co/docs/diffusers/en/training/lora"
+      },
+      {
+        "label": "Textual Inversion",
+        "url": "https://arxiv.org/abs/2208.01618"
+      },
+      {
+        "label": "Custom Diffusion",
+        "url": "https://arxiv.org/abs/2212.04488"
+      }
+    ]
+  }
 }
