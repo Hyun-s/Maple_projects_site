@@ -1,0 +1,67 @@
+{
+  "experiment": {
+    "name": "20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42",
+    "seed": 42,
+    "output_root": "experiments"
+  },
+  "api": {
+    "base_url": "https://maplestory.io/api",
+    "region": "KMS",
+    "version": "389",
+    "timeout_seconds": 60.0,
+    "requests_per_second": 2.0,
+    "max_retries": 4
+  },
+  "dataset": {
+    "mode": "balanced",
+    "num_samples": 1000,
+    "resolution": 256,
+    "background": "white",
+    "skin_id": 2000,
+    "hair_id": 30000,
+    "face_id": 20000,
+    "animation": "stand1",
+    "frame": 0,
+    "items_per_category": 10,
+    "categories": {
+      "hat": "Hat",
+      "top": "Top",
+      "bottom": "Bottom"
+    },
+    "split": {
+      "strategy": "all_combinations",
+      "train_ratio": 1.0
+    }
+  },
+  "training": {
+    "enabled": true,
+    "family": "flux",
+    "method": "joint_textual_inversion",
+    "base_model": "black-forest-labs/FLUX.1-dev",
+    "model_revision": "3de623fc3c33e44ffbe2bad470d0f45bccf2eb21",
+    "learning_rate": 0.0005,
+    "steps": 90000,
+    "batch_size": 4,
+    "gradient_accumulation_steps": 1,
+    "dataloader_num_workers": 4,
+    "mixed_precision": "bf16",
+    "max_sequence_length": 64,
+    "flow_guidance_scale": 1.0,
+    "checkpoint_every_steps": 3000,
+    "resume_from_latest": true
+  },
+  "generation": {
+    "backends": ["oracle", "shuffled", "diffusion"],
+    "num_samples": 1000,
+    "num_inference_steps": 30,
+    "guidance_scale": 3.5,
+    "negative_prompt": "",
+    "prompt_template": "an anime-style character wearing {tokens}"
+  },
+  "evaluation": {
+    "semantic_metrics": true,
+    "model_device": "cuda",
+    "clip_model_id": "openai/clip-vit-large-patch14",
+    "clip_model_revision": "32bd64288804d66eefd0ccbe215aa642df71cc41"
+  }
+}

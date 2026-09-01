@@ -1,0 +1,1273 @@
+{
+  "schema_version": 1,
+  "checkpoint_steps": [
+    3000,
+    6000,
+    9000,
+    12000,
+    15000,
+    18000,
+    21000,
+    24000,
+    27000,
+    30000,
+    33000,
+    36000,
+    39000,
+    42000,
+    45000,
+    48000,
+    51000,
+    54000,
+    57000,
+    60000,
+    63000,
+    66000,
+    69000,
+    72000,
+    75000,
+    78000,
+    81000,
+    84000,
+    87000,
+    90000
+  ],
+  "sample_count": 4,
+  "evaluation": "visual_only",
+  "prompt_templates": {
+    "maple_style": "a maplestory character wearing {tokens}",
+    "anime_style": "an anime-style character wearing {tokens}"
+  },
+  "checkpoints": [
+    {
+      "step": 3000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_003000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 6000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_006000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 9000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_009000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 12000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_012000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 15000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_015000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 18000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_018000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 21000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_021000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 24000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_024000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 27000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_027000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 30000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_030000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 33000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_033000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 36000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_036000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 39000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_039000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 42000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_042000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 45000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_045000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 48000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_048000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 51000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_051000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 54000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_054000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 57000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_057000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 60000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_060000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 63000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_063000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 66000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_066000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 69000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_069000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 72000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_072000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 75000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_075000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 78000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_078000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 81000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_081000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 84000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_084000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 87000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_087000/generations/anime_style/00000004.png"
+        }
+      ]
+    },
+    {
+      "step": 90000,
+      "samples": [
+        {
+          "combination_key": "bottom:1060005|hat:1000007|top:1040003",
+          "seed": 43,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000001.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/maple_style/00000001.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060005> <hat_1000007> <top_1040003>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/anime_style/00000001.png"
+        },
+        {
+          "combination_key": "bottom:1060003|hat:1000004|top:1040000",
+          "seed": 44,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000002.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/maple_style/00000002.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060003> <hat_1000004> <top_1040000>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/anime_style/00000002.png"
+        },
+        {
+          "combination_key": "bottom:1060007|hat:1000001|top:1040009",
+          "seed": 45,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000003.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/maple_style/00000003.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060007> <hat_1000001> <top_1040009>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/anime_style/00000003.png"
+        },
+        {
+          "combination_key": "bottom:1060001|hat:1000006|top:1040008",
+          "seed": 46,
+          "target": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/dataset/images/00000004.png",
+          "maple_prompt": "a maplestory character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "maple_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/maple_style/00000004.png",
+          "anime_prompt": "an anime-style character wearing <bottom_1060001> <hat_1000006> <top_1040008>",
+          "anime_generated": "/home/hyuns/project/Maple_Generator/additional_experiments/maple_inversion/experiments/20260830_flux1dev_item_identity_full1000_3k_to_90k_seed42/checkpoint_visualization/step_090000/generations/anime_style/00000004.png"
+        }
+      ]
+    }
+  ]
+}
