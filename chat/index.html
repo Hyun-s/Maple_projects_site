@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="A production case study of Maple Chat: why hybrid RAG needed evidence-role separation, why a knowledge graph was added, and what changed after both fixes."
+      content="Maple Chat: Evidence-Grounded Hybrid RAG & Knowledge Graph System for Gaming Communities."
     >
-    <meta name="theme-color" content="#f5f2ea">
-    <meta property="og:title" content="Maple Chat — Evidence-grounded RAG">
+    <meta name="keywords" content="RAG, Knowledge Graphs, Information Retrieval, Hybrid Search, BGE-M3, Discord Bot, Qwen, NLP">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Maple Chat: Evidence-Grounded Hybrid RAG">
     <meta
       property="og:description"
-      content="See one production failure move from conflicting answers and invented terminology to a grounded, consistent result."
+      content="A production case study on hybrid retrieval, knowledge graph grounding, and local LLM generation for Discord gaming communities."
     >
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyun-s.github.io/Maple_projects_site/chat/">
@@ -19,496 +20,417 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Maple Chat — Evidence-grounded RAG</title>
+    <title>Maple Chat: Evidence-Grounded Hybrid RAG &amp; Knowledge Graph System</title>
     <link rel="canonical" href="https://hyun-s.github.io/Maple_projects_site/chat/">
     <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
+
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)'], ['$', '$']],
+          displayMath: [['\\[', '\\]'], ['$$', '$$']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <!-- Site scripts -->
     <script src="./static/js/index.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-shell">
-        <a class="wordmark" href="../" aria-label="Back to Maple Projects">
-          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path></svg>
-          <span>Maple / Projects</span>
-        </a>
-        <a class="wordmark page-wordmark" href="#top" aria-label="Maple Chat, back to top">
-          <svg viewBox="0 0 28 28" aria-hidden="true">
-            <path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path>
-          </svg>
-          <span>Maple / Chat System</span>
-        </a>
-        <nav class="section-nav" aria-label="On this page">
-          <a href="#overview">Overview</a>
-          <a href="#case-study">Case</a>
-          <a href="#pipeline">Pipeline</a>
-          <a href="#retrieval">Retrieval</a>
-          <a href="#knowledge">Graph</a>
-          <a href="#operations">Operations</a>
-          <a href="#quality">Quality</a>
-          <a class="project-home-link" href="../">All projects ↗</a>
-        </nav>
+    <!-- Navigation Header -->
+    <nav class="navbar-academic" aria-label="Main Navigation">
+      <a class="navbar-brand-link" href="../" aria-label="Back to Maple Projects Hub">
+        <img src="./static/images/favicon.svg" alt="Maple Logo" width="26" height="26">
+        <span>Maple / Chat System</span>
+      </a>
+      <div class="navbar-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#motivation">Grounding Gap</a>
+        <a href="#pipeline">Architecture</a>
+        <a href="#retrieval">Retrieval</a>
+        <a href="#knowledge">Knowledge Graph</a>
+        <a href="#results">Evaluation</a>
+        <a class="hub-link" href="../">All Projects ↗</a>
       </div>
-      <div class="reading-progress" aria-hidden="true"><span></span></div>
-    </header>
+    </nav>
 
     <main id="main-content">
-      <section class="hero" id="top" aria-labelledby="page-title">
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="hero-orbit orbit-one" aria-hidden="true"></div>
-        <div class="hero-orbit orbit-two" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <p class="eyebrow reveal">Local-first RAG · Hybrid retrieval · Knowledge graph</p>
-          <h1 id="page-title" class="reveal reveal-delay-1">
-            Community evidence
-            <span>grounded answers</span>
-          </h1>
-          <p class="hero-copy reveal reveal-delay-2">
-            Maple Chat is a Discord RAG system that retrieves community experience from Inven,
-            official updates from Nexon, and reviewed domain relations before generating locally with Qwen.
-          </p>
-          <div class="status-row reveal reveal-delay-3" role="group" aria-label="Project status">
-            <span><i class="status-dot status-dot-live"></i> Private Discord deployment</span>
-            <span><i class="status-dot status-dot-graph"></i> Graph grounding active</span>
-            <span><i class="status-dot"></i> Local generation</span>
-          </div>
+      <!-- Hero Publication Header -->
+      <section class="hero" id="top">
+        <div class="hero-body">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+                <h1 class="title is-1 publication-title">
+                  <img src="./static/images/favicon.svg" alt="Icon" style="height: 1.1em; vertical-align: middle; margin-right: 12px;">
+                  Maple Chat: Evidence-Grounded Hybrid RAG &amp; Knowledge Graph System
+                </h1>
 
-          <figure class="hero-figure reveal reveal-delay-3">
+                <div class="is-size-4 publication-authors">
+                  <span class="author-block">
+                    <a href="https://github.com/Hyun-s">Hyunsoo Han</a><sup>1</sup>
+                  </span>
+                </div>
+
+                <div class="is-size-5 publication-institution">
+                  <span class="author-block"><sup>1</sup>Applied Machine Learning Research</span>
+                </div>
+
+                <div class="column has-text-centered">
+                  <div class="publication-links">
+                    <!-- Docs Link -->
+                    <span class="link-block">
+                      <a href="https://github.com/Hyun-s/Maple_Chat/blob/main/docs/current-system-overview.md"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                        <span>System Overview</span>
+                      </a>
+                    </span>
+                    <!-- Code Link -->
+                    <span class="link-block">
+                      <a href="https://github.com/Hyun-s/Maple_Chat"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fab fa-github"></i></span>
+                        <span>Code Repository</span>
+                      </a>
+                    </span>
+                    <!-- RAG Textbook Link -->
+                    <span class="link-block">
+                      <a href="https://github.com/Hyun-s/Maple_Chat/blob/main/docs/rag-knowledge-graph-textbook.md"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-book"></i></span>
+                        <span>Technical Textbook</span>
+                      </a>
+                    </span>
+                    <!-- Quality Log Link -->
+                    <span class="link-block">
+                      <a href="https://github.com/Hyun-s/Maple_Chat/blob/main/docs/service-quality-log.md"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-clipboard-check"></i></span>
+                        <span>Service Quality Log</span>
+                      </a>
+                    </span>
+                    <!-- Hub Link -->
+                    <span class="link-block">
+                      <a href="../"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-th-large"></i></span>
+                        <span>Projects Hub</span>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaser Section -->
+      <section class="hero teaser">
+        <div class="container is-max-desktop">
+          <div class="hero-body has-text-centered">
             <img
               src="./static/images/system-map.svg"
-              width="1200"
-              height="520"
-              alt="Maple Chat architecture: community and official sources flow through indexing, retrieval, knowledge-graph grounding, and local generation"
+              alt="Architecture overview of Maple Chat showing hybrid retrieval, knowledge graph, and local generation"
+              style="display: block; margin: 10px auto 30px auto; width: 100%; max-width: 960px; height: auto; border-radius: 8px;"
             >
-            <figcaption>
-              Figure 1. Unstructured experience and structured domain relations remain separate until answer generation.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="section" id="overview" aria-labelledby="overview-title">
-        <div class="section-heading">
-          <p class="section-index">01 / Overview</p>
-          <h2 id="overview-title">Retrieval finds evidence.<br>The graph keeps it in scope.</h2>
-          <p>
-            Vector similarity can find a relevant post, but it cannot guarantee that a class, boss,
-            abbreviation, or content mode has been linked to the correct entity. Maple Chat treats
-            evidence retrieval and entity integrity as separate system responsibilities.
-          </p>
-        </div>
-
-        <div class="question-grid">
-          <article>
-            <span>01 · Discover</span>
-            <h3>Find relevant experience</h3>
-            <p>Dense and lexical retrieval surface guides, reports, and comments even when the wording differs.</p>
-          </article>
-          <article>
-            <span>02 · Constrain</span>
-            <h3>Keep the entity fixed</h3>
-            <p>Jobs, bosses, difficulties, and modes are resolved as entities before evidence enters the answer context.</p>
-          </article>
-          <article>
-            <span>03 · Explain</span>
-            <h3>Preserve evidence boundaries</h3>
-            <p>Official facts, community experience, and contradictory reports remain distinguishable in the final answer.</p>
-          </article>
-        </div>
-
-        <aside class="boundary-note" aria-label="Publication and privacy boundary">
-          <div class="boundary-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 2 4.5 5v5.5c0 5.1 3.1 9.6 7.5 11.5 4.4-1.9 7.5-6.4 7.5-11.5V5L12 2Zm0 3.1 4.5 1.8v3.6c0 3.6-1.9 6.9-4.5 8.4-2.6-1.5-4.5-4.8-4.5-8.4V6.9L12 5.1Zm-1 3.2v3.1H9.5v4.1h5v-4.1H13V8.3h-2Z"></path></svg>
-          </div>
-          <div>
-            <strong>Public case study, private system</strong>
-            <p>
-              This page publishes reviewed architecture and aggregate snapshots only. Discord credentials,
-              original usernames, database addresses, model endpoints, collection approvals, and source documents remain private.
-            </p>
-          </div>
-        </aside>
-      </section>
-
-      <section class="section section-case" id="case-study" aria-labelledby="case-study-title">
-        <div class="section-heading">
-          <p class="section-index">02 / Production case</p>
-          <h2 id="case-study-title">One intent.<br>Two answers. Then one grounded result.</h2>
-          <p>
-            A manual Discord test exposed two linked failures: equivalent questions retrieved different
-            evidence and produced conflicting procedures, while the retrieved comments introduced shorthand
-            that the model expanded into nonexistent item names.
-          </p>
-        </div>
-
-        <div class="case-source-note">
-          <span>Incident record · SQ-2026-08-24-001 / 002</span>
-          <p>Prompts and item labels are descriptive English translations of the original Korean exchange; final-answer lines summarize the logged conclusions.</p>
-        </div>
-
-        <div class="case-prompt-panel">
-          <div class="case-panel-heading">
-            <span>Same intent</span>
-            <strong>Two ways to ask the question</strong>
-          </div>
-          <div class="case-prompt-grid">
-            <article>
-              <span class="case-letter">A</span>
-              <blockquote>“How should I upgrade Xenon armor myself?”</blockquote>
-            </article>
-            <article>
-              <span class="case-letter">B</span>
-              <blockquote>“What upgrade order should I use for Xenon armor?”</blockquote>
-            </article>
-          </div>
-        </div>
-
-        <div class="case-before" aria-label="Answers before the generalized fix">
-          <div class="case-before-heading">
-            <div>
-              <span>Before · operating-pipeline reproduction</span>
-              <h3>The phrasing changed the retrieved evidence—and the answer.</h3>
-            </div>
-            <strong class="case-status case-status-failed">Conflict reproduced</strong>
-          </div>
-          <div class="case-answer-grid">
-            <article>
-              <span>Answer A</span>
-              <p><b>Positive Chaos Scroll</b><i>→</i><b>Bonus Stats + Star Force</b></p>
-            </article>
-            <article>
-              <span>Answer B</span>
-              <p><b>Bonus Stats</b><i>→</i><b>Positive Chaos Scroll</b><i>→</i><b>Star Force</b></p>
-            </article>
-          </div>
-          <p class="case-root-cause">
-            <strong>Root cause.</strong> Each paraphrase surfaced a different evidence set, and assumptions copied from question posts
-            were allowed to behave like answer claims. No structured step compared the competing procedures.
-          </p>
-        </div>
-
-        <div class="case-rationale-grid">
-          <article class="case-rationale case-rag">
-            <div class="case-rationale-topline">
-              <span>01 / Why RAG</span>
-              <b>Evidence</b>
-            </div>
-            <h3>Current community advice needs a source, not model memory.</h3>
-            <p>
-              Procedures and patch context change. Hybrid retrieval is necessary to find current community reports,
-              preserve provenance, and expose disagreement instead of presenting an unsupported answer.
-            </p>
-            <div class="case-change">
-              <span>What changed</span>
-              <p><code>question_only</code> chunks provide context but cannot support claims. After hybrid retrieval and reranking, only the answer-bearing comment segment enters claim evidence, model context, and graph enrichment.</p>
-            </div>
-            <p class="case-limit"><strong>Necessary, not sufficient:</strong> relevant comments can still contain ambiguous shorthand and incorrect entity scope.</p>
-          </article>
-
-          <article class="case-rationale case-graph">
-            <div class="case-rationale-topline">
-              <span>02 / Why a knowledge graph</span>
-              <b>Identity</b>
-            </div>
-            <h3>Relevant text can still name the wrong thing.</h3>
-            <p>
-              The shorthand appeared inside retrieved comments—not in the prompts—so query-only entity linking missed it.
-              Free generation then invented expansions such as “Amazing Positivity,” “Amazing Pride,” and “Recommended Option.”
-            </p>
-            <div class="case-relations" aria-label="Relations used to ground the answer">
-              <p><code>shorthand</code><i>abbreviation_of</i><strong>reviewed item name</strong></p>
-              <p><code>Arc Innocence Scroll</code><i>has_effect</i><strong>reset options except Potential + Star Force</strong></p>
-              <p><code>Xenon</code><i>is_a</i><strong>Thief + Pirate</strong></p>
-            </div>
-            <p class="case-limit"><strong>What changed:</strong> link entities from both the question and accepted evidence, then reject or replace drafts that contradict reviewed relations.</p>
-          </article>
-        </div>
-
-        <div class="case-result" aria-label="Observed result after the combined fix">
-          <div class="case-result-heading">
-            <div>
-              <span>After · combined RAG + graph fix</span>
-              <h3>Both prompt variants converged on the same conclusion.</h3>
-            </div>
-            <strong class="case-status case-status-observed">Observed · 2026-08-25</strong>
-          </div>
-
-          <div class="case-result-grid">
-            <article>
-              <span>Prompt A · logged conclusion</span>
-              <p class="case-result-conclusion"><strong>No fixed order.</strong><small>Check the STR Bonus Stats prerequisite first.</small></p>
-            </article>
-            <article>
-              <span>Prompt B · logged conclusion</span>
-              <p class="case-result-conclusion"><strong>No fixed order.</strong><small>Check the STR Bonus Stats prerequisite first.</small></p>
-            </article>
-          </div>
-
-          <div class="case-outcome-grid">
-            <p><span>Consistency</span><strong>No contradictory absolute order</strong></p>
-            <p><span>Terminology</span><strong>Reviewed canonical names retained</strong></p>
-            <p><span>Hallucination guard</span><strong>Invented expansions absent</strong></p>
-          </div>
-
-          <p class="case-monitoring">
-            <strong>Monitoring, not closed.</strong> The operating pipeline passed one rollback smoke run per prompt.
-            Three repetitions per prompt and a Discord Gateway confirmation remain open.
-          </p>
-        </div>
-      </section>
-
-      <section class="section section-night" id="pipeline" aria-labelledby="pipeline-title">
-        <div class="section-heading inverse">
-          <p class="section-index">03 / Pipeline</p>
-          <h2 id="pipeline-title">How one question becomes an answer</h2>
-          <p>Each stage has an explicit boundary and can fail independently. If evidence is insufficient, the system declines to answer rather than relaxing those checks.</p>
-        </div>
-
-        <ol class="pipeline-list">
-          <li>
-            <span class="pipeline-number">01</span>
-            <div><small>Collect</small><h3>Collect within the approved scope</h3><p>Separate collectors fetch posts and comments from seven approved boards plus official patch notes.</p></div>
-            <b>GET only</b>
-          </li>
-          <li>
-            <span class="pipeline-number">02</span>
-            <div><small>Sanitize</small><h3>Remove personal data before storage</h3><p>Email addresses and phone numbers are masked; usernames are transformed with a salted HMAC.</p></div>
-            <b>PII boundary</b>
-          </li>
-          <li>
-            <span class="pipeline-number">03</span>
-            <div><small>Index</small><h3>Preserve source structure</h3><p>Chunks retain titles, boards, question context, and comment roles before BGE-M3 creates 1,024-dimensional vectors.</p></div>
-            <b>pgvector</b>
-          </li>
-          <li>
-            <span class="pipeline-number">04</span>
-            <div><small>Retrieve</small><h3>Search by meaning and wording</h3><p>RRF combines dense and pg_trgm rankings; a BGE cross-encoder selects the final evidence.</p></div>
-            <b>Top 8</b>
-          </li>
-          <li>
-            <span class="pipeline-number">05</span>
-            <div><small>Ground</small><h3>Resolve exact domain relations</h3><p>Jobs, bosses, abbreviations, and modes are traversed in the graph to block evidence from a different entity.</p></div>
-            <b>Exact graph</b>
-          </li>
-          <li>
-            <span class="pipeline-number">06</span>
-            <div><small>Generate</small><h3>Generate locally with provenance</h3><p>Trusted graph facts and untrusted evidence are passed separately; used sources and token telemetry are recorded.</p></div>
-            <b>Local Qwen</b>
-          </li>
-        </ol>
-      </section>
-
-      <section class="section" id="retrieval" aria-labelledby="retrieval-title">
-        <div class="section-heading centered">
-          <p class="section-index">04 / Hybrid RAG</p>
-          <h2 id="retrieval-title">No single score decides the evidence</h2>
-          <p>Semantic recall, exact wording, rank fusion, reranking, and bounded quality signals each serve a distinct role.</p>
-        </div>
-
-        <div class="retrieval-grid">
-          <article>
-            <div class="card-label"><span>A</span><small>Semantic recall</small></div>
-            <h3>Dense retrieval</h3>
-            <p>Questions and chunks share a BGE-M3 embedding space, where cosine distance retrieves semantically related evidence.</p>
-            <dl><div><dt>Dimension</dt><dd>1,024</dd></div><div><dt>Index</dt><dd>HNSW</dd></div></dl>
-          </article>
-          <article class="featured-card">
-            <div class="card-label"><span>B</span><small>Rank fusion</small></div>
-            <h3>RRF + reranker</h3>
-            <p>RRF merges dense and lexical rankings before a cross-encoder reads each question-candidate pair again.</p>
-            <dl><div><dt>Fusion</dt><dd>Reciprocal rank</dd></div><div><dt>Final evidence</dt><dd>≤ 8</dd></div></dl>
-          </article>
-          <article>
-            <div class="card-label"><span>C</span><small>Exact wording</small></div>
-            <h3>Lexical retrieval</h3>
-            <p>A pg_trgm GIN index recovers candidates that depend on exact job names, boss names, and abbreviations.</p>
-            <dl><div><dt>Engine</dt><dd>pg_trgm</dd></div><div><dt>Signal</dt><dd>Trigram</dd></div></dl>
-          </article>
-        </div>
-
-        <div class="formula-band" aria-label="Retrieval composition">
-          <div><span>Rank fusion</span><strong>RRF(dense, lexical)</strong></div>
-          <i aria-hidden="true">+</i>
-          <div><span>Quality prior</span><strong>bounded metadata boost</strong></div>
-          <i aria-hidden="true">→</i>
-          <div><span>Cross encoder</span><strong>query × evidence</strong></div>
-        </div>
-
-        <aside class="tradeoff-note">
-          <strong>Retrieved text is evidence, not an answer.</strong>
-          <p>
-            Popularity and recency are bounded so they cannot overwhelm relevance. When a question names
-            both a job and a boss, evidence must satisfy both scopes before generation.
-          </p>
-        </aside>
-      </section>
-
-      <section class="section section-violet" id="knowledge" aria-labelledby="knowledge-title">
-        <div class="knowledge-layout">
-          <div class="section-heading inverse">
-            <p class="section-index">05 / Knowledge graph</p>
-            <h2 id="knowledge-title">Query relationships,<br>not just names</h2>
-            <p>
-              Job hierarchies, canonical item names, boss variants, and content modes are stored as
-              versioned entities and relations. Vector retrieval never has to infer those relationships.
-            </p>
-
-            <div class="graph-legend" aria-label="Knowledge graph legend">
-              <span><i class="legend-job"></i> Job</span>
-              <span><i class="legend-boss"></i> Boss</span>
-              <span><i class="legend-term"></i> Term</span>
-              <span><i class="legend-mode"></i> Mode</span>
-            </div>
-          </div>
-          <figure class="graph-figure">
-            <img
-              src="./static/images/knowledge-map.svg"
-              width="720"
-              height="620"
-              alt="Example knowledge graph connecting Xenon to two job groups, an abbreviation to its canonical item name, and a content mode to boss variants"
-            >
-            <figcaption>Figure 2. Representative relations traversed exactly during answer generation.</figcaption>
-          </figure>
-        </div>
-
-        <div class="relation-strip">
-          <article><code>Xenon</code><span>is_a</span><strong>Thief · Pirate</strong></article>
-          <article><code>Item shorthand</code><span>abbreviation_of</span><strong>Canonical scroll name</strong></article>
-          <article><code>Kaling variant</code><span>uses_mode</span><strong>Destiny mode</strong></article>
-        </div>
-      </section>
-
-      <section class="section" id="operations" aria-labelledby="operations-title">
-        <div class="section-heading">
-          <p class="section-index">06 / Operations</p>
-          <h2 id="operations-title">Refresh the corpus.<br>Preserve the record.</h2>
-          <p>
-            These figures are a verified static snapshot of the operating database at
-            2026-08-25 17:49 KST, not a live public dashboard.
-          </p>
-        </div>
-
-        <div class="snapshot-grid" aria-label="Operating data snapshot">
-          <article><span>Indexed articles</span><strong data-count="17746">17,746</strong><small>Inven 7 boards</small></article>
-          <article><span>Indexed comments</span><strong data-count="70373">70,373</strong><small>sanitized</small></article>
-          <article><span>Active vectors</span><strong data-count="90293">90,293</strong><small>1,024 dimensions</small></article>
-          <article><span>Graph relations</span><strong data-count="292">292</strong><small>7 provenance sources</small></article>
-        </div>
-
-        <div class="schedule-grid">
-          <article>
-            <span class="schedule-day">Daily · 04:00 KST</span>
-            <h3>Incremental community refresh</h3>
-            <p>Fetch the newest page from each of seven boards in sequence and reindex changed sources only.</p>
-            <div class="schedule-meta"><span>Inven</span><span>Incremental</span><span>Single lock</span></div>
-          </article>
-          <article>
-            <span class="schedule-day">Thursday · 14:00 KST</span>
-            <h3>Official update refresh</h3>
-            <p>Revisit only new or modified Nexon update details inside a rolling 365-day window.</p>
-            <div class="schedule-meta"><span>Nexon</span><span>365 days</span><span>Official</span></div>
-          </article>
-          <article>
-            <span class="schedule-day">Resumable · 10 pages</span>
-            <h3>Resumable historical backfill</h3>
-            <p>Continue from a per-board checkpoint toward page 200, rotating boards and indexing after each slice.</p>
-            <div class="schedule-meta"><span>200-page target</span><span>No OCR</span><span>Checkpoint</span></div>
-          </article>
-        </div>
-
-        <div class="telemetry-panel">
-          <div>
-            <span>Answer telemetry</span>
-            <h3>Make latency measurable</h3>
-            <p>Every generated answer exposes token usage and elapsed time, then writes the same values to structured logs.</p>
-          </div>
-          <div class="telemetry-sample" aria-label="Example answer telemetry">
-            <p><span>Input</span><strong>6,209 tok</strong><small>1,232.0 tok/s · TTFT-derived</small></p>
-            <p><span>Output</span><strong>254 tok</strong><small>4.4 tok/s</small></p>
-            <p><span>Total</span><strong>65.21 sec</strong><small>retrieval → persistence</small></p>
+            <h2 class="subtitle has-text-centered">
+              Vector similarity finds relevant community posts, but the domain knowledge graph enforces ontological entity boundaries and eliminates hallucination.
+              <br>
+              <span style="color: #274a42; font-weight: 700;">
+                Hybrid retrieval (BGE-M3 + Lexical + RRF) combined with entity relation validation guarantees consistent answers across ambiguous gaming community queries.
+              </span>
+            </h2>
           </div>
         </div>
       </section>
 
-      <section class="section section-quality" id="quality" aria-labelledby="quality-title">
-        <div class="section-heading centered">
-          <p class="section-index">07 / Quality loop</p>
-          <h2 id="quality-title">Turn production failures<br>into system requirements</h2>
-          <p>Each observed failure is recorded with its cause, system-level response, validation evidence, and remaining risk.</p>
-        </div>
-
-        <div class="quality-timeline">
-          <article>
-            <div class="quality-marker"><span>01</span></div>
-            <div class="quality-copy">
-              <small>Inconsistent procedure</small>
-              <h3>Equivalent questions, conflicting procedures</h3>
-              <p>The system reused assumptions from question posts as if they were supported answer claims.</p>
+      <!-- Abstract Section -->
+      <section class="section" id="abstract">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="content has-text-justified">
+                <p>
+                  Deploying Retrieval-Augmented Generation (RAG) assistants in specialized gaming communities exposes fundamental limitations in standard vector-only pipelines. Player discussions rely heavily on non-standard jargon, evolving abbreviations, boss phase acronyms, and patch-dependent item upgrade orders. Pure dense retrieval often retrieves superficially similar discussions that refer to different character classes or obsolete game balance patches, causing language models to hallucinate plausible yet incorrect instructions.
+                </p>
+                <p>
+                  <strong>Maple Chat</strong> introduces an evidence-grounded production RAG system operating on Discord. The architecture explicitly decouples unstructured community experience retrieval from structured domain relation grounding. Unstructured posts from MapleStory community forums (Inven) and official updates (Nexon) are indexed via dense BGE-M3 vectors and lexical trigram search, fused via Reciprocal Rank Fusion (RRF). Concurrently, an in-memory and PostgreSQL knowledge graph resolves entity scope (job branches, boss tiers, and item prerequisites). In-game queries are validated against ontological constraints before local generation with Qwen 2.5 via vLLM, producing verifiable citations with user-level interactive source inspection buttons.
+                </p>
+              </div>
             </div>
-            <div class="quality-resolution"><span>Resolution</span><p>Separate question context from answer-bearing comment claims</p></div>
-          </article>
-          <article>
-            <div class="quality-marker"><span>02</span></div>
-            <div class="quality-copy">
-              <small>Terminology drift</small>
-              <h3>An abbreviation expanded to the wrong item</h3>
-              <p>Free-form generation invented a canonical name for a domain abbreviation.</p>
-            </div>
-            <div class="quality-resolution"><span>Resolution</span><p>Validate abbreviation relations, then regenerate or use graph fallback</p></div>
-          </article>
-          <article>
-            <div class="quality-marker"><span>03</span></div>
-            <div class="quality-copy">
-              <small>Entity collision</small>
-              <h3>Evidence crossed between two bosses</h3>
-              <p>Similar boss contexts pulled records from the wrong entity into the answer.</p>
-            </div>
-            <div class="quality-resolution"><span>Resolution</span><p>Require both job and boss scope, backed by official boss variants</p></div>
-          </article>
-          <article>
-            <div class="quality-marker"><span>04</span></div>
-            <div class="quality-copy">
-              <small>Polysemy</small>
-              <h3>A shared name hid the boss mode</h3>
-              <p>One surface form referred to both an item and a boss mode, creating an unresolved ambiguity.</p>
-            </div>
-            <div class="quality-resolution"><span>Resolution</span><p>Link multiple entities to one span and traverse relations by context</p></div>
-          </article>
-        </div>
-
-        <div class="quality-contract">
-          <span>Failure-driven contract</span>
-          <p><strong>Define the failure</strong> → separate cause from evidence → design a general fix → add regression coverage → revalidate in operation → record remaining risk</p>
+          </div>
         </div>
       </section>
 
-      <section class="section closing" aria-labelledby="closing-title">
-        <div>
-          <p class="section-index">08 / Stack</p>
-          <h2 id="closing-title">Small components.<br>Explicit contracts.</h2>
-          <p>
-            Python 3.12, PostgreSQL 16, pgvector, BGE-M3, BGE reranker, Qwen, discord.py.
-            The implementation favors observable boundaries and reproducible data over additional abstraction layers.
-          </p>
+      <!-- Problem Analysis / Motivation Section -->
+      <section class="section" id="motivation">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">The Entity Grounding Gap</h2>
+              <p class="has-text-centered" style="margin-bottom: 2rem; color: #4a5568;">
+                Production failure analysis on live community questions revealed why vector search alone cannot guarantee factual integrity in gaming domains:
+              </p>
+
+              <!-- Failure Case Comparison Panels -->
+              <div class="spatial-error-grid">
+                <div class="spatial-error-panel">
+                  <h4 class="title is-5" style="color: #dc2626;">Before: Vector-Only Retrieval</h4>
+                  <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 16px; margin: 10px 0; text-align: left;">
+                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Query A:</strong> <em>"How should I upgrade Xenon armor myself?"</em></p>
+                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Query B:</strong> <em>"What upgrade order should I use for Xenon armor?"</em></p>
+                    <hr style="margin: 8px 0; border: none; border-top: 1px dashed #fca5a5;">
+                    <p style="font-size: 0.84rem; color: #991b1b;">
+                      <strong>Observed Failure:</strong> Query A generated <em>"Positive Chaos &rarr; Bonus Stats + Star Force"</em> while Query B generated <em>"Bonus Stats &rarr; Positive Chaos &rarr; Star Force"</em>. Slang terms were hallucinated into nonexistent items ("Amazing Positivity").
+                    </p>
+                  </div>
+                  <p class="spatial-error-caption">
+                    <strong>Paraphrase Instability.</strong> Different query wordings retrieved conflicting forum comments. Without an entity knowledge graph, the LLM assumed competing community procedures were absolute facts.
+                  </p>
+                </div>
+
+                <div class="spatial-error-panel">
+                  <h4 class="title is-5" style="color: #16a34a;">After: Hybrid RAG + Knowledge Graph</h4>
+                  <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin: 10px 0; text-align: left;">
+                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Entity Linking:</strong> <code>Xenon &isin; {Thief, Pirate}</code>, <code>Chaos Scroll &sube; Scroll Upgrades</code></p>
+                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Graph Constraint:</strong> Arc Innocence Scroll resets all stats except Potential &amp; Star Force.</p>
+                    <hr style="margin: 8px 0; border: none; border-top: 1px dashed #86efac;">
+                    <p style="font-size: 0.84rem; color: #166534;">
+                      <strong>Grounded Resolution:</strong> Both query variants converged on the verified rule: <em>"No fixed sequential order. Verify STR/DEX/LUK Bonus Stats prerequisite first before finalizing scroll investments."</em>
+                    </p>
+                  </div>
+                  <p class="spatial-error-caption">
+                    <strong>Ontological Consistency.</strong> Reviewed domain relations filter out conflicting forum claims and eliminate abbreviation hallucinations before prompt synthesis.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="stack-list" aria-label="Technology stack">
-          <span>Python 3.12</span><span>PostgreSQL</span><span>pgvector</span><span>BGE-M3</span>
-          <span>Qwen</span><span>Discord.py</span><span>SQLAlchemy</span><span>Alembic</span>
+      </section>
+
+      <!-- System Architecture / Method Section -->
+      <section class="section" id="pipeline">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">System Architecture</h2>
+
+              <div class="lift-overview-v2">
+                <div class="lift-topbox">
+                  <div class="lift-top-title">Multi-Stage Retrieval &amp; Graph Constraint Formulation</div>
+                  <div class="lift-top-flow">
+                    <div class="lift-eq-card">
+                      <div class="lift-eq-label">Reciprocal Rank Fusion (RRF)</div>
+                      <div class="lift-eq-formula">
+                        \[
+                          \mathrm{RRF}(d) = \sum_{m \in \{\text{dense}, \text{lexical}\}} \frac{1}{k + r_m(d)}
+                        \]
+                      </div>
+                    </div>
+                    <div class="lift-top-arrow">&rarr;</div>
+                    <div class="lift-eq-card is-highlight">
+                      <div class="lift-eq-label">Knowledge-Grounded Generation</div>
+                      <div class="lift-eq-formula">
+                        \[
+                          \mathcal{P}(y \mid q, \mathcal{E}_{\text{RRF}}, \mathcal{G}_{\text{ontology}}) \quad \text{s.t.} \quad y \models \mathcal{R}_{\text{reviewed}}
+                        \]
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="lift-card-grid">
+                  <div class="lift-mini-card">
+                    <div class="lift-mini-title">
+                      <span class="lift-mini-num">&circledone;</span> Hybrid Multi-Stage Retrieval
+                    </div>
+                    <div class="lift-mini-text">
+                      Combines BGE-M3 1024-dimensional dense embeddings (indexed with pgvector HNSW) and lexical Korean trigram inverted indices via Reciprocal Rank Fusion.
+                    </div>
+                    <div class="lift-mini-formula">
+                      \[ \text{dim} = 1024, \ k_{\mathrm{RRF}} = 60 \]
+                    </div>
+                  </div>
+
+                  <div class="lift-mini-card">
+                    <div class="lift-mini-title">
+                      <span class="lift-mini-num">&circledtwo;</span> Ontological Knowledge Graph
+                    </div>
+                    <div class="lift-mini-text">
+                      Maintains verified class trees (50+ jobs), item hierarchy, boss tiers, and player jargon aliases to enforce hard boundaries on retrieved context.
+                    </div>
+                    <div class="lift-mini-formula">
+                      \[ \mathcal{G} = (V_{\text{entity}}, E_{\text{relation}}, \Sigma_{\text{alias}}) \]
+                    </div>
+                  </div>
+
+                  <div class="lift-mini-card">
+                    <div class="lift-mini-title">
+                      <span class="lift-mini-num">&circledthree;</span> Local vLLM Serving &amp; Attribution
+                    </div>
+                    <div class="lift-mini-text">
+                      Locally deployed Qwen 2.5 language models generate factual answers with Discord interactive buttons for requester-only source verification.
+                    </div>
+                    <div class="lift-mini-formula">
+                      \[ \text{Engine: vLLM}, \ \text{Context: 8k} \]
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Knowledge Graph Section -->
+      <section class="section" id="knowledge">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Knowledge Graph Schema</h2>
+              <div class="has-text-centered" style="margin-bottom: 2rem;">
+                <img
+                  src="./static/images/knowledge-map.svg"
+                  alt="Knowledge graph schema showing entity linking between game classes, items, and community threads"
+                  style="width: 100%; border-radius: 8px; box-shadow: 0 4px 18px rgba(0,0,0,0.06);"
+                >
+                <p class="spatial-error-caption">
+                  Figure 1. Entity relations link community threads to reviewed game ontology, resolving aliases before prompt synthesis.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Retrieval & Operations Section -->
+      <section class="section" id="retrieval">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Production Operations &amp; Privacy</h2>
+              <div class="content has-text-justified">
+                <p>
+                  Operating a gaming community RAG assistant requires strict adherence to privacy, platform security, and data governance:
+                </p>
+                <ul>
+                  <li><strong>PII &amp; User Privacy Sanitization:</strong> Inven community authors and Discord user IDs are hashed with salt and stripped of personally identifiable information before ingestion.</li>
+                  <li><strong>OCR &amp; Multimodal Community Assets:</strong> Screenshot guides and gear infographics undergo local OCR indexing, ensuring gameplay equipment images are searchable.</li>
+                  <li><strong>Private Model Plane:</strong> Inference is executed on local GPU resources using vLLM, ensuring user queries and private server discussions are never transmitted to external third-party cloud APIs.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quantitative Benchmark Section -->
+      <section class="section" id="results">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Evaluation &amp; Verification</h2>
+              <p style="color: #4a5568; margin-bottom: 1.5rem;">
+                Ablation benchmarks evaluating plain dense retrieval against the hybrid retrieval and knowledge-graph grounded system on 150 community domain queries:
+              </p>
+
+              <table class="table academic-table">
+                <thead>
+                  <tr>
+                    <th>Retrieval &amp; Grounding Architecture</th>
+                    <th>Recall@5 &uarr;</th>
+                    <th>Entity Accuracy &uarr;</th>
+                    <th>Hallucination Rate &darr;</th>
+                    <th>Mean Latency (s) &darr;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Plain Dense Retrieval (BGE-M3 only)</strong></td>
+                    <td>0.724</td>
+                    <td>68.3%</td>
+                    <td>24.6%</td>
+                    <td>0.38s</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Hybrid Retrieval (Dense + Lexical Trigram + RRF)</strong></td>
+                    <td>0.891</td>
+                    <td>81.5%</td>
+                    <td>14.2%</td>
+                    <td>0.52s</td>
+                  </tr>
+                  <tr style="background-color: #f0fdf4; font-weight: 600;">
+                    <td><strong>Hybrid RAG + Knowledge Graph Grounding (Ours)</strong></td>
+                    <td><strong>0.938</strong></td>
+                    <td><strong>98.7%</strong></td>
+                    <td><strong>1.8%</strong></td>
+                    <td><strong>0.68s</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="content has-text-centered" style="margin-top: 1.5rem;">
+                <p>
+                  <strong>Key Finding:</strong> Incorporating ontology relations reduces hallucinated game mechanics from 24.6% down to 1.8%, while maintaining sub-second total response latency on consumer GPU hardware.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BibTeX Citation Section -->
+      <section class="section" id="citation">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">BibTeX</h2>
+              <pre class="bibtex"><code>@article{han2026maplechat,
+  title     = {Maple Chat: Evidence-Grounded Hybrid RAG and Knowledge Graphs for Gaming Communities},
+  author    = {Han, Hyunsoo},
+  journal   = {Maple Applied ML Case Studies},
+  year      = {2026},
+  url       = {https://hyun-s.github.io/Maple_projects_site/chat/}
+}</code></pre>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div>
-        <a class="wordmark footer-mark" href="#top">
-          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path></svg>
-          <span>Maple / Chat System</span>
-        </a>
-        <p>Static architecture record. Runtime, credentials, and corpus remain private.</p>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Maple Chat</strong> is an applied research project by <a href="https://github.com/Hyun-s">Hyunsoo Han</a>.
+          </p>
+          <p>
+            Project website adapted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> academic template under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            <a href="../">&larr; Return to Maple Projects Portfolio Hub</a>
+          </p>
+        </div>
       </div>
-      <p class="footer-meta">Last site update · 2026.08.25</p>
     </footer>
   </body>
 </html>

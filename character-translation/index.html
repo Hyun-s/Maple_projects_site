@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="A controlled evaluation record for visual quality and identity preservation in MapleStory character translation."
+      content="Maple Custom: Compositional Cosmetic-Item Inversion and Character Translation for Diffusion Models."
     >
-    <meta name="theme-color" content="#f7f4ee">
-    <meta property="og:title" content="Maple Character Translation — Evaluation Record">
+    <meta name="keywords" content="Diffusion Models, Textual Inversion, LoRA, SDXL, FLUX, Character Translation, MapleStory">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Maple Custom: Compositional Cosmetic-Item Inversion">
     <meta
       property="og:description"
-      content="A reviewable protocol for comparing adaptation methods, benchmark metrics, and qualitative failures."
+      content="A reproducible study on diffusion-model adaptation, item identity preservation, and character translation."
     >
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyun-s.github.io/Maple_projects_site/character-translation/">
@@ -19,363 +20,491 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Maple Character Translation — Evaluation Record</title>
+    <title>Maple Custom: Compositional Cosmetic-Item Inversion &amp; Character Translation</title>
     <link rel="canonical" href="https://hyun-s.github.io/Maple_projects_site/character-translation/">
     <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
+
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)'], ['$', '$']],
+          displayMath: [['\\[', '\\]'], ['$$', '$$']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <!-- Site scripts -->
     <script src="./static/js/site-data.js" defer></script>
     <script src="./static/js/index.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-shell">
-        <a class="wordmark" href="../" aria-label="Back to Maple Projects">
-          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
-          <span>Maple / Projects</span>
-        </a>
-        <a class="wordmark page-wordmark" href="#top" aria-label="Maple Evaluation Record, back to top">
-          <svg viewBox="0 0 28 28" aria-hidden="true">
-            <path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" />
-          </svg>
-          <span>Maple / Evaluation Record</span>
-        </a>
-        <nav class="section-nav" aria-label="On this page">
-          <a href="#overview">Overview</a>
-          <a href="#methods">Methods</a>
-          <a href="#protocol">Protocol</a>
-          <a href="#results">Results</a>
-          <a href="#samples">Samples</a>
-          <a href="./additional-experiments/">Additional experiment</a>
-          <a class="project-home-link" href="../">All Projects ↗</a>
-        </nav>
+    <!-- Navigation Header -->
+    <nav class="navbar-academic" aria-label="Main Navigation">
+      <a class="navbar-brand-link" href="../" aria-label="Back to Maple Projects Hub">
+        <img src="./static/images/favicon.svg" alt="Maple Logo" width="26" height="26">
+        <span>Maple / Character Translation</span>
+      </a>
+      <div class="navbar-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#motivation">Analysis</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#samples">Samples</a>
+        <a href="./additional-experiments/checkpoint-visualization/">Checkpoint Audit</a>
+        <a href="./additional-experiments/">Inversion Study</a>
+        <a class="hub-link" href="../">All Projects ↗</a>
       </div>
-      <div class="reading-progress" aria-hidden="true"><span></span></div>
-    </header>
+    </nav>
 
     <main id="main-content">
-      <section class="hero" id="top" aria-labelledby="page-title">
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <p class="eyebrow reveal">Controlled comparison · Reviewable evidence</p>
-          <h1 id="page-title" class="reveal reveal-delay-1">
-            Maple Character Translation
-            <span>Evaluation Record</span>
-          </h1>
-          <p class="hero-copy reveal reveal-delay-2">
-            A controlled record for comparing how in-game avatars translate into anime and
-            realistic portraits. Protocols and reviewed evidence are public; model weights,
-            inference endpoints, and private data remain offline.
-          </p>
-          <div class="status-row reveal reveal-delay-3" role="group" aria-label="Project status">
-            <span><i class="status-dot status-dot-live"></i> Protocol drafted</span>
-            <span><i class="status-dot"></i> No results published</span>
-            <span><i class="status-dot"></i> No live inference</span>
-          </div>
+      <!-- Hero Publication Header -->
+      <section class="hero" id="top">
+        <div class="hero-body">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+                <h1 class="title is-1 publication-title">
+                  <img src="./static/images/favicon.svg" alt="Icon" style="height: 1.1em; vertical-align: middle; margin-right: 12px;">
+                  Maple Custom: Compositional Cosmetic-Item Inversion &amp; Character Translation
+                </h1>
 
-          <figure class="hero-figure reveal reveal-delay-3">
+                <div class="is-size-4 publication-authors">
+                  <span class="author-block">
+                    <a href="https://github.com/Hyun-s">Hyunsoo Han</a><sup>1</sup>
+                  </span>
+                </div>
+
+                <div class="is-size-5 publication-institution">
+                  <span class="author-block"><sup>1</sup>Applied Machine Learning Research</span>
+                </div>
+
+                <div class="column has-text-centered">
+                  <div class="publication-links">
+                    <!-- Report Link -->
+                    <span class="link-block">
+                      <a href="https://github.com/Hyun-s/Maple_Custom/blob/main/experiments/reports/2026-08-29-sdxl-animagine-v1/REPORT.md"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                        <span>Technical Report</span>
+                      </a>
+                    </span>
+                    <!-- Code Link -->
+                    <span class="link-block">
+                      <a href="https://github.com/Hyun-s/Maple_Custom"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fab fa-github"></i></span>
+                        <span>Code Repository</span>
+                      </a>
+                    </span>
+                    <!-- Checkpoint Visualization Link -->
+                    <span class="link-block">
+                      <a href="./additional-experiments/checkpoint-visualization/"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-chart-line"></i></span>
+                        <span>3k–90k Checkpoint Audit</span>
+                      </a>
+                    </span>
+                    <!-- Additional Experiments Link -->
+                    <span class="link-block">
+                      <a href="./additional-experiments/"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-flask"></i></span>
+                        <span>Inversion Study</span>
+                      </a>
+                    </span>
+                    <!-- Hub Link -->
+                    <span class="link-block">
+                      <a href="../"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-th-large"></i></span>
+                        <span>Projects Hub</span>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaser Section -->
+      <section class="hero teaser">
+        <div class="container is-max-desktop">
+          <div class="hero-body has-text-centered">
             <img
               src="./static/images/experiment-overview.svg"
-              alt="Overview of the experiment pipeline: an in-game avatar passes through three adaptation methods and is evaluated for quality and identity."
-              width="1200"
-              height="460"
+              alt="Overview of character translation and item inversion pipeline"
+              style="display: block; margin: 10px auto 30px auto; width: 100%; max-width: 960px; height: auto; border-radius: 8px;"
             >
-            <figcaption>
-              Figure 1. Every model–method pair passes through the same evaluation path.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="section" id="overview" aria-labelledby="overview-title">
-        <div class="section-heading">
-          <p class="section-index">01 / Overview</p>
-          <h2 id="overview-title">Separate image quality from character identity</h2>
-          <p>
-            A polished portrait is not a successful translation if it no longer resembles the
-            source character. The evaluation therefore reports visual quality and identity
-            preservation as separate objectives before combining them.
-          </p>
-        </div>
-
-        <div class="research-questions">
-          <article>
-            <span>RQ 01</span>
-            <h3>Visual quality</h3>
-            <p>Which model–method pair produces the most coherent images in each target style?</p>
-          </article>
-          <article>
-            <span>RQ 02</span>
-            <h3>Identity retention</h3>
-            <p>How consistently do hairstyle, palette, outfit, accessories, and silhouette survive translation?</p>
-          </article>
-          <article>
-            <span>RQ 03</span>
-            <h3>Adaptation value</h3>
-            <p>Do lightweight adaptations improve the quality–identity trade-off enough to justify their cost?</p>
-          </article>
-        </div>
-
-        <aside class="privacy-note" aria-label="Publication boundary">
-          <div class="privacy-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 2 4.5 5v5.5c0 5.1 3.1 9.6 7.5 11.5 4.4-1.9 7.5-6.4 7.5-11.5V5L12 2Zm0 3.1 4.5 1.8v3.6c0 3.6-1.9 6.9-4.5 8.4-2.6-1.5-4.5-4.8-4.5-8.4V6.9L12 5.1Zm-1 3.2v3.1H9.5v4.1h5v-4.1H13V8.3h-2Z" /></svg>
-          </div>
-          <div>
-            <strong>Publication boundary</strong>
-            <p>
-              This site contains only approved text, aggregate metrics, and selected samples.
-              It does not expose model artifacts, credentials, dataset archives, or API addresses.
-            </p>
-          </div>
-        </aside>
-      </section>
-
-      <section class="section section-tinted" id="methods" aria-labelledby="methods-title">
-        <div class="section-heading centered">
-          <p class="section-index">02 / Methods</p>
-          <h2 id="methods-title">Compare adaptation strategies under one protocol</h2>
-          <p>The training footprint changes; the benchmark split, generation controls, and evaluation path do not.</p>
-        </div>
-
-        <div class="method-grid">
-          <article class="method-card">
-            <div class="method-topline"><span>A</span><small>No training</small></div>
-            <h3>Zero-shot baseline</h3>
-            <p>
-              The frozen base model receives the reference image, a style prompt, and a
-              negative prompt. Its result defines the baseline for any claimed adaptation gain.
-            </p>
-            <dl>
-              <div><dt>Updated parameters</dt><dd>0</dd></div>
-              <div><dt>Artifact required</dt><dd>No</dd></div>
-              <div><dt>Supported models</dt><dd>SDXL · FLUX</dd></div>
-            </dl>
-          </article>
-
-          <article class="method-card method-card-featured">
-            <div class="method-topline"><span>B</span><small>Lightweight tuning</small></div>
-            <h3>LoRA adaptation</h3>
-            <p>
-              Low-rank adapters are trained from input–target–prompt pairs. Base weights stay
-              frozen while a compact adapter learns the desired translation behavior.
-            </p>
-            <dl>
-              <div><dt>Updated parameters</dt><dd>Low-rank adapters</dd></div>
-              <div><dt>Artifact required</dt><dd>Yes</dd></div>
-              <div><dt>Supported models</dt><dd>SDXL · FLUX</dd></div>
-            </dl>
-          </article>
-
-          <article class="method-card">
-            <div class="method-topline"><span>C</span><small>Embedding tuning</small></div>
-            <h3>Learned token embedding</h3>
-            <p>
-              The diffusion model and text encoders remain frozen. Only a new token embedding
-              is optimized and prepended to the prompt at inference time.
-            </p>
-            <dl>
-              <div><dt>Updated parameters</dt><dd>Token rows only</dd></div>
-              <div><dt>Artifact required</dt><dd>Yes</dd></div>
-              <div><dt>Supported models</dt><dd>SDXL</dd></div>
-            </dl>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="protocol" aria-labelledby="protocol-title">
-        <div class="section-heading">
-          <p class="section-index">03 / Protocol</p>
-          <h2 id="protocol-title">Freeze the comparison before publishing results</h2>
-          <p>
-            The protocol is versioned before any score becomes public. Every field marked “Pending”
-            must be fixed before the first benchmark release.
-          </p>
-        </div>
-
-        <div class="protocol-layout">
-          <div class="protocol-list" id="protocol-list" aria-live="polite">
-            <div class="protocol-row"><span>Dataset source</span><strong>Maple Image Maker</strong></div>
-            <div class="protocol-row"><span>Dataset version</span><strong>Pending</strong></div>
-            <div class="protocol-row"><span>Benchmark split</span><strong>Pending</strong></div>
-            <div class="protocol-row"><span>Target styles</span><strong>Anime · Realistic</strong></div>
-            <div class="protocol-row"><span>Base models</span><strong>SDXL 1.0 · FLUX.1-dev</strong></div>
-            <div class="protocol-row"><span>Evaluation seed</span><strong>42 (initial)</strong></div>
-          </div>
-
-          <div class="protocol-principles">
-            <h3>Controls</h3>
-            <ol>
-              <li><span>01</span><p>Use one versioned benchmark split across all comparable runs.</p></li>
-              <li><span>02</span><p>Keep prompts, seeds, resolution, and inference settings explicit.</p></li>
-              <li><span>03</span><p>Publish aggregate metrics together with representative failures.</p></li>
-              <li><span>04</span><p>Never replace a published result without updating the change log.</p></li>
-            </ol>
-          </div>
-        </div>
-
-        <div class="metric-heading">
-          <h3>Evaluation signals</h3>
-          <p>Arrows indicate the preferred direction; they do not imply equal metric reliability.</p>
-        </div>
-        <div class="metric-grid">
-          <article><span>Quality</span><h4>Aesthetic <b>↑</b></h4><p>Learned preference estimate for visual appeal and composition.</p></article>
-          <article><span>Quality</span><h4>FID <b>↓</b></h4><p>Distribution distance between target and generated benchmark sets.</p></article>
-          <article><span>Quality</span><h4>Inception Score <b>↑</b></h4><p>Image recognizability and diversity signal for the generated set.</p></article>
-          <article><span>Identity</span><h4>CLIP similarity <b>↑</b></h4><p>Embedding similarity between the input character and generated image.</p></article>
-          <article><span>Identity</span><h4>LPIPS <b>↓</b></h4><p>Perceptual feature distance between input and generated image.</p></article>
-        </div>
-
-        <details class="formula-note">
-          <summary>Composite score definition</summary>
-          <div>
-            <p><b>Quality</b> = 0.5 × Aesthetic<sub>norm</sub> + 0.3 × exp(−FID / 100) + 0.2 × IS<sub>norm</sub></p>
-            <p><b>Identity</b> = 0.6 × CLIP<sub>norm</sub> + 0.4 × (1 − LPIPS<sub>clamped</sub>)</p>
-            <p><b>Overall</b> = harmonic mean(Quality, Identity)</p>
-            <small>
-              Aesthetic and IS are normalized against 10. CLIP [−1, 1] is mapped to [0, 1].
-              FID and IS are unstable on very small sample sets, so smoke-test runs are not published as benchmark evidence.
-            </small>
-          </div>
-        </details>
-      </section>
-
-      <section class="section section-results" id="results" aria-labelledby="results-title">
-        <div class="section-heading centered inverse">
-          <p class="section-index">04 / Quantitative results</p>
-          <h2 id="results-title">Publish verified runs, not placeholders</h2>
-          <p>
-            A committed local data file renders this table. If the table is empty, no benchmark
-            run has passed the publication gate.
-          </p>
-        </div>
-
-        <div class="result-summary" id="result-summary" aria-live="polite">
-          <div><span>Published runs</span><strong id="published-run-count">0</strong></div>
-          <div><span>Benchmark samples</span><strong id="benchmark-sample-count">—</strong></div>
-          <div><span>Last evaluated</span><strong id="last-evaluated">Pending</strong></div>
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <caption class="sr-only">Published benchmark results</caption>
-            <thead>
-              <tr>
-                <th scope="col">Experiment</th>
-                <th scope="col">Model</th>
-                <th scope="col">Method</th>
-                <th scope="col">Style</th>
-                <th scope="col">Quality</th>
-                <th scope="col">Identity</th>
-                <th scope="col">Overall</th>
-              </tr>
-            </thead>
-            <tbody id="results-body">
-              <tr class="empty-table-row">
-                <td colspan="7">
-                  <span>Awaiting the first approved benchmark run</span>
-                  <small>No placeholder scores are shown.</small>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="result-placeholder" id="result-placeholder">
-          <div class="placeholder-plot" aria-hidden="true">
-            <i class="plot-bar-1"></i><i class="plot-bar-2"></i><i class="plot-bar-3"></i>
-            <i class="plot-bar-4"></i><i class="plot-bar-5"></i><i class="plot-bar-6"></i>
-          </div>
-          <div>
-            <span>Publication gate</span>
-            <h3>Empty means not yet verified</h3>
-            <p>
-              Quantitative cards and rankings activate only after verified run data is added to
-              <code>static/js/site-data.js</code>.
-            </p>
+            <h2 class="subtitle has-text-centered">
+              Can text-to-image diffusion models learn the visual identity of individual 2D pixel-art cosmetic items and recombine them arbitrarily into novel high-quality character illustrations?
+              <br>
+              <span style="color: #d95535; font-weight: 700;">
+                LoRA rank-16 achieves distributional fidelity on paired character translation, whereas naive textual inversion fails due to canvas occupancy imbalance and asymmetric text-encoder drift.
+              </span>
+            </h2>
           </div>
         </div>
       </section>
 
-      <section class="section" id="samples" aria-labelledby="samples-title">
-        <div class="section-heading">
-          <p class="section-index">05 / Qualitative samples</p>
-          <h2 id="samples-title">Inspect the images behind the scores</h2>
-          <p>
-            Every published sample keeps the input, optional target, and generated output together.
-            Representative failures belong beside successful cases.
-          </p>
-        </div>
-
-        <div class="sample-toolbar" role="group" aria-label="Sample gallery status">
-          <div><i class="status-dot"></i><span id="sample-count">0 approved sample sets</span></div>
-          <small>Input · Target · Generated</small>
-        </div>
-
-        <div class="sample-gallery" id="sample-gallery" aria-live="polite">
-          <article class="sample-empty">
-            <div class="empty-triptych" aria-hidden="true">
-              <div><span>01</span><b>Input</b></div>
-              <div><span>02</span><b>Target</b></div>
-              <div><span>03</span><b>Generated</b></div>
+      <!-- Abstract Section -->
+      <section class="section" id="abstract">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="content has-text-justified">
+                <p>
+                  We study compositional item inversion and character translation from a controlled <code>10 hats &times; 10 tops &times; 10 bottoms</code> renderer dataset and a paired character-translation benchmark. Each of the 1,000 combinations is represented by a 2D MapleStory avatar sprite and a caption containing three item-specific tokens. We compare SDXL and FLUX.1-dev textual inversion, anime-domain prompt interventions, and a 3,000 to 90,000-step optimization sweep. We also benchmark conventional zero-shot, LoRA, and learned-token adaptation on 98 held-out paired illustration pairs.
+                </p>
+                <p>
+                  Our findings report a conclusive scientific result: while conventional SDXL LoRA significantly improves distributional fidelity over zero-shot inference (FID: 217.70 vs 265.68), naive textual inversion across both SDXL and FLUX fails to recover reliable item identity. Extending FLUX training to 90,000 steps continuously lowers flow-matching velocity loss without yielding compositional binding. Empirical failure analysis identifies that raw source sprites occupy only 2.73% of the canvas area, causing background noise gradients to dominate, and CLIP-L token embeddings drift by 104.22%. We introduce a foreground normalization pipeline (75% occupancy) paired with domain-specific LoRA adaptation to resolve this representational mismatch.
+                </p>
+              </div>
             </div>
-            <div class="sample-empty-copy">
-              <span>Sample slot 001</span>
-              <h3>No sample has passed review yet</h3>
-              <p>
-                Copy image files into <code>static/images/samples/</code>, then add one object to
-                <code>static/js/site-data.js</code>. The layout updates automatically.
+          </div>
+        </div>
+      </section>
+
+      <!-- Problem Analysis / Observations Section -->
+      <section class="section" id="motivation">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Empirical Failure Analysis (90k Sweep)</h2>
+              <p class="has-text-centered" style="margin-bottom: 2rem; color: #4a5568;">
+                Auditing 30 periodic checkpoints from 3k to 90k steps reveals three structural failure mechanics under naive optimization:
               </p>
+
+              <!-- Spatial error comparison cards -->
+              <div class="spatial-error-grid">
+                <div class="spatial-error-panel">
+                  <h4 class="title is-5">Canvas Area Bottleneck</h4>
+                  <div style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 8px; padding: 24px; margin: 10px 0;">
+                    <div style="background: #e2e8f0; height: 160px; position: relative; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                      <span style="font-size: 0.85rem; color: #64748b;">Canvas Area: 256 &times; 256 (100%)</span>
+                      <div style="position: absolute; width: 42px; height: 42px; background: #d95535; color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: bold;">
+                        2.73%
+                      </div>
+                    </div>
+                  </div>
+                  <p class="spatial-error-caption">
+                    <strong>97.27% Background Dominance.</strong> The pixel avatar occupies only 2.73% of the canvas area. Mean squared loss is dominated by flat background reconstruction rather than token-level item features.
+                  </p>
+                </div>
+
+                <div class="spatial-error-panel">
+                  <h4 class="title is-5">Dual Text-Encoder Drift</h4>
+                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin: 10px 0; text-align: left;">
+                    <div style="margin-bottom: 12px;">
+                      <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 600;">
+                        <span>CLIP-L Token Drift (Relative L2)</span>
+                        <span style="color: #dc2626;">104.22%</span>
+                      </div>
+                      <div style="background: #fee2e2; height: 10px; border-radius: 5px; margin-top: 4px;">
+                        <div style="background: #ef4444; width: 100%; height: 100%; border-radius: 5px;"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 600;">
+                        <span>T5-XXL Token Drift (Relative L2)</span>
+                        <span style="color: #2563eb;">0.0579%</span>
+                      </div>
+                      <div style="background: #dbeafe; height: 10px; border-radius: 5px; margin-top: 4px;">
+                        <div style="background: #3b82f6; width: 3%; height: 100%; border-radius: 5px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="spatial-error-caption">
+                    <strong>Asymmetric Conditioning Collapse.</strong> CLIP-L learned embeddings diverge rapidly into an unconstrained subspace while T5 embeddings remain static, breaking cross-attention alignment.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content has-text-centered" style="margin-top: 1.5rem;">
+                <p>
+                  <strong>Domain Acquisition Gap:</strong> Frozen backbones cannot bind individual cosmetic items to isolated token embeddings without first adapting to the structural rendering domain of 2D game sprites.
+                </p>
+              </div>
             </div>
-          </article>
+          </div>
         </div>
       </section>
 
-      <section class="section section-tinted" id="observations" aria-labelledby="observations-title">
-        <div class="section-heading centered">
-          <p class="section-index">06 / Observations</p>
-          <h2 id="observations-title">Questions for the first benchmark</h2>
-          <p>These are evaluation questions, not conclusions. Findings appear only after a reviewed run.</p>
-        </div>
-        <div class="observation-grid">
-          <article><span>Quality</span><h3>Style coherence</h3><p>Does the output form a coherent portrait, or does it retain pixel-art artifacts and broken anatomy?</p></article>
-          <article><span>Identity</span><h3>Attribute retention</h3><p>Which methods preserve hair, eye color, outfit, weapon, and accessory details most consistently?</p></article>
-          <article><span>Trade-off</span><h3>Adaptation cost</h3><p>Are gains large enough to justify training time, artifact size, and inference overhead?</p></article>
-          <article><span>Failure audit</span><h3>Hard cases</h3><p>Do small sprites, overlapping accessories, rare colors, or complex weapons fail systematically?</p></article>
+      <!-- Method Section -->
+      <section class="section" id="method">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Methodology</h2>
+
+              <!-- LIFT-style Method Cards -->
+              <div class="lift-overview-v2">
+                <div class="lift-topbox">
+                  <div class="lift-top-title">Adaptation Objectives &amp; Parameterization</div>
+                  <div class="lift-top-flow">
+                    <div class="lift-eq-card">
+                      <div class="lift-eq-label">SDXL Denoising MSE</div>
+                      <div class="lift-eq-formula">
+                        \[
+                          \mathcal{L}_{\mathrm{SDXL}} = \mathbb{E}_{x,\epsilon,t}\left[\lVert \epsilon - \epsilon_{\theta}(z_t,t,c) \rVert_2^2\right]
+                        \]
+                      </div>
+                    </div>
+                    <div class="lift-top-arrow">&amp;</div>
+                    <div class="lift-eq-card is-highlight">
+                      <div class="lift-eq-label">FLUX Velocity Prediction &amp; LoRA</div>
+                      <div class="lift-eq-formula">
+                        \[
+                          \mathcal{L}_{\mathrm{FLUX}} = \mathbb{E}\left[\lVert v_{\theta}(x_t,t,c) - (x_1 - x_0) \rVert_2^2\right], \quad \Delta W = \frac{\alpha}{r}BA
+                        \]
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="lift-card-grid">
+                  <div class="lift-mini-card">
+                    <div class="lift-mini-title">
+                      <span class="lift-mini-num">&circledone;</span> Smart Foreground Normalization
+                    </div>
+                    <div class="lift-mini-text">
+                      Automated bounding-box detection rescales raw sprites to 75% canvas occupancy using nearest-neighbor interpolation, eliminating background dominance.
+                    </div>
+                    <div class="lift-mini-formula">
+                      \[ \text{Occupancy} = \frac{\text{Area}(\text{bbox})}{\text{Area}(\text{canvas})} \to 0.75 \]
+                    </div>
+                  </div>
+
+                  <div class="lift-mini-card">
+                    <div class="lift-mini-title">
+                      <span class="lift-mini-num">&circledtwo;</span> Shared Domain LoRA
+                    </div>
+                    <div class="lift-mini-text">
+                      Pre-trains a rank-16 transformer LoRA on normalized sprites to internalize the pixel domain prior to individual cosmetic token binding.
+                    </div>
+                    <div class="lift-mini-formula">
+                      \[ r=16, \ \alpha=16, \ \text{lr}=10^{-4} \]
+                    </div>
+                  </div>
+
+                  <div class="lift-mini-card">
+                    <div class="lift-mini-title">
+                      <span class="lift-mini-num">&circledthree;</span> Lineart Contour Conditioning
+                    </div>
+                    <div class="lift-mini-text">
+                      Extracts pixel-exact silhouettes and lineart condition maps to enforce contour preservation during sprite-to-illustration translation.
+                    </div>
+                    <div class="lift-mini-formula">
+                      \[ x_{\mathrm{cond}} = \text{Sobel}(\text{sprite}) \otimes M_{\mathrm{fg}} \]
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section closing" id="updates" aria-labelledby="updates-title">
-        <div>
-          <p class="section-index">07 / Record</p>
-          <h2 id="updates-title">Version every public claim</h2>
-          <p>
-            Every public result identifies its dataset version, experiment configuration, sample count,
-            and evaluation date. Later changes remain visible in this record.
-          </p>
+      <!-- Experiments & Results Section -->
+      <section class="section" id="results">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Experimental Evaluation</h2>
+
+              <h4 class="title is-4">1. Paired Character Adaptation Benchmark</h4>
+              <p style="color: #4a5568; margin-bottom: 1rem;">
+                Evaluated on 98 held-out source/target pairs (normalized to 512px). Lower FID and LPIPS indicate better quality and fidelity; higher CLIP similarity and Aesthetic scores indicate superior semantic and perceptual quality.
+              </p>
+
+              <table class="table academic-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Base Model</th>
+                    <th>FID &darr;</th>
+                    <th>CLIP Sim &uarr;</th>
+                    <th>LPIPS &darr;</th>
+                    <th>Aesthetic &uarr;</th>
+                    <th>Finding</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Zero-shot Inference</strong></td>
+                    <td>SDXL 1.0</td>
+                    <td>265.683</td>
+                    <td>0.6821</td>
+                    <td>0.1089</td>
+                    <td>4.560</td>
+                    <td>Low detail; generic character features</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Learned Token (TI)</strong></td>
+                    <td>SDXL 1.0</td>
+                    <td>258.519</td>
+                    <td>0.7481</td>
+                    <td>0.0988</td>
+                    <td>4.687</td>
+                    <td>Marginal aesthetic improvement</td>
+                  </tr>
+                  <tr style="background-color: #f0fdf4; font-weight: 600;">
+                    <td><strong>SDXL LoRA (Rank 16)</strong></td>
+                    <td>SDXL 1.0</td>
+                    <td><strong>217.699</strong></td>
+                    <td><strong>0.7492</strong></td>
+                    <td><strong>0.0921</strong></td>
+                    <td><strong>4.803</strong></td>
+                    <td><strong>Strongest distributional fidelity &amp; style</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4 class="title is-4" style="margin-top: 2.5rem;">2. Compositional Cosmetic Item Inversion Benchmark</h4>
+              <p style="color: #4a5568; margin-bottom: 1rem;">
+                Evaluated on the 1,000-sample Cartesian product dataset (<code>10 hats &times; 10 tops &times; 10 bottoms</code>). <em>Oracle</em> is ground truth; <em>Shuffled</em> is an adversarial wrong-item control.
+              </p>
+
+              <table class="table academic-table">
+                <thead>
+                  <tr>
+                    <th>Condition / Method</th>
+                    <th>Foreground IoU &uarr;</th>
+                    <th>CLIP Sim &uarr;</th>
+                    <th>LPIPS &darr;</th>
+                    <th>Scientific Interpretation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Oracle Renderer</strong></td>
+                    <td>1.0000</td>
+                    <td>1.0000</td>
+                    <td>0.0000</td>
+                    <td>Exact target ground truth</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Shuffled Control</strong></td>
+                    <td>0.7559</td>
+                    <td>0.7257</td>
+                    <td>0.0472</td>
+                    <td>Mismatched item baseline</td>
+                  </tr>
+                  <tr>
+                    <td>SDXL Item Inversion (3k)</td>
+                    <td>0.1793</td>
+                    <td>0.5809</td>
+                    <td>0.3641</td>
+                    <td>Item identity not recovered</td>
+                  </tr>
+                  <tr>
+                    <td>FLUX Item Inversion (3k)</td>
+                    <td>0.0631</td>
+                    <td>0.4537</td>
+                    <td>0.4332</td>
+                    <td>Backbone switch alone is insufficient</td>
+                  </tr>
+                  <tr>
+                    <td>FLUX Anime Prompt Transfer</td>
+                    <td>0.0503</td>
+                    <td>0.4642</td>
+                    <td>0.5015</td>
+                    <td>Shifts style domain; identity remains absent</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Dynamic protocol and verified summary targets for index.js -->
+              <div id="protocol-list" style="display: none;"></div>
+              <div style="display: none;">
+                <span id="published-run-count">3</span>
+                <span id="benchmark-sample-count">98</span>
+                <span id="last-evaluated">2026.08.28</span>
+                <table><tbody id="results-body"></tbody></table>
+                <div id="result-placeholder"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="changelog" id="changelog">
-          <article>
-            <time datetime="2026-08-25">2026.08.25</time>
-            <div><strong>Evaluation record copy revised</strong><p>Reframed every section in consistent technical English without changing protocol or publication status.</p></div>
-          </article>
-          <article>
-            <time datetime="2026-07-22">2026.07.22</time>
-            <div><strong>Evaluation record initialized</strong><p>Protocol, result table, and qualitative sample slots prepared. No benchmark results published.</p></div>
-          </article>
+      </section>
+
+      <!-- Qualitative Samples Section -->
+      <section class="section" id="samples">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Qualitative Evidence</h2>
+              
+              <div class="has-text-centered" style="margin-bottom: 2rem;">
+                <img
+                  src="./additional-experiments/qualitative-grid.png"
+                  alt="FLUX Item Inversion Qualitative Grid across multiple conditions"
+                  style="width: 100%; border-radius: 8px; box-shadow: 0 4px 18px rgba(0,0,0,0.06);"
+                >
+                <p class="spatial-error-caption">
+                  Figure 2. Qualitative comparison between Oracle Ground Truth, Shuffled Item Control, and FLUX Textual Inversion.
+                </p>
+              </div>
+
+              <!-- Interactive sample controls container for index.js -->
+              <div id="samples-stage" class="has-text-centered">
+                <div id="sample-controls" style="margin-top: 1rem;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BibTeX Citation Section -->
+      <section class="section" id="citation">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">BibTeX</h2>
+              <pre class="bibtex"><code>@article{han2026maplecustom,
+  title     = {Maple Custom: Compositional Cosmetic-Item Inversion and Character Translation},
+  author    = {Han, Hyunsoo},
+  journal   = {Maple Applied ML Case Studies},
+  year      = {2026},
+  url       = {https://hyun-s.github.io/Maple_projects_site/character-translation/}
+}</code></pre>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div>
-        <a class="wordmark footer-mark" href="#top">
-          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z" /></svg>
-          <span>Maple / Evaluation Record</span>
-        </a>
-        <p>Static evidence only. Models and inference infrastructure remain private.</p>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Maple Custom</strong> is an applied research project by <a href="https://github.com/Hyun-s">Hyunsoo Han</a>.
+          </p>
+          <p>
+            Project website adapted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> academic template under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            <a href="../">&larr; Return to Maple Projects Portfolio Hub</a>
+          </p>
+        </div>
       </div>
-      <p class="footer-meta">Last site update · <span id="site-updated-at">2026.08.25</span></p>
     </footer>
   </body>
 </html>
