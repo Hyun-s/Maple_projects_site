@@ -8,6 +8,7 @@ const htmlFiles = [
   "index.html",
   "character-translation/index.html",
   "character-translation/additional-experiments/index.html",
+  "character-translation/additional-experiments/checkpoint-visualization/index.html",
   "chat/index.html",
 ];
 const scriptFiles = [
