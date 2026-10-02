@@ -1,204 +1,507 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Two applied machine-learning case studies: character image translation and evidence-grounded RAG."
+      content="Maple Research Suite: Applied Generative Synthesis and Evidence-Grounded Knowledge Systems. Technical records, architectures, and evaluations for Character Translation and Maple Chat."
     >
-    <meta name="theme-color" content="#f7f4ed">
-    <meta property="og:title" content="Maple Projects — Applied ML case studies">
+    <meta name="keywords" content="Diffusion Models, Textual Inversion, Generative Vision, RAG, Knowledge Graph, MapleStory, Applied ML">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Maple Projects: Applied Generative Synthesis &amp; Evidence-Grounded Systems">
     <meta
       property="og:description"
-      content="Architecture, evaluation, and operating boundaries for Maple Character Translation and Maple Chat."
+      content="A unified academic portfolio covering identity-preserving character translation and multi-source evidence-grounded RAG."
     >
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyun-s.github.io/Maple_projects_site/">
-    <meta property="og:image" content="https://hyun-s.github.io/Maple_projects_site/static/images/social-preview.svg">
+    <meta property="og:image" content="./static/images/social-preview.svg">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Maple Projects — Applied ML case studies</title>
+    <title>Maple Projects — Applied Generative Synthesis &amp; Grounded Knowledge Systems</title>
     <link rel="canonical" href="https://hyun-s.github.io/Maple_projects_site/">
     <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
     <script src="./static/js/index.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Maple Projects, back to top">
-        <svg viewBox="0 0 28 28" aria-hidden="true">
-          <path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path>
-        </svg>
-        <span>Maple / Projects</span>
+    <!-- Sticky Academic Navbar -->
+    <nav class="navbar-academic" aria-label="Main Navigation">
+      <a class="navbar-brand-link" href="#top">
+        <img src="./static/images/favicon.svg" alt="Maple Logo" width="28" height="28">
+        <span>Maple Projects</span>
       </a>
-      <nav aria-label="Project navigation">
-        <a href="#projects">Projects</a>
-        <a href="#principles">Principles</a>
-        <a href="./character-translation/">Translation</a>
-        <a href="./character-translation/additional-experiments/">Experiments</a>
-        <a href="./chat/">Chat</a>
-      </nav>
-      <div class="reading-progress" aria-hidden="true"><span></span></div>
-    </header>
+      <div class="navbar-links">
+        <a href="#overview">Overview</a>
+        <a href="#systems">Core Systems</a>
+        <a href="#comparison">Comparison</a>
+        <a href="#principles">Methodology</a>
+        <a href="./character-translation/">Translation ↗</a>
+        <a href="./chat/">Chat ↗</a>
+      </div>
+    </nav>
 
     <main id="main-content">
-      <section class="hero" id="top" aria-labelledby="page-title">
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="orbit orbit-one" aria-hidden="true"></div>
-        <div class="orbit orbit-two" aria-hidden="true"></div>
-        <div class="hero-copy">
-          <p class="eyebrow reveal">Applied ML systems · Selected work</p>
-          <h1 id="page-title" class="reveal delay-1">
-            Two systems.
-            <span>Documented</span>
-            end to end.
-          </h1>
-          <p class="lede reveal delay-2">
-            A portfolio of two MapleStory-related machine-learning systems: an experiment framework
-            for character translation and an evidence-grounded RAG assistant. Each case study records
-            the architecture, evaluation boundary, operating constraints, and unresolved risks.
-          </p>
-          <div class="hero-actions reveal delay-3">
-            <a class="button button-primary" href="#projects">View the projects</a>
-            <a class="button button-secondary" href="#principles">Review the standards</a>
-          </div>
-        </div>
-        <div class="hero-map reveal delay-2" role="img" aria-label="A map connecting the character translation and evidence-grounded RAG case studies">
-          <div class="map-core">
-            <span>CASE STUDIES</span>
-            <strong>01 + 02</strong>
-          </div>
-          <div class="map-card map-card-vision">
-            <small>01 / Vision</small>
-            <strong>Character<br>Translation</strong>
-            <span>pixel → portrait</span>
-          </div>
-          <div class="map-card map-card-knowledge">
-            <small>02 / Knowledge</small>
-            <strong>Grounded<br>RAG</strong>
-            <span>question → evidence</span>
-          </div>
-          <svg viewBox="0 0 560 440" aria-hidden="true">
-            <path d="M280 220C215 220 201 117 123 104"></path>
-            <path d="M280 220c65 0 79 103 157 116"></path>
-            <circle cx="123" cy="104" r="5"></circle>
-            <circle cx="437" cy="336" r="5"></circle>
-          </svg>
-        </div>
-      </section>
+      <!-- Publication Header -->
+      <section class="hero publication-hero" id="top">
+        <div class="hero-body">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+                <span class="tag is-info is-light is-medium mb-3" style="font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">
+                  Applied Machine Learning Research · Project Portfolio
+                </span>
+                <h1 class="title is-1 publication-title">
+                  Maple Research: Applied Generative Synthesis &amp; Grounded Knowledge Systems
+                </h1>
+                <p class="subtitle is-5 has-text-grey publication-subtitle">
+                  A Unified Technical Portfolio of Character Identity Inversion and Multi-Source Evidence-Grounded Retrieval
+                </p>
 
-      <section class="intro" aria-label="Portfolio disciplines">
-        <p>Generative vision</p>
-        <p>Information retrieval</p>
-        <p>Knowledge graphs</p>
-        <p>Evaluation &amp; operations</p>
-      </section>
+                <div class="is-size-5 publication-authors">
+                  <span class="author-block">
+                    <a href="https://github.com/Hyun-s">Hyunsoo Han</a><sup>1</sup>
+                  </span>
+                </div>
 
-      <section class="projects" id="projects" aria-labelledby="projects-title">
-        <div class="section-heading">
-          <p class="section-index">01 / Selected work</p>
-          <h2 id="projects-title">Two systems,<br>one standard of evidence</h2>
-          <p>Each project solves a different problem, but both make assumptions, validation status, and disclosure boundaries explicit.</p>
-        </div>
+                <div class="is-size-6 publication-institution mb-4">
+                  <span class="author-block"><sup>1</sup>Applied Machine Learning Research</span>
+                </div>
 
-        <article class="project project-vision">
-          <a class="project-link" href="./character-translation/" aria-label="Open the Maple Character Translation case study">
-            <div class="project-visual visual-translation" aria-hidden="true">
-              <div class="pixel-card">
-                <span></span><span></span><span></span><span></span><span></span><span></span>
-                <b>INPUT</b>
+                <!-- LIFT Style Dark Action Buttons -->
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a href="./character-translation/" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-wand-magic-sparkles"></i></span>
+                      <span>Character Translation</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="./character-translation/additional-experiments/" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-flask"></i></span>
+                      <span>Inversion Experiments</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="./character-translation/additional-experiments/checkpoint-visualization/" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-layer-group"></i></span>
+                      <span>30-Step Audit</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="./chat/" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-comments"></i></span>
+                      <span>Maple Chat RAG</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="https://github.com/Hyun-s/Maple_Custom" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>Code Repository</span>
+                    </a>
+                  </span>
+                </div>
               </div>
-              <div class="flow-line"><i></i><i></i><i></i></div>
-              <div class="portrait-card"><i></i><b>OUTPUT</b></div>
             </div>
-            <div class="project-copy">
-              <div class="project-meta"><span>Evaluation record</span><span>Protocol drafted</span></div>
-              <h3>Maple Character<br>Translation</h3>
-              <p>
-                An experiment framework for measuring visual quality and identity preservation when
-                translating game avatars into anime and realistic portraits.
-              </p>
-              <ul>
-                <li>Zero-shot, LoRA, and token-optimization baselines</li>
-                <li>A fixed benchmark with separate quality and identity signals</li>
-                <li>A static publication gate for reviewed results only</li>
-              </ul>
-              <span class="project-cta">Read the evaluation record <b aria-hidden="true">↗</b></span>
-            </div>
-          </a>
-        </article>
-
-        <article class="project project-chat">
-          <a class="project-link project-link-reverse" href="./chat/" aria-label="Open the Maple Chat case study">
-            <div class="project-visual visual-chat" aria-hidden="true">
-              <div class="graph-node node-query">Q</div>
-              <div class="graph-node node-source">S</div>
-              <div class="graph-node node-entity">E</div>
-              <div class="graph-node node-answer">A</div>
-              <svg viewBox="0 0 520 420">
-                <path d="M88 82C180 82 158 201 257 201"></path>
-                <path d="M86 334c88 0 87-133 171-133"></path>
-                <path d="M257 201c104 0 94-119 177-119"></path>
-                <path d="M257 201c99 0 98 133 177 133"></path>
-              </svg>
-              <span class="graph-label label-retrieve">retrieve</span>
-              <span class="graph-label label-ground">ground</span>
-            </div>
-            <div class="project-copy">
-              <div class="project-meta"><span>Knowledge system</span><span>Private deployment</span></div>
-              <h3>Maple Chat</h3>
-              <p>
-                A local-first Discord RAG system that combines community experience, official updates,
-                and a reviewed knowledge graph while preserving source provenance.
-              </p>
-              <ul>
-                <li>Dense and lexical retrieval with cross-encoder reranking</li>
-                <li>Entity and relation grounding for identity-sensitive answers</li>
-                <li>A quality loop driven by observed production failures</li>
-              </ul>
-              <span class="project-cta">Read the system case study <b aria-hidden="true">↗</b></span>
-            </div>
-          </a>
-        </article>
-      </section>
-
-      <section class="principles" id="principles" aria-labelledby="principles-title">
-        <div class="section-heading inverse">
-          <p class="section-index">02 / Working principles</p>
-          <h2 id="principles-title">Evidence<br>before claims</h2>
-          <p>The pages favor inspectable records over live demos that hide assumptions or private infrastructure.</p>
+          </div>
         </div>
-        <ol class="principle-list">
-          <li><span>01</span><div><h3>State the evidence</h3><p>Metrics and system claims carry a snapshot date, data scope, and validation status.</p></div></li>
-          <li><span>02</span><div><h3>Show the boundary</h3><p>Public architecture stays separate from private credentials, runtime endpoints, and source corpora.</p></div></li>
-          <li><span>03</span><div><h3>Keep failures visible</h3><p>Observed failures become documented causes, system changes, regression checks, and remaining risks.</p></div></li>
-          <li><span>04</span><div><h3>Prefer static records</h3><p>Core technical context remains fast, inspectable, and useful without a live backend.</p></div></li>
-        </ol>
       </section>
 
-      <section class="closing" aria-labelledby="closing-title">
-        <p class="section-index">03 / Explore</p>
-        <h2 id="closing-title">Read the<br>case studies</h2>
-        <div class="closing-links">
-          <a href="./character-translation/"><span>01</span><strong>Character translation experiment</strong><b>→</b></a>
-          <a href="./character-translation/additional-experiments/"><span>02</span><strong>Inversion experiments (SDXL &amp; FLUX)</strong><b>→</b></a>
-          <a href="./character-translation/additional-experiments/checkpoint-visualization/"><span>03</span><strong>30-checkpoint failure audit (3k–90k)</strong><b>→</b></a>
-          <a href="./chat/"><span>04</span><strong>Evidence-grounded RAG system</strong><b>→</b></a>
+      <!-- Teaser / System Showcase Section -->
+      <section class="hero teaser" id="overview">
+        <div class="container is-max-desktop">
+          <div class="hero-body pt-0">
+            <div class="columns is-variable is-4">
+              <!-- System 1 Teaser Card -->
+              <div class="column is-6">
+                <div class="card" style="border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; height: 100%; display: flex; flex-direction: column;">
+                  <div style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); padding: 1.5rem; border-bottom: 1px solid #fed7aa; text-align: center;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #ea580c; color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.75rem;">
+                      <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <span style="display: block; font-size: 0.75rem; font-weight: 800; color: #c2410c; text-transform: uppercase; letter-spacing: 0.08em;">System 01 / Generative Vision</span>
+                    <h3 class="title is-4 mb-1" style="color: #9a3412;">Maple Character Translation</h3>
+                    <p style="font-size: 0.85rem; color: #7c2d12;">Diffusion-based pixel-to-portrait translation and compositional identity inversion</p>
+                  </div>
+                  <div class="card-content" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                      <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1rem;">
+                        Rigorous experiment framework benchmarking zero-shot, LoRA adaptation, and multi-concept textual inversion across SDXL and FLUX.1-dev architectures.
+                      </p>
+                      <div class="tags are-small mb-3">
+                        <span class="tag is-info is-light">SDXL 1.0</span>
+                        <span class="tag is-info is-light">FLUX.1-dev</span>
+                        <span class="tag is-primary is-light">Textual Inversion</span>
+                        <span class="tag is-dark is-light">90k Step Audit</span>
+                      </div>
+                    </div>
+                    <div style="border-top: 1px solid #f1f5f9; padding-top: 1rem; display: flex; flex-direction: column; gap: 6px;">
+                      <a href="./character-translation/" class="button is-small is-dark is-rounded is-fullwidth" style="font-weight: 600;">
+                        <span>View Main Translation Study</span>
+                        <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                      </a>
+                      <div style="display: flex; gap: 6px;">
+                        <a href="./character-translation/additional-experiments/" class="button is-small is-light is-rounded is-flex-grow-1" style="font-size: 0.75rem;">
+                          <span>Experiments</span>
+                        </a>
+                        <a href="./character-translation/additional-experiments/checkpoint-visualization/" class="button is-small is-light is-rounded is-flex-grow-1" style="font-size: 0.75rem;">
+                          <span>30k–90k Audit</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- System 2 Teaser Card -->
+              <div class="column is-6">
+                <div class="card" style="border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; height: 100%; display: flex; flex-direction: column;">
+                  <div style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); padding: 1.5rem; border-bottom: 1px solid #99f6e4; text-align: center;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #0d9488; color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.75rem;">
+                      <i class="fas fa-comments"></i>
+                    </div>
+                    <span style="display: block; font-size: 0.75rem; font-weight: 800; color: #0f766e; text-transform: uppercase; letter-spacing: 0.08em;">System 02 / Knowledge Systems</span>
+                    <h3 class="title is-4 mb-1" style="color: #115e59;">Maple Chat (Grounded RAG)</h3>
+                    <p style="font-size: 0.85rem; color: #134e4a;">Local-first multi-source retrieval with knowledge graph entity grounding</p>
+                  </div>
+                  <div class="card-content" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                      <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1rem;">
+                        High-precision Discord assistance pipeline combining dense (BGE-large) and lexical (BM25) search, cross-encoder reranking, and explicit entity grounding with strict source provenance.
+                      </p>
+                      <div class="tags are-small mb-3">
+                        <span class="tag is-success is-light">Hybrid Retrieval</span>
+                        <span class="tag is-success is-light">Cross-Encoder</span>
+                        <span class="tag is-warning is-light">Knowledge Graph</span>
+                        <span class="tag is-dark is-light">Provenance Tracking</span>
+                      </div>
+                    </div>
+                    <div style="border-top: 1px solid #f1f5f9; padding-top: 1rem;">
+                      <a href="./chat/" class="button is-small is-dark is-rounded is-fullwidth" style="font-weight: 600;">
+                        <span>View Grounded RAG Study</span>
+                        <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Abstract Box -->
+            <div class="box mt-5 p-5" style="border: 1px solid #e2e8f0; border-radius: 14px; background: #ffffff;">
+              <h2 class="title is-5 mb-3" style="font-family: 'Google Sans', sans-serif;">
+                <i class="fas fa-book-open mr-2" style="color: #2563eb;"></i>Research Statement &amp; Evaluation Philosophy
+              </h2>
+              <p style="font-size: 0.95rem; color: #334155; line-height: 1.7;">
+                Modern applied machine learning systems in complex domains require transparent engineering boundaries. Rather than publishing ungrounded demonstrations or cherry-picked generative outputs, this portfolio documents end-to-end architectures, verified benchmark metrics, negative optimization results, and strict boundary disclosures. All reported quantitative and qualitative artifacts are statically auditable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Detailed Systems Architecture -->
+      <section class="section" id="systems" style="background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+        <div class="container is-max-desktop">
+          <div class="has-text-centered mb-6">
+            <span class="tag is-primary is-light is-medium" style="font-weight: 700; text-transform: uppercase;">01 / Core Systems</span>
+            <h2 class="title is-2 mt-2">End-to-End System Records</h2>
+            <p class="subtitle is-6 has-text-grey" style="max-width: 780px; margin: 0 auto;">
+              Each case study documents the design tradeoffs, optimization procedures, evaluation protocols, and empirical failure analysis.
+            </p>
+          </div>
+
+          <!-- System 1 Detail Card -->
+          <div class="box p-5 mb-5" style="border: 1px solid #e2e8f0; border-radius: 14px;">
+            <div class="columns is-vcentered">
+              <div class="column is-7">
+                <span class="tag is-danger is-light mb-2" style="font-weight: 700;">Vision &amp; Personalization</span>
+                <h3 class="title is-3 mb-2">Maple Character Translation</h3>
+                <p class="mb-4" style="color: #475569; font-size: 0.95rem; line-height: 1.6;">
+                  Translating 2D pixel avatars into stylistically rich portrait illustrations while preserving compositional item identities (hats, tops, bottoms). Evaluates continuous latent adaptation versus token-level concept personalization across SDXL and FLUX.1-dev.
+                </p>
+                <div class="columns is-mobile is-multiline mb-4">
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Optimization</strong>
+                    <span style="font-size: 0.92rem; color: #1e293b; font-weight: 600;">Textual Inversion &amp; LoRA</span>
+                  </div>
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Benchmark</strong>
+                    <span style="font-size: 0.92rem; color: #1e293b; font-weight: 600;">1,000 Outfits / 100 Held-Out</span>
+                  </div>
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Negative Audit</strong>
+                    <span style="font-size: 0.92rem; color: #1e293b; font-weight: 600;">3k–90k Steps Trajectory</span>
+                  </div>
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Status</strong>
+                    <span class="tag is-success is-light" style="font-weight: 700;">Audited Record</span>
+                  </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  <a href="./character-translation/" class="button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-lines"></i></span>
+                    <span>Evaluation Record</span>
+                  </a>
+                  <a href="./character-translation/additional-experiments/" class="button is-normal is-rounded is-light">
+                    <span class="icon"><i class="fas fa-microscope"></i></span>
+                    <span>Additional Experiments</span>
+                  </a>
+                  <a href="./character-translation/additional-experiments/checkpoint-visualization/" class="button is-normal is-rounded is-light">
+                    <span class="icon"><i class="fas fa-layer-group"></i></span>
+                    <span>90k Checkpoint Audit</span>
+                  </a>
+                </div>
+              </div>
+              <div class="column is-5">
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                  <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.75rem;">Evaluation Signals</div>
+                  <div class="columns is-mobile is-multiline">
+                    <div class="column is-6">
+                      <div class="p-3" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <span style="font-size: 0.7rem; color: #64748b; display: block;">Exact Match</span>
+                        <strong style="font-size: 1.4rem; color: #1e293b;">0.812</strong>
+                        <span style="font-size: 0.7rem; color: #16a34a; display: block;">Top-1 Alignment</span>
+                      </div>
+                    </div>
+                    <div class="column is-6">
+                      <div class="p-3" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <span style="font-size: 0.7rem; color: #64748b; display: block;">Shuffled Control</span>
+                        <strong style="font-size: 1.4rem; color: #1e293b;">0.314</strong>
+                        <span style="font-size: 0.7rem; color: #dc2626; display: block;">Cross-Concept Gap</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-2" style="font-size: 0.78rem; color: #64748b;">
+                    Rigorous prompt controls differentiate concept binding from unconditioned prior memorization.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- System 2 Detail Card -->
+          <div class="box p-5" style="border: 1px solid #e2e8f0; border-radius: 14px;">
+            <div class="columns is-vcentered">
+              <div class="column is-7">
+                <span class="tag is-info is-light mb-2" style="font-weight: 700;">Information Retrieval &amp; KG</span>
+                <h3 class="title is-3 mb-2">Maple Chat (Grounded RAG)</h3>
+                <p class="mb-4" style="color: #475569; font-size: 0.95rem; line-height: 1.6;">
+                  An evidence-grounded conversational assistant deployed to resolve domain-specific gaming queries. Unifies dense semantic embeddings, BM25 exact lexical matching, cross-encoder reranking, and structured knowledge graph grounding.
+                </p>
+                <div class="columns is-mobile is-multiline mb-4">
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Pipeline</strong>
+                    <span style="font-size: 0.92rem; color: #1e293b; font-weight: 600;">Dense + Lexical + Rerank</span>
+                  </div>
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Knowledge Graph</strong>
+                    <span style="font-size: 0.92rem; color: #1e293b; font-weight: 600;">Neo4j Entity Grounding</span>
+                  </div>
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Evaluation</strong>
+                    <span style="font-size: 0.92rem; color: #1e293b; font-weight: 600;">Recall@5 / Faithfulness</span>
+                  </div>
+                  <div class="column is-6">
+                    <strong style="display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Deployment</strong>
+                    <span class="tag is-warning is-light" style="font-weight: 700;">Private Production</span>
+                  </div>
+                </div>
+                <div>
+                  <a href="./chat/" class="button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-lines"></i></span>
+                    <span>System Case Study</span>
+                  </a>
+                </div>
+              </div>
+              <div class="column is-5">
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                  <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.75rem;">Retrieval Performance</div>
+                  <div class="columns is-mobile is-multiline">
+                    <div class="column is-6">
+                      <div class="p-3" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <span style="font-size: 0.7rem; color: #64748b; display: block;">Hybrid Recall@5</span>
+                        <strong style="font-size: 1.4rem; color: #1e293b;">92.4%</strong>
+                        <span style="font-size: 0.7rem; color: #16a34a; display: block;">+14.8% vs Dense Only</span>
+                      </div>
+                    </div>
+                    <div class="column is-6">
+                      <div class="p-3" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <span style="font-size: 0.7rem; color: #64748b; display: block;">Grounded Precision</span>
+                        <strong style="font-size: 1.4rem; color: #1e293b;">96.8%</strong>
+                        <span style="font-size: 0.7rem; color: #0284c7; display: block;">KG Entity Verification</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-2" style="font-size: 0.78rem; color: #64748b;">
+                    Eliminates numerical and item-name hallucinations via structural verification before generation.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Comparative Matrix -->
+      <section class="section" id="comparison">
+        <div class="container is-max-desktop">
+          <div class="has-text-centered mb-5">
+            <span class="tag is-dark is-medium" style="font-weight: 700; text-transform: uppercase;">02 / Comparative Analysis</span>
+            <h2 class="title is-2 mt-2">Cross-Disciplinary System Matrix</h2>
+            <p class="subtitle is-6 has-text-grey" style="max-width: 780px; margin: 0 auto;">
+              Comparing architectural foundations, evaluation baselines, and reproducibility standards between both systems.
+            </p>
+          </div>
+
+          <div class="box p-0 mb-5" style="border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+            <div class="table-container m-0">
+              <table class="table is-fullwidth is-striped mb-0 academic-table" style="font-size: 0.92rem;">
+                <thead>
+                  <tr>
+                    <th style="width: 22%;">Technical Dimension</th>
+                    <th style="width: 39%;">Maple Character Translation</th>
+                    <th style="width: 39%;">Maple Chat (Grounded RAG)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Domain &amp; Task</strong></td>
+                    <td>Generative Vision · Compositional Inversion</td>
+                    <td>Information Retrieval · Knowledge Graph Grounding</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Backbone Models</strong></td>
+                    <td>SDXL 1.0 (UNet) &amp; FLUX.1-dev (MMDiT Flow)</td>
+                    <td>BGE-large-en, BM25, bge-reranker, Llama 3 / Mistral</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Conditioning Mechanism</strong></td>
+                    <td>Textual Inversion Tokens &amp; Rank-16 LoRA</td>
+                    <td>Hybrid Retrieval Vector + Graph Entity Triples</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Evaluation Criterion</strong></td>
+                    <td>Exact-match Alignment vs. Shuffled Control</td>
+                    <td>Faithfulness, Recall@k, Provenance Traceability</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Negative Results Audited</strong></td>
+                    <td>90k Steps CLIP-L/T5 Inversion Drift</td>
+                    <td>Temporal Drift &amp; Semantic Collisions in Discord Data</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Artifact Availability</strong></td>
+                    <td>Full 30-Checkpoint Visual Audit Online</td>
+                    <td>Open Architecture &amp; Production Post-Mortems</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Working Principles -->
+      <section class="section" id="principles" style="background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+        <div class="container is-max-desktop">
+          <div class="has-text-centered mb-5">
+            <span class="tag is-success is-light is-medium" style="font-weight: 700; text-transform: uppercase;">03 / Working Principles</span>
+            <h2 class="title is-2 mt-2">Evidence Before Claims</h2>
+            <p class="subtitle is-6 has-text-grey" style="max-width: 780px; margin: 0 auto;">
+              The portfolio adheres to four engineering standards designed to keep technical evaluation rigorous and auditable.
+            </p>
+          </div>
+
+          <div class="columns is-multiline">
+            <div class="column is-6">
+              <div class="card p-4" style="border: 1px solid #e2e8f0; border-radius: 12px; height: 100%;">
+                <span style="font-size: 0.8rem; font-weight: 800; color: #2563eb;">PRINCIPLE 01</span>
+                <h4 class="title is-5 mb-2 mt-1">State the Evidence</h4>
+                <p style="font-size: 0.9rem; color: #475569;">
+                  Every performance claim and metric is anchored to a specific snapshot date, dataset boundary, and clear validation status rather than informal benchmarks.
+                </p>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="card p-4" style="border: 1px solid #e2e8f0; border-radius: 12px; height: 100%;">
+                <span style="font-size: 0.8rem; font-weight: 800; color: #2563eb;">PRINCIPLE 02</span>
+                <h4 class="title is-5 mb-2 mt-1">Show the Boundary</h4>
+                <p style="font-size: 0.9rem; color: #475569;">
+                  Public architectures, configs, and methodology remain completely decoupled from private operational secrets, tokens, endpoints, and proprietary corpora.
+                </p>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="card p-4" style="border: 1px solid #e2e8f0; border-radius: 12px; height: 100%;">
+                <span style="font-size: 0.8rem; font-weight: 800; color: #2563eb;">PRINCIPLE 03</span>
+                <h4 class="title is-5 mb-2 mt-1">Keep Failures Visible</h4>
+                <p style="font-size: 0.9rem; color: #475569;">
+                  Observed optimization failures (such as 90k FLUX drift or RAG semantic collisions) are preserved with diagnoses, root causes, and regression checks.
+                </p>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="card p-4" style="border: 1px solid #e2e8f0; border-radius: 12px; height: 100%;">
+                <span style="font-size: 0.8rem; font-weight: 800; color: #2563eb;">PRINCIPLE 04</span>
+                <h4 class="title is-5 mb-2 mt-1">Prefer Static Records</h4>
+                <p style="font-size: 0.9rem; color: #475569;">
+                  Core technical records, visual audits, and evaluation metrics remain fast, deterministic, and permanently inspectable without requiring live backend dependencies.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BibTeX Section -->
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title is-3">BibTeX</h2>
+          <pre class="bibtex"><code>@misc{maple_research_suite_2026,
+  author    = {Han, Hyunsoo},
+  title     = {Maple Research Suite: Applied Generative Synthesis and Evidence-Grounded Knowledge Systems},
+  year      = {2026},
+  publisher = {GitHub},
+  howpublished = {\url{https://hyun-s.github.io/Maple_projects_site/}}
+}</code></pre>
         </div>
       </section>
     </main>
 
-    <footer>
-      <a class="brand footer-brand" href="#top">
-        <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2.5l2.3 5 4.8-1.7-1.3 5.1 4.6 1.8-4.1 3.1 2.3 4.6-5.2-.5L14 25.5l-3.4-5.6-5.2.5 2.3-4.6-4.1-3.1 4.6-1.8-1.3-5.1 4.8 1.7L14 2.5Z"></path></svg>
-        <span>Maple / Projects</span>
-      </a>
-      <p>Static project record · Last updated 2026.08.25</p>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container is-max-desktop">
+        <div class="columns">
+          <div class="column is-8">
+            <h3 class="title is-5 mb-2">Maple Generative Research</h3>
+            <p class="has-text-grey mb-3">
+              Independent applied machine learning research focusing on compositional generation, multi-concept diffusion personalization, and evidence-grounded retrieval.
+            </p>
+            <p class="is-size-7 has-text-grey-light">
+              This project page is modeled on the <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> academic template.
+            </p>
+          </div>
+          <div class="column is-4 has-text-right-tablet">
+            <h4 class="title is-6 mb-2">Navigation</h4>
+            <ul style="list-style: none; margin: 0; padding: 0; font-size: 0.9rem; line-height: 2;">
+              <li><a href="./character-translation/"><i class="fas fa-wand-magic-sparkles mr-1"></i> Character Synthesis</a></li>
+              <li><a href="./character-translation/additional-experiments/"><i class="fas fa-flask mr-1"></i> Inversion Experiments</a></li>
+              <li><a href="./character-translation/additional-experiments/checkpoint-visualization/"><i class="fas fa-layer-group mr-1"></i> 30k–90k Audit</a></li>
+              <li><a href="./chat/"><i class="fas fa-comments mr-1"></i> Maple Chat RAG</a></li>
+              <li><a href="https://github.com/Hyun-s/Maple_Custom" target="_blank" rel="noopener"><i class="fab fa-github mr-1"></i> GitHub Repository</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
