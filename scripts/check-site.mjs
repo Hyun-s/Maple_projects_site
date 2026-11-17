@@ -16,6 +16,7 @@ const scriptFiles = [
   "character-translation/static/js/index.js",
   "character-translation/static/js/site-data.js",
   "chat/static/js/index.js",
+  "scripts/check-chat-showcase.mjs",
 ];
 const requiredFiles = [
   ".nojekyll",
@@ -31,6 +32,8 @@ const requiredFiles = [
   "character-translation/additional-experiments/metrics.png",
   "character-translation/additional-experiments/qualitative-grid.png",
   "chat/static/css/index.css",
+  "chat/static/css/showcase.css",
+  "chat/static/data/live-examples-2026-11-17.json",
   "chat/static/images/favicon.svg",
   "chat/static/images/system-map.svg",
   "chat/static/images/knowledge-map.svg",
@@ -79,9 +82,8 @@ for (const htmlFile of htmlFiles) {
   if (!/<html\s+lang="[^"]+"/i.test(html)) failures.push(`${htmlFile} is missing a document language.`);
 }
 
-const publicTextFiles = requiredFiles.filter((file) => [".html", ".css", ".js", ".svg", ".xml", ".txt"].includes(extname(file)));
+const publicTextFiles = requiredFiles.filter((file) => [".html", ".css", ".js", ".mjs", ".json", ".svg", ".xml", ".txt"].includes(extname(file)));
 const forbiddenPatterns = [
-  [/[\uAC00-\uD7AF]/u, "Korean text in the English-only public site"],
   [/\b(?:ghp|gho|github_pat)_[A-Za-z0-9_]+\b/, "GitHub token"],
   [/\b(?:api[_-]?key|secret[_-]?key|access[_-]?token)\s*[:=]\s*["'][^"']+["']/i, "possible secret"],
   [/\b(?:127\.0\.0\.1|localhost)(?::\d+)?\b/i, "loopback address"],
@@ -93,6 +95,14 @@ for (const file of publicTextFiles) {
   const absolute = resolve(root, file);
   if (!existsSync(absolute)) continue;
   const contents = readFileSync(absolute, "utf8");
+  // User-approved Korean is confined to the actual Q&A block and its data record.
+  // Security scanning below always examines the complete file, with no exemption.
+  const languageContents = file === "chat/index.html"
+    ? contents.replace(/<!-- KOREAN_EXAMPLES_START -->[\s\S]*?<!-- KOREAN_EXAMPLES_END -->/g, "")
+    : file === "chat/static/data/live-examples-2026-11-17.json" ? "" : contents;
+  if (/[\uAC00-\uD7AF]/u.test(languageContents)) {
+    failures.push(`${file} contains Korean outside the approved chatbot examples.`);
+  }
   for (const [pattern, label] of forbiddenPatterns) {
     if (pattern.test(contents)) failures.push(`${file} contains a forbidden ${label}.`);
   }
@@ -105,6 +115,12 @@ try {
   });
 } catch (error) {
   failures.push(`Character translation validation failed: ${error.stderr?.toString().trim() || error.message}`);
+}
+
+try {
+  execFileSync(process.execPath, [resolve(root, "scripts/check-chat-showcase.mjs")], { stdio: "pipe" });
+} catch (error) {
+  failures.push(`Chat showcase validation failed: ${error.stderr?.toString().trim() || error.message}`);
 }
 
 if (failures.length > 0) {

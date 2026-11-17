@@ -1,21 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" role="img" aria-labelledby="title desc">
-  <title id="title">Knowledge graph example</title>
-  <desc id="desc">Xenon connects to thief and pirate classes, abbreviations connect to official item names, and Destiny mode connects to boss variants.</desc>
-  <rect width="720" height="620" rx="26" fill="#27233f"/>
-  <g fill="none" stroke="#bdb3d9" stroke-width="2" opacity=".45"><path d="M196 128L92 251M196 128l112 123M356 321l-98 128M356 321l120 117M565 164l-89 274M565 164l73 118M476 438l162-156"/></g>
-  <g font-family="Arial, sans-serif" text-anchor="middle">
-    <g transform="translate(196 128)"><circle r="58" fill="#dd7050"/><text y="-4" fill="#fff" font-size="22" font-weight="700">Xenon</text><text y="20" fill="#fff" opacity=".7" font-size="12">JOB</text></g>
-    <g transform="translate(92 251)"><circle r="45" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="16" font-weight="700">Thief</text></g>
-    <g transform="translate(308 251)"><circle r="45" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="16" font-weight="700">Pirate</text></g>
-    <text x="125" y="177" fill="#d7ccef" font-size="11">is_a</text><text x="268" y="177" fill="#d7ccef" font-size="11">is_a</text>
-    <g transform="translate(356 321)"><circle r="51" fill="#78ad9a"/><text y="-5" fill="#fff" font-size="14" font-weight="700">Scroll</text><text y="12" fill="#fff" font-size="14" font-weight="700">shorthand</text><text y="31" fill="#fff" opacity=".72" font-size="10">TERM</text></g>
-    <g transform="translate(258 449)"><rect x="-91" y="-43" width="182" height="86" rx="23" fill="#ddd5ed"/><text y="-6" fill="#302b4b" font-size="14" font-weight="700">Canonical chaos</text><text y="16" fill="#302b4b" font-size="14" font-weight="700">scroll name</text></g>
-    <text x="281" y="383" fill="#d7ccef" font-size="11">abbreviation_of</text>
-    <g transform="translate(565 164)"><circle r="57" fill="#9b86cf"/><text y="-4" fill="#fff" font-size="17" font-weight="700">Destiny</text><text y="18" fill="#fff" opacity=".72" font-size="11">MODE</text></g>
-    <g transform="translate(638 282)"><circle r="42" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="15" font-weight="700">Seren</text></g>
-    <g transform="translate(476 438)"><circle r="46" fill="#d9b85f"/><text y="5" fill="#332e24" font-size="15" font-weight="700">Kaling</text></g>
-    <text x="615" y="220" fill="#d7ccef" font-size="11">applies_to</text><text x="513" y="313" fill="#d7ccef" font-size="11">applies_to</text>
-    <g transform="translate(600 520)"><rect x="-72" y="-30" width="144" height="60" rx="18" fill="#4a416b" stroke="#9b86cf"/><text y="5" fill="#fff" font-size="14">Boss variant</text></g>
-    <text x="556" y="489" fill="#d7ccef" font-size="11">has_variant</text>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 730" role="img" aria-labelledby="title desc">
+<title id="title">Actual stored knowledge graph relations</title>
+<desc id="desc">Xenon has two class memberships; a shorthand maps to its scroll; a Kaling boss variant uses Destiny mode and is a variant of Kaling; the distinct Destiny weapon upgrades from Genesis. No inferred edges.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#d7ccef"/></marker></defs>
+<rect width="1200" height="730" rx="26" fill="#27233f"/>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<text x="200" y="55" fill="#fff" font-size="22" font-weight="700">Class membership</text>
+<text x="600" y="55" fill="#fff" font-size="22" font-weight="700">Canonical naming</text>
+<text x="1000" y="55" fill="#fff" font-size="22" font-weight="700">Different entity types</text>
+<g data-relation-id="07cb48df920c9a7b181704af936d3296e453276623f1cd910ab9a55639a81cea" data-subject-id="weapon:destiny" data-object-id="weapon:genesis" data-predicate="upgrades_from"><title>weapon:destiny upgrades_from weapon:genesis; source nexon-destiny-weapon-update-1-2-401; version 1.2.401-2025-03-20</title><path d="M1000 498L1000 587" fill="none" stroke="#d7ccef" stroke-width="2" marker-end="url(#arrow)"/><rect x="938.0" y="528.5" width="124" height="26" rx="4" fill="#27233f"/><text x="1000.0" y="546.5" fill="#fff" font-size="14">upgrades_from</text></g>
+<g data-relation-id="15669a66f5723b6cf5043395dfd8c6b0ab30df086ccac9cf9fbfaf0d5313b01a" data-subject-id="boss-variant:kaling-destiny" data-object-id="content-mode:destiny" data-predicate="uses_mode"><title>boss-variant:kaling-destiny uses_mode content-mode:destiny; source nexon-destiny-weapon-update-1-2-401; version 1.2.401-2025-03-20</title><path d="M1000 183L905 277" fill="none" stroke="#d7ccef" stroke-width="2" marker-end="url(#arrow)"/><rect x="906.5" y="216.0" width="92" height="26" rx="4" fill="#27233f"/><text x="952.5" y="234.0" fill="#fff" font-size="14">uses_mode</text></g>
+<g data-relation-id="834156a1682780eda84ff3d73c880fe2736b49f4aafcaaeeca0f8f7c1442000e" data-subject-id="abbreviation:amazing-positive-chaos-scroll" data-object-id="item:amazing-positive-chaos-scroll" data-predicate="abbreviation_of"><title>abbreviation:amazing-positive-chaos-scroll abbreviation_of item:amazing-positive-chaos-scroll; source maple-chat-curated-item-abbreviations; version 2026-08-25-v1</title><path d="M600 183L600 277" fill="none" stroke="#d7ccef" stroke-width="2" marker-end="url(#arrow)"/><rect x="530.0" y="216.0" width="140" height="26" rx="4" fill="#27233f"/><text x="600.0" y="234.0" fill="#fff" font-size="14">abbreviation_of</text></g>
+<g data-relation-id="83cf9ed95aef1e7702dada6df5e66104b15df4173cd6a1eadccedfba28c8c504" data-subject-id="job:xenon" data-object-id="job-family:pirate" data-predicate="is_a"><title>job:xenon is_a job-family:pirate; source nexon-maplestory-job-guide; version 2026-08-25</title><path d="M200 183L295 277" fill="none" stroke="#d7ccef" stroke-width="2" marker-end="url(#arrow)"/><rect x="221.5" y="216.0" width="52" height="26" rx="4" fill="#27233f"/><text x="247.5" y="234.0" fill="#fff" font-size="14">is_a</text></g>
+<g data-relation-id="ed811b82c523e222fe55d662ef15583d9eee6a564bd93d53c80310877d11332a" data-subject-id="boss-variant:kaling-destiny" data-object-id="boss:kaling" data-predicate="variant_of"><title>boss-variant:kaling-destiny variant_of boss:kaling; source nexon-destiny-weapon-update-1-2-401; version 1.2.401-2025-03-20</title><path d="M1000 183L1090 277" fill="none" stroke="#d7ccef" stroke-width="2" marker-end="url(#arrow)"/><rect x="995.0" y="216.0" width="100" height="26" rx="4" fill="#27233f"/><text x="1045.0" y="234.0" fill="#fff" font-size="14">variant_of</text></g>
+<g data-relation-id="fe78d5680c0e04d51d5c164a2efd6d8d46e5a1f8b479655a24db84e9f11d06bd" data-subject-id="job:xenon" data-object-id="job-family:thief" data-predicate="is_a"><title>job:xenon is_a job-family:thief; source nexon-maplestory-job-guide; version 2026-08-25</title><path d="M200 183L110 277" fill="none" stroke="#d7ccef" stroke-width="2" marker-end="url(#arrow)"/><rect x="129.0" y="216.0" width="52" height="26" rx="4" fill="#27233f"/><text x="155.0" y="234.0" fill="#fff" font-size="14">is_a</text></g>
+<g data-entity-id="job:xenon"><title>job:xenon</title><rect x="118.0" y="109" width="164" height="72" rx="18" fill="#dd7050"/>
+<text x="200" y="151.0" fill="#fff" font-size="16" font-weight="700">Xenon</text>
+</g>
+<g data-entity-id="job-family:thief"><title>job-family:thief</title><rect x="28.0" y="279" width="164" height="72" rx="18" fill="#d9b85f"/>
+<text x="110" y="321.0" fill="#302b4b" font-size="16" font-weight="700">Thief</text>
+</g>
+<g data-entity-id="job-family:pirate"><title>job-family:pirate</title><rect x="213.0" y="279" width="164" height="72" rx="18" fill="#d9b85f"/>
+<text x="295" y="321.0" fill="#302b4b" font-size="16" font-weight="700">Pirate</text>
+</g>
+<g data-entity-id="abbreviation:amazing-positive-chaos-scroll"><title>abbreviation:amazing-positive-chaos-scroll</title><rect x="518.0" y="109" width="164" height="72" rx="18" fill="#78ad9a"/>
+<text x="600" y="139.5" fill="#302b4b" font-size="16" font-weight="700">Nol-geung</text>
+<text x="600" y="162.5" fill="#302b4b" font-size="16" font-weight="700">shorthand</text>
+</g>
+<g data-entity-id="item:amazing-positive-chaos-scroll"><title>item:amazing-positive-chaos-scroll</title><rect x="477.5" y="279" width="245" height="72" rx="18" fill="#ddd5ed"/>
+<text x="600" y="309.5" fill="#302b4b" font-size="16" font-weight="700">Amazing Positive</text>
+<text x="600" y="332.5" fill="#302b4b" font-size="16" font-weight="700">Chaos Scroll</text>
+</g>
+<g data-entity-id="boss-variant:kaling-destiny"><title>boss-variant:kaling-destiny</title><rect x="918.0" y="109" width="164" height="72" rx="18" fill="#d9b85f"/>
+<text x="1000" y="139.5" fill="#302b4b" font-size="16" font-weight="700">Kaling</text>
+<text x="1000" y="162.5" fill="#302b4b" font-size="16" font-weight="700">Destiny variant</text>
+</g>
+<g data-entity-id="content-mode:destiny"><title>content-mode:destiny</title><rect x="823.0" y="279" width="164" height="72" rx="18" fill="#9b86cf"/>
+<text x="905" y="321.0" fill="#fff" font-size="16" font-weight="700">Destiny mode</text>
+</g>
+<g data-entity-id="boss:kaling"><title>boss:kaling</title><rect x="1008.0" y="279" width="164" height="72" rx="18" fill="#d9b85f"/>
+<text x="1090" y="321.0" fill="#302b4b" font-size="16" font-weight="700">Kaling</text>
+</g>
+<g data-entity-id="weapon:destiny"><title>weapon:destiny</title><rect x="918.0" y="424" width="164" height="72" rx="18" fill="#9b86cf"/>
+<text x="1000" y="466.0" fill="#fff" font-size="16" font-weight="700">Destiny weapon</text>
+</g>
+<g data-entity-id="weapon:genesis"><title>weapon:genesis</title><rect x="918.0" y="589" width="164" height="72" rx="18" fill="#ddd5ed"/>
+<text x="1000" y="631.0" fill="#302b4b" font-size="16" font-weight="700">Genesis weapon</text>
+</g>
+<text x="600" y="700" fill="#ded6ef" font-size="13">10 displayed entities / 6 actual triples / English presentation labels / snapshot 17 Nov 2026</text>
+</g></svg>

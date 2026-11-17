@@ -35,70 +35,7 @@
                 <img src="./static/images/favicon.svg" alt="Icon" style="height: 1em; vertical-align: baseline; margin-right: 10px;">
                 Maple Research: Applied Generative Synthesis &amp; Grounded Knowledge Systems
               </h1>
-              <div class="is-size-3 publication-authors">
-                <span class="author-block">
-                  <a href="https://github.com/Hyun-s">Hyunsoo Han</a><sup>1</sup>
-                </span>
-              </div>
 
-              <div class="is-size-4 publication-authors">
-                <span class="author-block"><sup>1</sup>Applied Machine Learning Research</span>
-              </div>
-
-              <div class="column has-text-centered">
-                <div class="publication-links">
-                  <!-- Character Translation Project -->
-                  <span class="link-block">
-                    <a href="./character-translation/"
-                       class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-wand-magic-sparkles"></i>
-                      </span>
-                      <span>Character Translation</span>
-                    </a>
-                  </span>
-                  <!-- Inversion Study -->
-                  <span class="link-block">
-                    <a href="./character-translation/additional-experiments/"
-                       class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-flask"></i>
-                      </span>
-                      <span>Inversion Experiments</span>
-                    </a>
-                  </span>
-                  <!-- 90k Audit -->
-                  <span class="link-block">
-                    <a href="./character-translation/additional-experiments/checkpoint-visualization/"
-                       class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-chart-line"></i>
-                      </span>
-                      <span>30k–90k Checkpoint Audit</span>
-                    </a>
-                  </span>
-                  <!-- Maple Chat -->
-                  <span class="link-block">
-                    <a href="./chat/"
-                       class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-comments"></i>
-                      </span>
-                      <span>Maple Chat (RAG)</span>
-                    </a>
-                  </span>
-                  <!-- Code -->
-                  <span class="link-block">
-                    <a href="https://github.com/Hyun-s/Maple_Custom"
-                       class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
-                      <span class="icon">
-                        <i class="fab fa-github"></i>
-                      </span>
-                      <span>Code</span>
-                    </a>
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -132,7 +69,7 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Modern applied machine-learning systems operating in stylized gaming environments face two fundamental challenges: faithfully capturing fine-grained visual identity in generative diffusion models, and preventing hallucination in conversational retrieval systems. This portfolio presents two complementary systems built end-to-end: (1) <strong>Maple Character Translation</strong>, an experimental framework evaluating continuous latent adaptation (LoRA) versus discrete token optimization (Textual Inversion) across SDXL and FLUX.1-dev architectures, including a 90,000-step failure analysis on compositional equipment binding; and (2) <strong>Maple Chat</strong>, a hybrid information-retrieval pipeline combining dense semantic embeddings, lexical BM25 matching, cross-encoder reranking, and explicit knowledge graph entity grounding with complete source provenance.
+                Modern applied machine-learning systems operating in stylized gaming environments face two fundamental challenges: faithfully capturing fine-grained visual identity in generative diffusion models, and preventing hallucination in conversational retrieval systems. This portfolio presents two complementary systems built end-to-end: (1) <strong>Maple Character Translation</strong>, an experimental framework evaluating continuous latent adaptation (LoRA) versus discrete token optimization (Textual Inversion) across SDXL and FLUX.1-dev architectures, including a 90,000-step failure analysis on compositional equipment binding; and (2) <strong>Maple Chat</strong>, an Agent-first assistant combining BGE-M3 dense retrieval, lexical search, BGE-Reranker scoring, PostgreSQL knowledge relations, and route-specific attribution and output checks.
               </p>
             </div>
           </div>
@@ -193,7 +130,7 @@
 
             <div class="content has-text-justified">
               <p>
-                A local-first conversational assistant deployed to resolve domain-specific gaming queries. Unifies dense semantic embeddings (BGE-large), lexical matching (BM25), cross-encoder reranking (bge-reranker-large), and structured Neo4j knowledge graph entity grounding.
+                A local-first Discord assistant with an Agent tool loop and an alternative QA path. BGE-M3 dense retrieval and lexical search are fused with RRF, reranked with BGE-Reranker-v2-m3, and supplemented by reviewed entity relations stored in PostgreSQL.
               </p>
             </div>
 
@@ -203,7 +140,7 @@
 
             <div class="content has-text-justified">
               <p>
-                <strong>Production Quality Loop.</strong> Evaluated across realistic user questions with strict grounding boundaries. Incorporates a continuous feedback loop driven by observed production failures (temporal patch drift, ambiguous item naming, and cross-source conflicts).
+                <strong>Inspectable Service Record.</strong> The updated study separates service requirements, model preprocessing and postprocessing, retrieval evidence, graph relations, and known implementation limits. It includes real Korean chatbot runs with observed tool traces rather than unsupported accuracy claims.
               </p>
             </div>
 
@@ -224,11 +161,11 @@
         <!-- Experiments & Quantitative Comparison -->
         <div class="columns is-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3 has-text-centered">Quantitative Evaluation Summary</h2>
+            <h2 class="title is-3 has-text-centered">Evaluation &amp; Evidence Summary</h2>
 
             <div class="content has-text-centered">
               <p>
-                Summary of quantitative performance across the two systems under controlled benchmarks.
+                Image-study metrics are retained from their original reports. Chatbot entries below are dated evidence inventories, not comparable accuracy benchmarks.
               </p>
             </div>
 
@@ -260,17 +197,17 @@
                   </tr>
                   <tr>
                     <td style="text-align: left; font-weight: bold;">Maple Chat (RAG)</td>
-                    <td style="text-align: left;">Domain Knowledge Retrieval (Recall@5 &uarr;)</td>
-                    <td style="text-align: center;">Context Retrieval</td>
-                    <td style="text-align: center;">77.6% (Dense Only)</td>
-                    <td style="text-align: center; font-weight: bold; color: #2e7d32;">92.4% (Hybrid+Rerank)</td>
+                    <td style="text-align: left;">Live application-level examples</td>
+                    <td style="text-align: center;">Observed search/tool records</td>
+                    <td style="text-align: center;">Not benchmarked</td>
+                    <td style="text-align: center;"><a href="./chat/#examples">Read real Q&amp;A and limitations</a></td>
                   </tr>
                   <tr>
                     <td style="text-align: left; font-weight: bold;">Maple Chat (KG)</td>
-                    <td style="text-align: left;">Entity Grounding Accuracy (&uarr;)</td>
-                    <td style="text-align: center;">Factual Precision</td>
-                    <td style="text-align: center;">68.2% (Ungrounded)</td>
-                    <td style="text-align: center; font-weight: bold; color: #2e7d32;">96.8% (Graph-Grounded)</td>
+                    <td style="text-align: left;">Graph snapshot: 17 November 2026</td>
+                    <td style="text-align: center;">Entities / relations</td>
+                    <td style="text-align: center;">Inventory, not accuracy</td>
+                    <td style="text-align: center;">217 entities / 292 relations</td>
                   </tr>
                 </tbody>
               </table>

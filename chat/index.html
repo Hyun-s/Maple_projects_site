@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/showcase.css">
 
     <!-- MathJax -->
     <script>
@@ -65,60 +66,6 @@
                   Maple Chat: Evidence-Grounded Hybrid RAG &amp; Knowledge Graph System
                 </h1>
 
-                <div class="is-size-4 publication-authors">
-                  <span class="author-block">
-                    <a href="https://github.com/Hyun-s">Hyunsoo Han</a><sup>1</sup>
-                  </span>
-                </div>
-
-                <div class="is-size-5 publication-institution">
-                  <span class="author-block"><sup>1</sup>Applied Machine Learning Research</span>
-                </div>
-
-                <div class="column has-text-centered">
-                  <div class="publication-links">
-                    <!-- Docs Link -->
-                    <span class="link-block">
-                      <a href="https://github.com/Hyun-s/Maple_Chat/blob/main/docs/current-system-overview.md"
-                         class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span>
-                        <span>System Overview</span>
-                      </a>
-                    </span>
-                    <!-- Code Link -->
-                    <span class="link-block">
-                      <a href="https://github.com/Hyun-s/Maple_Chat"
-                         class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon"><i class="fab fa-github"></i></span>
-                        <span>Code Repository</span>
-                      </a>
-                    </span>
-                    <!-- RAG Textbook Link -->
-                    <span class="link-block">
-                      <a href="https://github.com/Hyun-s/Maple_Chat/blob/main/docs/rag-knowledge-graph-textbook.md"
-                         class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon"><i class="fas fa-book"></i></span>
-                        <span>Technical Textbook</span>
-                      </a>
-                    </span>
-                    <!-- Quality Log Link -->
-                    <span class="link-block">
-                      <a href="https://github.com/Hyun-s/Maple_Chat/blob/main/docs/service-quality-log.md"
-                         class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon"><i class="fas fa-clipboard-check"></i></span>
-                        <span>Service Quality Log</span>
-                      </a>
-                    </span>
-                    <!-- Hub Link -->
-                    <span class="link-block">
-                      <a href="../"
-                         class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon"><i class="fas fa-th-large"></i></span>
-                        <span>Projects Hub</span>
-                      </a>
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -129,17 +76,10 @@
       <section class="hero teaser">
         <div class="container is-max-desktop">
           <div class="hero-body has-text-centered">
-            <img
-              src="./static/images/system-map.svg"
-              alt="Architecture overview of Maple Chat showing hybrid retrieval, knowledge graph, and local generation"
-              style="display: block; margin: 10px auto 30px auto; width: 100%; max-width: 960px; height: auto; border-radius: 8px;"
-            >
+            <img src="./static/images/system-map.svg" alt="Simplified source preparation and QA retrieval path; the default Agent loop is described in the architecture section" style="display: block; margin: 10px auto 30px auto; width: 100%; max-width: 960px; height: auto; border-radius: 8px;">
             <h2 class="subtitle has-text-centered">
-              Vector similarity finds relevant community posts, but the domain knowledge graph enforces ontological entity boundaries and eliminates hallucination.
-              <br>
-              <span style="color: #274a42; font-weight: 700;">
-                Hybrid retrieval (BGE-M3 + Lexical + RRF) combined with entity relation validation guarantees consistent answers across ambiguous gaming community queries.
-              </span>
+              Retrieval supplies document evidence. A knowledge graph resolves names and stored relations.
+              <br><span style="color: #274a42; font-weight: 700;">The Agent decides what to look up; application code validates tool requests, records failures, and formats the answer.</span>
             </h2>
           </div>
         </div>
@@ -152,12 +92,30 @@
             <div class="column is-four-fifths">
               <h2 class="title is-3">Abstract</h2>
               <div class="content has-text-justified">
-                <p>
-                  Deploying Retrieval-Augmented Generation (RAG) assistants in specialized gaming communities exposes fundamental limitations in standard vector-only pipelines. Player discussions rely heavily on non-standard jargon, evolving abbreviations, boss phase acronyms, and patch-dependent item upgrade orders. Pure dense retrieval often retrieves superficially similar discussions that refer to different character classes or obsolete game balance patches, causing language models to hallucinate plausible yet incorrect instructions.
-                </p>
-                <p>
-                  <strong>Maple Chat</strong> introduces an evidence-grounded production RAG system operating on Discord. The architecture explicitly decouples unstructured community experience retrieval from structured domain relation grounding. Unstructured posts from MapleStory community forums (Inven) and official updates (Nexon) are indexed via dense BGE-M3 vectors and lexical trigram search, fused via Reciprocal Rank Fusion (RRF). Concurrently, an in-memory and PostgreSQL knowledge graph resolves entity scope (job branches, boss tiers, and item prerequisites). In-game queries are validated against ontological constraints before local generation with Qwen 2.5 via vLLM, producing verifiable citations with user-level interactive source inspection buttons.
-                </p>
+                <p>Maple Chat is a local-first Korean assistant for a configured Discord community. Its default Agent path plans a question, selects schema-validated read-only tools, evaluates their results, and returns an answer. Tools provide stored community evidence, official updates, exact knowledge-graph relations, deterministic experience calculations, and optional character information.</p>
+                <p>The alternative QA path combines BGE-M3 dense retrieval with lexical search, Reciprocal Rank Fusion, BGE-Reranker scoring, and reviewed entity relations in PostgreSQL. Generation uses a local OpenAI-compatible service; the current deployment uses TensorFold serving under the application model alias <code>local-coder</code>. No part of this architecture makes every generated statement automatically correct.</p>
+                <p>This page describes the implementation inspected on <time datetime="2026-11-17">17 November 2026</time>. The Korean examples below are actual application-level runs using the deployed chatbot engine, current model, and stored data—not hand-written demonstration answers or a new accuracy benchmark.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="requirements">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3 has-text-centered">Service Requirements</h2>
+              <div class="content has-text-justified">
+                <ul>
+                  <li><strong>Controlled entry:</strong> accept direct mentions only in configured Discord servers and channels; reject bot/webhook traffic and invalid or oversized questions.</li>
+                  <li><strong>Evidence appropriate to the question:</strong> search documents for community observations, use the graph for reviewed names and relations, and delegate supported numerical work to calculation tools.</li>
+                  <li><strong>Readable Korean answers:</strong> request an easy 1–3 sentence opening summary followed by the detailed explanation and its qualifications. This is a prompt instruction, not a sentence-count validator.</li>
+                  <li><strong>Explicit failure and bounded execution:</strong> validate JSON/tool arguments, limit tool calls and retries, suppress duplicate message responses, and record resumable Agent checkpoints.</li>
+                  <li><strong>Traceability:</strong> retain the source links used by QA and the Agent execution/tool record. QA source buttons and Agent attribution are different mechanisms.</li>
+                  <li><strong>Operational limits:</strong> per-user and per-channel rate limits, serialized generation, a bounded admission counter, and token/time diagnostics. There is no newly claimed latency or availability SLA.</li>
+                </ul>
+                <p>Recent conversation context is injected into the Agent path: up to five turns with a one-hour TTL and shortened previous answers. The current QA path does not receive the same context. Job-guide and combat-rotation construction remains paused; the presence of a guide lookup tool does not imply complete or current guide coverage.</p>
               </div>
             </div>
           </div>
@@ -169,41 +127,24 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column is-four-fifths">
-              <h2 class="title is-3 has-text-centered">The Entity Grounding Gap</h2>
-              <p class="has-text-centered" style="margin-bottom: 2rem; color: #4a5568;">
-                Production failure analysis on live community questions revealed why vector search alone cannot guarantee factual integrity in gaming domains:
-              </p>
-
-              <!-- Failure Case Comparison Panels -->
+              <h2 class="title is-3 has-text-centered">Why Retrieval, and Why a Knowledge Graph?</h2>
+              <p class="has-text-centered" style="margin-bottom: 2rem; color: #4a5568;">Document evidence and domain relations solve different problems. Neither replaces the other.</p>
               <div class="spatial-error-grid">
                 <div class="spatial-error-panel">
-                  <h4 class="title is-5" style="color: #dc2626;">Before: Vector-Only Retrieval</h4>
-                  <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 16px; margin: 10px 0; text-align: left;">
-                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Query A:</strong> <em>"How should I upgrade Xenon armor myself?"</em></p>
-                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Query B:</strong> <em>"What upgrade order should I use for Xenon armor?"</em></p>
-                    <hr style="margin: 8px 0; border: none; border-top: 1px dashed #fca5a5;">
-                    <p style="font-size: 0.84rem; color: #991b1b;">
-                      <strong>Observed Failure:</strong> Query A generated <em>"Positive Chaos &rarr; Bonus Stats + Star Force"</em> while Query B generated <em>"Bonus Stats &rarr; Positive Chaos &rarr; Star Force"</em>. Slang terms were hallucinated into nonexistent items ("Amazing Positivity").
-                    </p>
+                  <h3 class="title is-5">Retrieval: find what a source actually says</h3>
+                  <div class="content">
+                    <p>A question about equipment investment or player experience needs passages from stored discussions—not a plausible answer recalled from model weights. Dense and lexical candidates are fused and reranked so the model can inspect a bounded set of relevant sources.</p>
+                    <p>Retrieval returns observations, not universal rules. A question, failed attempt, historical patch, and successful report must not be treated as interchangeable evidence.</p>
+                    <p><a href="#examples">See the live community-search example and its observed tool trace.</a></p>
                   </div>
-                  <p class="spatial-error-caption">
-                    <strong>Paraphrase Instability.</strong> Different query wordings retrieved conflicting forum comments. Without an entity knowledge graph, the LLM assumed competing community procedures were absolute facts.
-                  </p>
                 </div>
-
                 <div class="spatial-error-panel">
-                  <h4 class="title is-5" style="color: #16a34a;">After: Hybrid RAG + Knowledge Graph</h4>
-                  <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin: 10px 0; text-align: left;">
-                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Entity Linking:</strong> <code>Xenon &isin; {Thief, Pirate}</code>, <code>Chaos Scroll &sube; Scroll Upgrades</code></p>
-                    <p style="font-size: 0.88rem; margin-bottom: 8px;"><strong>Graph Constraint:</strong> Arc Innocence Scroll resets all stats except Potential &amp; Star Force.</p>
-                    <hr style="margin: 8px 0; border: none; border-top: 1px dashed #86efac;">
-                    <p style="font-size: 0.84rem; color: #166534;">
-                      <strong>Grounded Resolution:</strong> Both query variants converged on the verified rule: <em>"No fixed sequential order. Verify STR/DEX/LUK Bonus Stats prerequisite first before finalizing scroll investments."</em>
-                    </p>
+                  <h3 class="title is-5">Graph: keep a name attached to the right entity</h3>
+                  <div class="content">
+                    <p>Similar text cannot by itself establish a class relation or disambiguate a shared name. The graph stores explicit triples: Xenon belongs to both Thief and Pirate; the Destiny weapon and Destiny content mode are separate entities.</p>
+                    <p>Alias matching and stored relations provide a canonical reference. They do not automatically supply boss tactics, skill rotations, or current community consensus.</p>
+                    <p><a href="#knowledge">Inspect the real relation subset</a>, then compare the Korean Agent answers below.</p>
                   </div>
-                  <p class="spatial-error-caption">
-                    <strong>Ontological Consistency.</strong> Reviewed domain relations filter out conflicting forum claims and eliminate abbreviation hallucinations before prompt synthesis.
-                  </p>
                 </div>
               </div>
             </div>
@@ -217,68 +158,56 @@
           <div class="columns is-centered">
             <div class="column is-four-fifths">
               <h2 class="title is-3 has-text-centered">System Architecture</h2>
-
               <div class="lift-overview-v2">
                 <div class="lift-topbox">
-                  <div class="lift-top-title">Multi-Stage Retrieval &amp; Graph Constraint Formulation</div>
+                  <div class="lift-top-title">Separate data preparation from online reasoning</div>
                   <div class="lift-top-flow">
                     <div class="lift-eq-card">
-                      <div class="lift-eq-label">Reciprocal Rank Fusion (RRF)</div>
-                      <div class="lift-eq-formula">
-                        \[
-                          \mathrm{RRF}(d) = \sum_{m \in \{\text{dense}, \text{lexical}\}} \frac{1}{k + r_m(d)}
-                        \]
-                      </div>
+                      <div class="lift-eq-label">Reciprocal Rank Fusion</div>
+                      <div class="lift-eq-formula">\[ \mathrm{RRF}(d)=\sum_{m\in\{\mathrm{dense},\mathrm{lexical}\}}\frac{1}{60+r_m(d)} \]</div>
                     </div>
                     <div class="lift-top-arrow">&rarr;</div>
                     <div class="lift-eq-card is-highlight">
-                      <div class="lift-eq-label">Knowledge-Grounded Generation</div>
-                      <div class="lift-eq-formula">
-                        \[
-                          \mathcal{P}(y \mid q, \mathcal{E}_{\text{RRF}}, \mathcal{G}_{\text{ontology}}) \quad \text{s.t.} \quad y \models \mathcal{R}_{\text{reviewed}}
-                        \]
-                      </div>
+                      <div class="lift-eq-label">Grounded prompt, not a proof of correctness</div>
+                      <div class="lift-eq-formula">Question + selected evidence + stored relations + route instructions</div>
                     </div>
                   </div>
                 </div>
-
                 <div class="lift-card-grid">
                   <div class="lift-mini-card">
-                    <div class="lift-mini-title">
-                      <span class="lift-mini-num">&circledone;</span> Hybrid Multi-Stage Retrieval
-                    </div>
-                    <div class="lift-mini-text">
-                      Combines BGE-M3 1024-dimensional dense embeddings (indexed with pgvector HNSW) and lexical Korean trigram inverted indices via Reciprocal Rank Fusion.
-                    </div>
-                    <div class="lift-mini-formula">
-                      \[ \text{dim} = 1024, \ k_{\mathrm{RRF}} = 60 \]
-                    </div>
+                    <div class="lift-mini-title">Prepare sources</div>
+                    <div class="lift-mini-text">Collect and sanitize documents; preserve titles, dates, source keys and comment context; chunk and embed with revision-checked BGE-M3. Synchronize reviewed graph catalogs separately.</div>
+                    <div class="lift-mini-formula">1024-dimensional normalized embeddings</div>
                   </div>
-
                   <div class="lift-mini-card">
-                    <div class="lift-mini-title">
-                      <span class="lift-mini-num">&circledtwo;</span> Ontological Knowledge Graph
-                    </div>
-                    <div class="lift-mini-text">
-                      Maintains verified class trees (50+ jobs), item hierarchy, boss tiers, and player jargon aliases to enforce hard boundaries on retrieved context.
-                    </div>
-                    <div class="lift-mini-formula">
-                      \[ \mathcal{G} = (V_{\text{entity}}, E_{\text{relation}}, \Sigma_{\text{alias}}) \]
-                    </div>
+                    <div class="lift-mini-title">Select evidence and tools</div>
+                    <div class="lift-mini-text">The Agent selects read-only tools. QA uses dense + lexical retrieval, RRF, entity scope, reranking and source diversity, with optional graph relations.</div>
+                    <div class="lift-mini-formula">QA defaults: up to 30 rerank candidates, 8 evidence records</div>
                   </div>
-
                   <div class="lift-mini-card">
-                    <div class="lift-mini-title">
-                      <span class="lift-mini-num">&circledthree;</span> Local vLLM Serving &amp; Attribution
-                    </div>
-                    <div class="lift-mini-text">
-                      Locally deployed Qwen 2.5 language models generate factual answers with Discord interactive buttons for requester-only source verification.
-                    </div>
-                    <div class="lift-mini-formula">
-                      \[ \text{Engine: vLLM}, \ \text{Context: 8k} \]
-                    </div>
+                    <div class="lift-mini-title">Generate and check</div>
+                    <div class="lift-mini-text">Request bounded local generation. Validate Agent JSON and tool arguments; apply QA-specific term checks; record errors and attribution before safe Discord output.</div>
+                    <div class="lift-mini-formula">Format validation is not factual certification</div>
                   </div>
                 </div>
+              </div>
+              <div class="content has-text-justified" style="margin-top: 2rem;">
+                <h3 class="title is-4">Before the model</h3>
+                <ol>
+                  <li><strong>Entry and context:</strong> strip the bot mention, parse options, check access/length/rate limits, and construct Agent conversation context.</li>
+                  <li><strong>Agent route:</strong> generate and validate a plan, then provide the tool catalog and schemas. Each tool result is data for the next decision—not an instruction to execute.</li>
+                  <li><strong>QA route:</strong> identify graph aliases, embed the query, retrieve dense and lexical candidates in parallel, fuse/rerank them, and separate factual claims from question-only context. Graph lookup and query embedding in the hybrid retriever are sequential.</li>
+                  <li><strong>Prompt assembly:</strong> keep canonical relations, untrusted source text, provenance, and the user question distinguishable. Do not invent unsupported abbreviation expansions.</li>
+                </ol>
+                <h3 class="title is-4">Model transport</h3>
+                <p>The client requests temperature 0.1, thinking disabled, an output-token budget, and SSE usage reporting. It collects the streamed result before Discord output. Agent plan/action/forced-final budgets are 512/768/1024 output tokens; ordinary finish decisions share the action budget. QA defaults to 1024. These are current code limits, not a measured latency guarantee.</p>
+                <h3 class="title is-4">After the model</h3>
+                <ol>
+                  <li><strong>Agent:</strong> parse the plan/action JSON and validate its schema; execute only registered tools with valid arguments; block repeated identical tool calls; checkpoint results and distinguish failed runs from success.</li>
+                  <li><strong>QA:</strong> stop without generation when both document and graph evidence are absent. Check unsupported term expansions, attempt one repair generation, and fall back to retrieved facts when generation is unavailable or repair remains invalid.</li>
+                  <li><strong>Output:</strong> add the applicable attribution, execution/source record and processing metrics; neutralize mentions and split long Discord messages. QA source inspection is requester-only and expires by default after seven days.</li>
+                </ol>
+                <p><strong>Route selection:</strong> Agent is the default. <code>--qa --rag-mode mix</code> selects mixed QA retrieval; <code>--qa --no-rag</code> selects direct QA generation. <code>--no-rag</code> alone does not prohibit the default Agent from choosing a search tool.</p>
               </div>
             </div>
           </div>
@@ -290,97 +219,200 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column is-four-fifths">
-              <h2 class="title is-3 has-text-centered">Knowledge Graph Schema</h2>
+              <h2 class="title is-3 has-text-centered">Knowledge Graph: Stored Relations, Not Guessed Links</h2>
               <div class="has-text-centered" style="margin-bottom: 2rem;">
-                <img
-                  src="./static/images/knowledge-map.svg"
-                  alt="Knowledge graph schema showing entity linking between game classes, items, and community threads"
-                  style="width: 100%; border-radius: 8px; box-shadow: 0 4px 18px rgba(0,0,0,0.06);"
-                >
-                <p class="spatial-error-caption">
-                  Figure 1. Entity relations link community threads to reviewed game ontology, resolving aliases before prompt synthesis.
-                </p>
+                <img src="./static/images/knowledge-map.svg" alt="Actual stored triples: Xenon is a Thief and Pirate; a shorthand resolves to its scroll; a Kaling variant uses Destiny mode" style="width: 100%; border-radius: 8px;">
+                <p class="spatial-error-caption">A small subset of actual stored triples, with presentation labels in English. Arrows retain their database predicate and direction; no similarity or inferred edges are added.</p>
+              </div>
+              <div class="content has-text-justified">
+                <p>The graph snapshot at 15:34 KST on 17 November 2026 contains <strong>217 entities, 292 relations, 755 aliases and 7 sources</strong>. Aliases are lookup labels, not 755 additional semantic entities. Sources retain versions and provenance.</p>
+                <p>Knowledge graph relations and community thread links are different structures. A reply-to or has-comment link supplies conversational context; it does not prove agreement, contradiction, or truth. Document retrieval remains necessary for the experiences and procedures that the graph does not contain.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- KOREAN_EXAMPLES_START -->
+      <section class="section" id="examples">
+        <div class="container is-max-desktop"><div class="columns is-centered"><div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Live Chatbot Questions &amp; Answers</h2>
+          <div class="content"><p>Captured on 17 November 2026 with the deployed Agent engine, production tools, stored data and current local model. These are application-level calls, not manually written answers; no Discord messages were posted. The database connections were read-only, and no durable conversation record was written.</p>
+          <p>Four records are selected from six exercised questions, including one format failure. Other exploratory answers were not adopted as verified gameplay guidance. This is not a randomized benchmark or a success-rate estimate. Opening excerpts are verbatim; full returned text is available below each excerpt. Review notes are separate from model output.</p>
+          <p><a href="./static/data/live-examples-2026-11-17.json">Inspect the Q&amp;A, observed tool calls and exact run measurements (JSON)</a></p></div>
+<article class="qa-example" data-sample-id="source-discovery" aria-labelledby="sample-source-discovery">
+<h3 class="title is-4" id="sample-source-discovery">Why retrieval: locate a real community source</h3>
+<p class="qa-question" lang="ko"><strong>Q.</strong> 저장된 커뮤니티 자료에서 놀라운 긍정의 혼돈 주문서가 언급된 글을 하나 찾아 제목과 게시판 이름만 알려줘. 게임 효과는 설명하지 마.</p>
+<p class="qa-output-label">Verbatim answer opening</p>
+<blockquote class="qa-opening" lang="ko">요약: &#x27;놀라운 긍정의 혼돈 주문서&#x27;가 명시적으로 언급된 글은 &#x27;심심해서 쓰는 방어구/장신구 작 종류와 구분법&#x27;이며, 해당 글은 &#x27;팁과 노하우&#x27; 게시판에 게시되었습니다. 또한 &#x27;아이템별로 판매하는 이벤트 상점 및 가격 정리&#x27; 글에서도 카르마 버전이 언급됩니다.</blockquote>
+<p class="qa-review"><strong>Review of evidence, not model output:</strong> The returned records contain the named article and board. Retrieval supplies inspectable source metadata instead of asking model weights to invent a citation. The model also volunteered quotations beyond the requested metadata; this is not verification of the gameplay mechanics in those quotations.</p>
+<p class="qa-run-meta">10.89 s application wall time &middot; 3 generation calls &middot; 1 tool attempts &middot; No final format error</p>
+<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
+<pre class="qa-transcript" lang="ko">요약: &#x27;놀라운 긍정의 혼돈 주문서&#x27;가 명시적으로 언급된 글은 &#x27;심심해서 쓰는 방어구/장신구 작 종류와 구분법&#x27;이며, 해당 글은 &#x27;팁과 노하우&#x27; 게시판에 게시되었습니다. 또한 &#x27;아이템별로 판매하는 이벤트 상점 및 가격 정리&#x27; 글에서도 카르마 버전이 언급됩니다.
+
+상세 답변:
+1. **글 제목**: 심심해서 쓰는 방어구/장신구 작 종류와 구분법
+   **게시판 이름**: 팁과 노하우
+   **근거**: 본문에서 &#x27;혼돈의 주문서와 놀라운 혼돈의 주문서는 모두 스탯하락이 존재하지만... 마찬가지로 긍정의 혼돈 주문서는 +5까지 붙지만 놀라운 긍정의 혼돈 주문서는 +5가 없는 대신 +6까지 붙습니다.&#x27;라고 명시적으로 설명하고 있습니다.
+
+2. **글 제목**: 아이템별로 판매하는 이벤트 상점 및 가격 정리
+   **게시판 이름**: 팁과 노하우
+   **근거**: &#x27;카르마 놀라운 긍정의 혼돈 주문서 100%&#x27;라는 아이템명이 가격 목록에 포함되어 있습니다.
+
+첫 번째 글이 해당 아이템의 성능 차이를 구체적으로 설명하며 직접적으로 언급하고 있어 가장 적절한 답변으로 보입니다.
+
+Data based on Maple Chat indexed community evidence</pre></details>
+<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
+<li><code>search_community</code> &mdash; returned data
+<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;놀라운 긍정의 혼돈 주문서&quot;, &quot;top_k&quot;: 5}</pre>
+<ul lang="ko">
+<li>장문 주의) [주문서작 가이드] 주문서작 궁금해하는 사람 있길래 설명싸고간다 &mdash; 팁과 노하우 <code>article:2304:41108</code></li>
+<li>심심해서 쓰는 방어구/장신구 작 종류와 구분법 &mdash; 팁과 노하우 <code>article:2304:47436</code></li>
+<li>아이템별로 판매하는 이벤트 상점 및 가격 정리 &mdash; 팁과 노하우 <code>article:2304:45135</code></li>
+</ul>
+</li>
+</ol></details></article>
+<article class="qa-example" data-sample-id="xenon-classes" aria-labelledby="sample-xenon-classes">
+<h3 class="title is-4" id="sample-xenon-classes">Why a graph: preserve two class memberships</h3>
+<p class="qa-question" lang="ko"><strong>Q.</strong> 제논은 도적 계열이야, 해적 계열이야? 지식 그래프에 등록된 분류를 확인해서 설명해줘.</p>
+<p class="qa-output-label">Verbatim answer opening</p>
+<blockquote class="qa-opening" lang="ko"><strong>요약:</strong> 지식 그래프에는 제논이 &#x27;도적&#x27;과 &#x27;해적&#x27; 계열 모두에 속하는 것으로 등록되어 있습니다. 이는 제논이 두 계열의 특성을 모두 가진 특수한 직업임을 의미합니다.</blockquote>
+<p class="qa-review"><strong>Review of evidence, not model output:</strong> Both Xenon is_a Thief and Xenon is_a Pirate are present in the tool result. The classification is supported. The full answer adds stat and skill explanations that are not present in those two triples; those additions are not validated and should not be used as a build guide.</p>
+<p class="qa-run-meta">12.58 s application wall time &middot; 3 generation calls &middot; 1 tool attempts &middot; No final format error</p>
+<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
+<pre class="qa-transcript" lang="ko">**요약:** 지식 그래프에는 제논이 &#x27;도적&#x27;과 &#x27;해적&#x27; 계열 모두에 속하는 것으로 등록되어 있습니다. 이는 제논이 두 계열의 특성을 모두 가진 특수한 직업임을 의미합니다.
+
+**상세 설명:**
+메이플스토리 공식 직업소개 페이지(2026-08-25 기준)를 기반으로 한 지식 그래프 데이터에 따르면, 제논은 `is_a` 관계에서 **도적**과 **해적** 두 계열 모두에 연결되어 있습니다.
+
+*   **도적 계열:** 제논은 도적 계열의 스탯(주력: 민첩/행운)과 일부 스킬 메커니즘을 공유합니다.
+*   **해적 계열:** 동시에 해적 계열의 스탯(주력: 힘/민첩/행운/지력 중 선택 가능)과 스킬 메커니즘도 포함하고 있습니다.
+
+따라서 제논은 단일 계열이 아닌, **도적과 해적 계열의 하이브리드(혼합) 직업**으로 분류됩니다. 이는 제논이 게임 내 다른 직업들과 달리 두 계열의 장점을 모두 취할 수 있도록 설계된 특수한 직업이기 때문입니다.
+
+Data based on Maple Chat knowledge graph</pre></details>
+<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
+<li><code>query_knowledge_graph</code> &mdash; returned data
+<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;제논 계열 도적 해적&quot;, &quot;top_k&quot;: 5}</pre>
+<ul lang="ko">
+<li>제논 <code>is_a</code> 도적 &mdash; <a href="https://maplestory.nexon.com/Guide/N23Job">메이플스토리 공식 직업소개</a> (2026-08-25)</li>
+<li>제논 <code>is_a</code> 해적 &mdash; <a href="https://maplestory.nexon.com/Guide/N23Job">메이플스토리 공식 직업소개</a> (2026-08-25)</li>
+</ul>
+</li>
+</ol></details></article>
+<article class="qa-example" data-sample-id="destiny-meanings" aria-labelledby="sample-destiny-meanings">
+<h3 class="title is-4" id="sample-destiny-meanings">Why entity types: one word, two different meanings</h3>
+<p class="qa-question" lang="ko"><strong>Q.</strong> 데스티니는 무기 이름이야, 보스 모드 이름이야? 지식 그래프에 등록된 관계를 찾아 두 의미를 구분해줘.</p>
+<p class="qa-output-label">Verbatim answer opening</p>
+<blockquote class="qa-opening" lang="ko"><strong>요약:</strong> &#x27;데스티니&#x27;는 메이플스토리에서 <strong>무기(무기 시스템)</strong>와 <strong>보스 모드(콘텐츠 모드)</strong> 두 가지 의미로 모두 사용되며, 지식 그래프 데이터에 따라 명확히 구분됩니다. &#x27;데스티니 무기&#x27;는 캐릭터의 성장 및 초월 시스템과 관련된 아이템이고, &#x27;데스티니 모드&#x27;는 특정 보스(선택받은 세렌, 감시자 칼로스, 카링 등)가 사용하는 전투 패턴이나 콘텐츠의 변형된 형태를 의미합니다.</blockquote>
+<p class="qa-review"><strong>Review of evidence, not model output:</strong> The returned graph distinguishes a weapon from a content_mode, with uses_mode edges on boss variants. One top_k=10 request was rejected by the input schema before a valid request succeeded. The base-boss shorthand in the answer is not a new database relation.</p>
+<p class="qa-run-meta">21.94 s application wall time &middot; 4 generation calls &middot; 2 tool attempts &middot; No final format error</p>
+<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
+<pre class="qa-transcript" lang="ko">**요약:** &#x27;데스티니&#x27;는 메이플스토리에서 **무기(무기 시스템)**와 **보스 모드(콘텐츠 모드)** 두 가지 의미로 모두 사용되며, 지식 그래프 데이터에 따라 명확히 구분됩니다. &#x27;데스티니 무기&#x27;는 캐릭터의 성장 및 초월 시스템과 관련된 아이템이고, &#x27;데스티니 모드&#x27;는 특정 보스(선택받은 세렌, 감시자 칼로스, 카링 등)가 사용하는 전투 패턴이나 콘텐츠의 변형된 형태를 의미합니다.
+
+**상세 구분 및 근거:**
+
+1. **무기로서의 데스티니 (Destiny Weapon)**
+   - **관계:** &#x27;데스티니 무기&#x27;는 `weapon` 타입으로 등록되어 있습니다.
+   - **설명:** 클라이언트 1.2.401 업데이트(2025-03-20)에서 도입된 새로운 무기 시스템입니다. &#x27;데스티니&#x27;라는 명칭은 이 무기 자체와 그 성장/초월 시스템(&#x27;데스티니 무기 초월&#x27;)을 지칭합니다.
+   - **근거:** `subject: &quot;데스티니 무기&quot;, object_type: &quot;weapon&quot;` (출처: NEXON 공식 업데이트 안내)
+
+2. **보스 모드로서의 데스티니 (Destiny Mode)**
+   - **관계:** &#x27;데스티니 모드&#x27;는 `content_mode` 타입으로 등록되어 있습니다.
+   - **설명:** 특정 보스들이 &#x27;데스티니 모드&#x27;라는 변형된 전투 패턴이나 콘텐츠 난이도/상태로 등장합니다. 이는 보스의 기본 형태가 아닌, 특정 조건이나 시스템(예: 데스티니 무기 초월 시스템과 연관)에 따라 활성화되는 모드입니다.
+   - **적용 보스:**&#32;
+     - 선택받은 세렌 (선택받은 세렌 uses_mode 데스티니 모드)
+     - 감시자 칼로스 (감시자 칼로스 uses_mode 데스티니 모드)
+     - 카링 (카링 uses_mode 데스티니 모드)
+   - **근거:** `subject: &quot;선택받은 세렌 (데스티니 모드)&quot;, predicate: &quot;uses_mode&quot;, object: &quot;데스티니 모드&quot;` (출처: NEXON 공식 업데이트 안내)
+
+**결론:**&#32;
+&#x27;데스티니&#x27;는 단독으로 쓰일 경우 문맥에 따라 다르지만, 지식 그래프상에서는 **&#x27;데스티니 무기&#x27;**와 **&#x27;데스티니 모드&#x27;**로 명확히 분리되어 있습니다.&#32;
+- **무기**를 말할 때는: &quot;데스티니 무기&quot; 또는 &quot;데스티니 무기 초월&quot;
+- **보스 패턴/모드**를 말할 때는: &quot;데스티니 모드&quot; (세렌, 칼로스, 카링 등 특정 보스에게 적용)
+
+**참고:** &#x27;데스티니 모드&#x27;는 &#x27;데스티니 무기 초월&#x27; 시스템의 일부(`part_of`)로 연결되어 있어, 두 개념은 시스템적으로 긴밀하게 연관되어 있습니다.
+
+Data based on Maple Chat knowledge graph</pre></details>
+<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
+<li><code>query_knowledge_graph</code> &mdash; rejected/error
+<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;데스티니&quot;, &quot;top_k&quot;: 10}</pre>
+<p lang="ko">툴 이름 또는 인자가 유효하지 않습니다.</p>
+</li>
+<li><code>query_knowledge_graph</code> &mdash; returned data
+<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;데스티니&quot;, &quot;top_k&quot;: 5}</pre>
+<ul lang="ko">
+<li>데티 <code>abbreviation_of</code> 데스티니 무기 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
+<li>선택받은 세렌 (데스티니 모드) <code>uses_mode</code> 데스티니 모드 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
+<li>감시자 칼로스 (데스티니 모드) <code>uses_mode</code> 데스티니 모드 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
+<li>카링 (데스티니 모드) <code>uses_mode</code> 데스티니 모드 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
+<li>데스티니 모드 <code>part_of</code> 데스티니 무기 초월 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
+</ul>
+</li>
+</ol></details></article>
+<article class="qa-example" data-sample-id="equipment-evidence" aria-labelledby="sample-equipment-evidence">
+<h3 class="title is-4" id="sample-equipment-evidence">Observed failure: retrieval succeeded, final output did not</h3>
+<p class="qa-question" lang="ko"><strong>Q.</strong> 제논 방어구를 직접 만들 때 추옵, 주문서, 스타포스의 작업 순서는 어떻게 잡아야 해? 저장된 커뮤니티 글을 검색해서 근거와 예외를 설명해줘.</p>
+<p class="qa-output-label">Verbatim answer opening</p>
+<blockquote class="qa-opening" lang="ko">AI 응답 형식을 검증하지 못해 답변을 완료하지 못했습니다. 다시 시도해 주세요.</blockquote>
+<p class="qa-review"><strong>Review of evidence, not model output:</strong> Two community searches returned related records, but two decision generations ended with finish_reason=length and the Agent returned invalid_decision. This record is intentionally shown as a failure, not a successful procedural answer. Finding evidence does not guarantee valid or factually correct model output.</p>
+<p class="qa-run-meta">36.95 s application wall time &middot; 5 generation calls &middot; 2 tool attempts &middot; invalid_decision</p>
+<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
+<pre class="qa-transcript" lang="ko">AI 응답 형식을 검증하지 못해 답변을 완료하지 못했습니다. 다시 시도해 주세요.</pre></details>
+<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
+<li><code>search_community</code> &mdash; returned data
+<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;제논 방어구 제작 추옵 주문서 스타포스 순서&quot;, &quot;top_k&quot;: 5}</pre>
+<ul lang="ko">
+<li>제논 방어구 작 &mdash; 팁과 노하우 <code>article:2304:45829</code></li>
+<li>제논 추옵 작 스타포스 질문 &mdash; 해적 <code>comment:article:2298:226097:771920</code></li>
+<li>제논 추옵 질문이요! &mdash; 해적 <code>comment:article:2298:224286:765924</code></li>
+<li>제논 추옵 작 스타포스 질문 &mdash; 해적 <code>article:2298:226097</code></li>
+<li>제논 힘작질문 &mdash; 질문과 답변 <code>article:2300:363565</code></li>
+</ul>
+</li>
+<li><code>search_community</code> &mdash; returned data
+<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;제논 방어구 스타포스 별작 순서 예외&quot;, &quot;top_k&quot;: 5}</pre>
+<ul lang="ko">
+<li>제논 방어구 작 &mdash; 팁과 노하우 <code>article:2304:45829</code></li>
+<li>제논 추옵 작 스타포스 질문 &mdash; 해적 <code>comment:article:2298:226097:771920</code></li>
+<li>제논 방어구 스타포스 힘작 피드백 부탁드립니다 ㅜㅜ &mdash; 해적 <code>article:2298:225745</code></li>
+<li>제논 방어구 작 &mdash; 팁과 노하우 <code>comment:article:2304:45829:978681</code></li>
+<li>제논 방어구 작할때 &mdash; 해적 <code>article:2298:231312</code></li>
+</ul>
+</li>
+</ol></details></article>
+        </div></div></div>
+      </section>
+      <!-- KOREAN_EXAMPLES_END -->
 
       <!-- Retrieval & Operations Section -->
       <section class="section" id="retrieval">
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column is-four-fifths">
-              <h2 class="title is-3 has-text-centered">Production Operations &amp; Privacy</h2>
+              <h2 class="title is-3 has-text-centered">Operations, Privacy &amp; Known Boundaries</h2>
               <div class="content has-text-justified">
-                <p>
-                  Operating a gaming community RAG assistant requires strict adherence to privacy, platform security, and data governance:
-                </p>
                 <ul>
-                  <li><strong>PII &amp; User Privacy Sanitization:</strong> Inven community authors and Discord user IDs are hashed with salt and stripped of personally identifiable information before ingestion.</li>
-                  <li><strong>OCR &amp; Multimodal Community Assets:</strong> Screenshot guides and gear infographics undergo local OCR indexing, ensuring gameplay equipment images are searchable.</li>
-                  <li><strong>Private Model Plane:</strong> Inference is executed on local GPU resources using vLLM, ensuring user queries and private server discussions are never transmitted to external third-party cloud APIs.</li>
+                  <li><strong>Local generation:</strong> the configured generator and TEI encoders remain inside the approved local service boundary. Optional character lookup is a separate NEXON API integration, not a local model.</li>
+                  <li><strong>Data handling:</strong> supported sensitive identifiers in collected text are masked and user identifiers are pseudonymized. Agent runs retain question text and tool arguments/results; session storage retains conversation text. Hashing an identifier does not mean no raw text is stored anywhere.</li>
+                  <li><strong>Availability:</strong> an active Discord process is not proof that generation is ready. The existing indexing wrapper can yield model memory and restore the mia-qwen profile afterward. No service or model configuration was changed for this page.</li>
+                  <li><strong>Remaining gap:</strong> QA term checks and source buttons do not apply identically to Agent answers. The Agent prompt still permits general gameplay guidance when a guide is missing, so evidence-only procedural answers are not guaranteed.</li>
+                  <li><strong>Freshness:</strong> date and official-source boosts help ranking but do not certify current-patch correctness. The graph and corpus totals are dated snapshots, not live counters.</li>
                 </ul>
+                <p><a href="https://github.com/Hyun-s/Maple_Chat">Application source</a> &middot; <a href="../">Return to the projects hub</a></p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Quantitative Benchmark Section -->
-      <section class="section" id="results">
-        <div class="container is-max-desktop">
-          <div class="columns is-centered">
-            <div class="column is-four-fifths">
-              <h2 class="title is-3 has-text-centered">Evaluation &amp; Verification</h2>
-              <p style="color: #4a5568; margin-bottom: 1.5rem;">
-                Ablation benchmarks evaluating plain dense retrieval against the hybrid retrieval and knowledge-graph grounded system on 150 community domain queries:
-              </p>
+      <section class="section" id="results"><div class="container is-max-desktop"><div class="columns is-centered"><div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Execution Measurements, Not an Accuracy Benchmark</h2>
+        <div class="content"><p>Measured single-run application wall time includes planning, tool selection, retrieval when requested, and answer generation. It excludes Discord delivery. Generation calls include the plan and any format-repair attempts; tokens are summed from the actual API usage records. None of these values establishes factual accuracy, recall, or a latency SLA.</p></div>
+        <div class="table-container"><table class="table academic-table is-fullwidth"><thead><tr><th>Selected run</th><th>Wall time (s)</th><th>Generation calls</th><th>Total tokens</th><th>Observed outcome</th></tr></thead><tbody><tr><td>source-discovery</td><td>10.89</td><td>3</td><td>6,235</td><td>Returned answer; see review note</td></tr><tr><td>xenon-classes</td><td>12.58</td><td>3</td><td>4,794</td><td>Returned answer; see review note</td></tr><tr><td>destiny-meanings</td><td>21.94</td><td>4</td><td>8,119</td><td>Returned answer; see review note</td></tr><tr><td>equipment-evidence</td><td>36.95</td><td>5</td><td>19,857</td><td>invalid_decision</td></tr></tbody></table></div>
+        <p class="spatial-error-caption">The previous untraceable 150-question accuracy/ablation table has been replaced with these inspectable run records. A returned answer is not automatically a verified answer.</p>
+      </div></div></div></section>
 
-              <table class="table academic-table">
-                <thead>
-                  <tr>
-                    <th>Retrieval &amp; Grounding Architecture</th>
-                    <th>Recall@5 &uarr;</th>
-                    <th>Entity Accuracy &uarr;</th>
-                    <th>Hallucination Rate &darr;</th>
-                    <th>Mean Latency (s) &darr;</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Plain Dense Retrieval (BGE-M3 only)</strong></td>
-                    <td>0.724</td>
-                    <td>68.3%</td>
-                    <td>24.6%</td>
-                    <td>0.38s</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Hybrid Retrieval (Dense + Lexical Trigram + RRF)</strong></td>
-                    <td>0.891</td>
-                    <td>81.5%</td>
-                    <td>14.2%</td>
-                    <td>0.52s</td>
-                  </tr>
-                  <tr style="background-color: #f0fdf4; font-weight: 600;">
-                    <td><strong>Hybrid RAG + Knowledge Graph Grounding (Ours)</strong></td>
-                    <td><strong>0.938</strong></td>
-                    <td><strong>98.7%</strong></td>
-                    <td><strong>1.8%</strong></td>
-                    <td><strong>0.68s</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <div class="content has-text-centered" style="margin-top: 1.5rem;">
-                <p>
-                  <strong>Key Finding:</strong> Incorporating ontology relations reduces hallucinated game mechanics from 24.6% down to 1.8%, while maintaining sub-second total response latency on consumer GPU hardware.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <!-- BibTeX Citation Section -->
       <section class="section" id="citation">

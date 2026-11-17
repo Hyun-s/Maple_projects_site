@@ -1,0 +1,20 @@
+/* Scoped additions; the existing academic template remains unchanged. */
+.qa-example { padding: 1.75rem 0; border-bottom: 1px solid #dedede; }
+.qa-example:last-child { border-bottom: 0; }
+.qa-question { font-size: 1.06rem; line-height: 1.8; margin: 0 0 1rem; overflow-wrap: anywhere; }
+.qa-output-label { color: #4a4a4a; font-size: .85rem; margin-bottom: .4rem; }
+.qa-opening { margin: 0 0 1rem; padding: 1rem 1.15rem; border: 1px solid #dedede; border-radius: 6px; background: #fafafa; color: #303030; line-height: 1.8; overflow-wrap: anywhere; }
+.qa-review { margin: 1rem 0; line-height: 1.7; }
+.qa-run-meta { font-size: .86rem; color: #4a4a4a; line-height: 1.7; }
+.qa-details { margin-top: .75rem; }
+.qa-details summary { cursor: pointer; padding: .55rem 0; font-weight: 600; color: #363636; }
+.qa-details summary:focus-visible { outline: 2px solid #3273dc; outline-offset: 3px; }
+pre.qa-transcript, pre.qa-arguments { white-space: pre-wrap; overflow-wrap: anywhere; word-break: normal; max-width: 100%; font-family: inherit; background: #fafafa; color: #303030; border: 1px solid #dedede; border-radius: 4px; line-height: 1.75; padding: 1rem; }
+pre.qa-arguments { font-family: monospace; font-size: .85rem; }
+.qa-trace { margin-left: 1.3rem; }
+.qa-trace > li { padding: .6rem 0; }
+.qa-trace ul { list-style: disc; margin: .65rem 0 .65rem 1.2rem; line-height: 1.7; }
+.qa-trace li, .qa-trace a { overflow-wrap: anywhere; }
+#results .academic-table { min-width: 620px; }
+#pipeline .lift-eq-formula { overflow-wrap: anywhere; }
+@media (max-width: 600px) { .qa-question { font-size: 1rem; } .qa-opening, pre.qa-transcript, pre.qa-arguments { padding: .8rem; } }
