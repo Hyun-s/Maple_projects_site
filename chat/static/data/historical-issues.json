@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "record_type": "historical_issue_excerpts",
+  "prepared_on": "2026-11-17",
+  "new_model_runs": false,
+  "complete_original_conversations": false,
+  "controlled_ablation": false,
+  "source_document": "docs/service-quality-log.md",
+  "source_commit": "d971e5f09995d816dd239e50fe9060de3a65be4a",
+  "issues": [
+    {
+      "id": "SQ-2026-08-24-001",
+      "status": "monitoring",
+      "title": "Xenon: equivalent questions, contradictory crafting orders",
+      "source_url": "https://github.com/Hyun-s/Maple_Chat/blob/d971e5f09995d816dd239e50fe9060de3a65be4a/docs/service-quality-log.md#L41-L122",
+      "quotes": [
+        {
+          "id": "xenon-question-a",
+          "text": "제논 방어구 직작할 때 어떻게 해야 할까?",
+          "line_start": 52,
+          "line_end": 52,
+          "label": "Original question A",
+          "sha256": "db381c19603517fa747b623ba9d4fff85ffa101ee0edb7c35427e930bb3cdc47"
+        },
+        {
+          "id": "xenon-result-a",
+          "text": "놀긍 → 스타포스 → 추옵",
+          "line_start": 53,
+          "line_end": 53,
+          "label": "Recorded response excerpt A",
+          "sha256": "5cd8b8888fd32174e8a3784867eb1d9a53315bd914160bbe01c75ddaacee2c51"
+        },
+        {
+          "id": "xenon-question-b",
+          "text": "제논 방어구 직작 순서를 알려줘",
+          "line_start": 54,
+          "line_end": 54,
+          "label": "Original question B",
+          "sha256": "ca564af2440324d6db3eb28fb68d0a25fa526c404b09dd844bf854158d2c9b52"
+        },
+        {
+          "id": "xenon-result-b",
+          "text": "추옵 → 놀긍 → 스타포스",
+          "line_start": 55,
+          "line_end": 55,
+          "label": "Recorded response excerpt B",
+          "sha256": "9948b13e9c67962d7101f1fe6fd62ff76ecc47720458b7c08fc0fd206448efaa"
+        }
+      ]
+    },
+    {
+      "id": "SQ-2026-08-24-002",
+      "status": "monitoring",
+      "title": "Item abbreviation: a plausible expansion is not a canonical name",
+      "source_url": "https://github.com/Hyun-s/Maple_Chat/blob/d971e5f09995d816dd239e50fe9060de3a65be4a/docs/service-quality-log.md#L123-L223",
+      "quotes": [
+        {
+          "id": "abbreviation-error",
+          "text": "놀러긍",
+          "line_start": 132,
+          "line_end": 132,
+          "label": "Recorded incorrect expansion of the abbreviation",
+          "sha256": "c89fadda47f601d099d49a344bdde61f37e2fc660e870a84d69e71b159f19a45"
+        },
+        {
+          "id": "canonical-name",
+          "text": "놀라운 긍정의 혼돈 주문서",
+          "line_start": 133,
+          "line_end": 133,
+          "label": "Canonical item name recorded in the issue",
+          "sha256": "6cf2df043a5b805233e56ba42e14a432649c899f330e43cdbc6925f831a46f85"
+        },
+        {
+          "id": "canonical-recheck",
+          "text": "  - case1: `추가 옵션`, `놀라운 긍정의 혼돈 주문서`, `아크 이노센트 주문서`,\n    `프리미엄 악세서리 공격력 주문서`로 정확히 생성\n  - case2: `놀라운 긍정의 혼돈 주문서(놀긍)`, `추가 옵션(추옵)`,\n    `아크 이노센트 주문서(아크이노)`로 정확히 생성",
+          "line_start": 211,
+          "line_end": 214,
+          "label": "Historical rerun summary copied from the issue log; not a complete answer",
+          "sha256": "0eedfba4ba1923e6b2f3bb1bc67bb893d70ab5ebde9d9dd225fadf3e0cd3939d"
+        }
+      ]
+    }
+  ],
+  "discord_usage": {
+    "mention_is_placeholder": true,
+    "scope": "Explicit QA options; the default Agent is a separate tool-selecting route.",
+    "commands": [
+      {
+        "id": "llm-only",
+        "flags": "--qa --no-rag",
+        "mode": "bypass",
+        "uses_evidence": false,
+        "uses_knowledge": false
+      },
+      {
+        "id": "document-rag",
+        "flags": "--qa --rag-mode naive",
+        "mode": "naive",
+        "uses_evidence": true,
+        "uses_knowledge": false
+      },
+      {
+        "id": "rag-and-kg",
+        "flags": "--qa --rag-mode mix",
+        "mode": "mix",
+        "uses_evidence": true,
+        "uses_knowledge": true
+      },
+      {
+        "id": "kg-local",
+        "flags": "--qa --rag-mode local",
+        "mode": "local",
+        "uses_evidence": false,
+        "uses_knowledge": true
+      },
+      {
+        "id": "kg-global",
+        "flags": "--qa --rag-mode global",
+        "mode": "global",
+        "uses_evidence": false,
+        "uses_knowledge": true
+      },
+      {
+        "id": "hybrid",
+        "flags": "--qa --rag-mode hybrid",
+        "mode": "hybrid",
+        "uses_evidence": true,
+        "uses_knowledge": true
+      }
+    ],
+    "source_urls": [
+      "https://github.com/Hyun-s/Maple_Chat/blob/d971e5f09995d816dd239e50fe9060de3a65be4a/src/maple_chat/retrieval/modes.py#L29-L35"
+    ],
+    "implementation_source_commit": "b5c7ac02012d12cb652228afe7e8a176dca88cce",
+    "implementation_files": [
+      "src/maple_chat/discord/routing.py:59-127",
+      "src/maple_chat/retrieval/modes.py:29-35",
+      "src/maple_chat/qa/service.py:629-715"
+    ]
+  }
+}

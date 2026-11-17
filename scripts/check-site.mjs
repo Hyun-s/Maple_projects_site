@@ -34,6 +34,7 @@ const requiredFiles = [
   "chat/static/css/index.css",
   "chat/static/css/showcase.css",
   "chat/static/data/live-examples-2026-11-17.json",
+  "chat/static/data/historical-issues.json",
   "chat/static/images/favicon.svg",
   "chat/static/images/system-map.svg",
   "chat/static/images/knowledge-map.svg",
@@ -99,7 +100,7 @@ for (const file of publicTextFiles) {
   // Security scanning below always examines the complete file, with no exemption.
   const languageContents = file === "chat/index.html"
     ? contents.replace(/<!-- KOREAN_EXAMPLES_START -->[\s\S]*?<!-- KOREAN_EXAMPLES_END -->/g, "")
-    : file === "chat/static/data/live-examples-2026-11-17.json" ? "" : contents;
+    : file === "chat/static/data/historical-issues.json" ? "" : contents;
   if (/[\uAC00-\uD7AF]/u.test(languageContents)) {
     failures.push(`${file} contains Korean outside the approved chatbot examples.`);
   }

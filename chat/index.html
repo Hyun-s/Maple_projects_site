@@ -94,7 +94,7 @@
               <div class="content has-text-justified">
                 <p>Maple Chat is a local-first Korean assistant for a configured Discord community. Its default Agent path plans a question, selects schema-validated read-only tools, evaluates their results, and returns an answer. Tools provide stored community evidence, official updates, exact knowledge-graph relations, deterministic experience calculations, and optional character information.</p>
                 <p>The alternative QA path combines BGE-M3 dense retrieval with lexical search, Reciprocal Rank Fusion, BGE-Reranker scoring, and reviewed entity relations in PostgreSQL. Generation uses a local OpenAI-compatible service; the current deployment uses TensorFold serving under the application model alias <code>local-coder</code>. No part of this architecture makes every generated statement automatically correct.</p>
-                <p>This page describes the implementation inspected on <time datetime="2026-11-17">17 November 2026</time>. The Korean examples below are actual application-level runs using the deployed chatbot engine, current model, and stored data—not hand-written demonstration answers or a new accuracy benchmark.</p>
+                <p>This page describes the implementation inspected on <time datetime="2026-11-17">17 November 2026</time>. The Korean excerpts below come from existing user-reported Discord issues and their recorded verification history. They are not newly authored test prompts or reconstructed full conversations; the mode guide describes the currently implemented Discord options.</p>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@
                   <div class="content">
                     <p>A question about equipment investment or player experience needs passages from stored discussions—not a plausible answer recalled from model weights. Dense and lexical candidates are fused and reranked so the model can inspect a bounded set of relevant sources.</p>
                     <p>Retrieval returns observations, not universal rules. A question, failed attempt, historical patch, and successful report must not be treated as interchangeable evidence.</p>
-                    <p><a href="#examples">See the live community-search example and its observed tool trace.</a></p>
+                    <p><a href="#examples">See the recorded Xenon crafting issue and its evidence-handling failure.</a></p>
                   </div>
                 </div>
                 <div class="spatial-error-panel">
@@ -143,7 +143,7 @@
                   <div class="content">
                     <p>Similar text cannot by itself establish a class relation or disambiguate a shared name. The graph stores explicit triples: Xenon belongs to both Thief and Pirate; the Destiny weapon and Destiny content mode are separate entities.</p>
                     <p>Alias matching and stored relations provide a canonical reference. They do not automatically supply boss tactics, skill rotations, or current community consensus.</p>
-                    <p><a href="#knowledge">Inspect the real relation subset</a>, then compare the Korean Agent answers below.</p>
+                    <p><a href="#knowledge">Inspect the real relation subset</a>, then inspect the historical abbreviation failure below.</p>
                   </div>
                 </div>
               </div>
@@ -234,155 +234,54 @@
       </section>
 
       <!-- KOREAN_EXAMPLES_START -->
-      <section class="section" id="examples">
-        <div class="container is-max-desktop"><div class="columns is-centered"><div class="column is-four-fifths">
-          <h2 class="title is-3 has-text-centered">Live Chatbot Questions &amp; Answers</h2>
-          <div class="content"><p>Captured on 17 November 2026 with the deployed Agent engine, production tools, stored data and current local model. These are application-level calls, not manually written answers; no Discord messages were posted. The database connections were read-only, and no durable conversation record was written.</p>
-          <p>Four records are selected from six exercised questions, including one format failure. Other exploratory answers were not adopted as verified gameplay guidance. This is not a randomized benchmark or a success-rate estimate. Opening excerpts are verbatim; full returned text is available below each excerpt. Review notes are separate from model output.</p>
-          <p><a href="./static/data/live-examples-2026-11-17.json">Inspect the Q&amp;A, observed tool calls and exact run measurements (JSON)</a></p></div>
-<article class="qa-example" data-sample-id="source-discovery" aria-labelledby="sample-source-discovery">
-<h3 class="title is-4" id="sample-source-discovery">Why retrieval: locate a real community source</h3>
-<p class="qa-question" lang="ko"><strong>Q.</strong> 저장된 커뮤니티 자료에서 놀라운 긍정의 혼돈 주문서가 언급된 글을 하나 찾아 제목과 게시판 이름만 알려줘. 게임 효과는 설명하지 마.</p>
-<p class="qa-output-label">Verbatim answer opening</p>
-<blockquote class="qa-opening" lang="ko">요약: &#x27;놀라운 긍정의 혼돈 주문서&#x27;가 명시적으로 언급된 글은 &#x27;심심해서 쓰는 방어구/장신구 작 종류와 구분법&#x27;이며, 해당 글은 &#x27;팁과 노하우&#x27; 게시판에 게시되었습니다. 또한 &#x27;아이템별로 판매하는 이벤트 상점 및 가격 정리&#x27; 글에서도 카르마 버전이 언급됩니다.</blockquote>
-<p class="qa-review"><strong>Review of evidence, not model output:</strong> The returned records contain the named article and board. Retrieval supplies inspectable source metadata instead of asking model weights to invent a citation. The model also volunteered quotations beyond the requested metadata; this is not verification of the gameplay mechanics in those quotations.</p>
-<p class="qa-run-meta">10.89 s application wall time &middot; 3 generation calls &middot; 1 tool attempts &middot; No final format error</p>
-<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
-<pre class="qa-transcript" lang="ko">요약: &#x27;놀라운 긍정의 혼돈 주문서&#x27;가 명시적으로 언급된 글은 &#x27;심심해서 쓰는 방어구/장신구 작 종류와 구분법&#x27;이며, 해당 글은 &#x27;팁과 노하우&#x27; 게시판에 게시되었습니다. 또한 &#x27;아이템별로 판매하는 이벤트 상점 및 가격 정리&#x27; 글에서도 카르마 버전이 언급됩니다.
-
-상세 답변:
-1. **글 제목**: 심심해서 쓰는 방어구/장신구 작 종류와 구분법
-   **게시판 이름**: 팁과 노하우
-   **근거**: 본문에서 &#x27;혼돈의 주문서와 놀라운 혼돈의 주문서는 모두 스탯하락이 존재하지만... 마찬가지로 긍정의 혼돈 주문서는 +5까지 붙지만 놀라운 긍정의 혼돈 주문서는 +5가 없는 대신 +6까지 붙습니다.&#x27;라고 명시적으로 설명하고 있습니다.
-
-2. **글 제목**: 아이템별로 판매하는 이벤트 상점 및 가격 정리
-   **게시판 이름**: 팁과 노하우
-   **근거**: &#x27;카르마 놀라운 긍정의 혼돈 주문서 100%&#x27;라는 아이템명이 가격 목록에 포함되어 있습니다.
-
-첫 번째 글이 해당 아이템의 성능 차이를 구체적으로 설명하며 직접적으로 언급하고 있어 가장 적절한 답변으로 보입니다.
-
-Data based on Maple Chat indexed community evidence</pre></details>
-<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
-<li><code>search_community</code> &mdash; returned data
-<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;놀라운 긍정의 혼돈 주문서&quot;, &quot;top_k&quot;: 5}</pre>
-<ul lang="ko">
-<li>장문 주의) [주문서작 가이드] 주문서작 궁금해하는 사람 있길래 설명싸고간다 &mdash; 팁과 노하우 <code>article:2304:41108</code></li>
-<li>심심해서 쓰는 방어구/장신구 작 종류와 구분법 &mdash; 팁과 노하우 <code>article:2304:47436</code></li>
-<li>아이템별로 판매하는 이벤트 상점 및 가격 정리 &mdash; 팁과 노하우 <code>article:2304:45135</code></li>
-</ul>
-</li>
-</ol></details></article>
-<article class="qa-example" data-sample-id="xenon-classes" aria-labelledby="sample-xenon-classes">
-<h3 class="title is-4" id="sample-xenon-classes">Why a graph: preserve two class memberships</h3>
-<p class="qa-question" lang="ko"><strong>Q.</strong> 제논은 도적 계열이야, 해적 계열이야? 지식 그래프에 등록된 분류를 확인해서 설명해줘.</p>
-<p class="qa-output-label">Verbatim answer opening</p>
-<blockquote class="qa-opening" lang="ko"><strong>요약:</strong> 지식 그래프에는 제논이 &#x27;도적&#x27;과 &#x27;해적&#x27; 계열 모두에 속하는 것으로 등록되어 있습니다. 이는 제논이 두 계열의 특성을 모두 가진 특수한 직업임을 의미합니다.</blockquote>
-<p class="qa-review"><strong>Review of evidence, not model output:</strong> Both Xenon is_a Thief and Xenon is_a Pirate are present in the tool result. The classification is supported. The full answer adds stat and skill explanations that are not present in those two triples; those additions are not validated and should not be used as a build guide.</p>
-<p class="qa-run-meta">12.58 s application wall time &middot; 3 generation calls &middot; 1 tool attempts &middot; No final format error</p>
-<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
-<pre class="qa-transcript" lang="ko">**요약:** 지식 그래프에는 제논이 &#x27;도적&#x27;과 &#x27;해적&#x27; 계열 모두에 속하는 것으로 등록되어 있습니다. 이는 제논이 두 계열의 특성을 모두 가진 특수한 직업임을 의미합니다.
-
-**상세 설명:**
-메이플스토리 공식 직업소개 페이지(2026-08-25 기준)를 기반으로 한 지식 그래프 데이터에 따르면, 제논은 `is_a` 관계에서 **도적**과 **해적** 두 계열 모두에 연결되어 있습니다.
-
-*   **도적 계열:** 제논은 도적 계열의 스탯(주력: 민첩/행운)과 일부 스킬 메커니즘을 공유합니다.
-*   **해적 계열:** 동시에 해적 계열의 스탯(주력: 힘/민첩/행운/지력 중 선택 가능)과 스킬 메커니즘도 포함하고 있습니다.
-
-따라서 제논은 단일 계열이 아닌, **도적과 해적 계열의 하이브리드(혼합) 직업**으로 분류됩니다. 이는 제논이 게임 내 다른 직업들과 달리 두 계열의 장점을 모두 취할 수 있도록 설계된 특수한 직업이기 때문입니다.
-
-Data based on Maple Chat knowledge graph</pre></details>
-<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
-<li><code>query_knowledge_graph</code> &mdash; returned data
-<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;제논 계열 도적 해적&quot;, &quot;top_k&quot;: 5}</pre>
-<ul lang="ko">
-<li>제논 <code>is_a</code> 도적 &mdash; <a href="https://maplestory.nexon.com/Guide/N23Job">메이플스토리 공식 직업소개</a> (2026-08-25)</li>
-<li>제논 <code>is_a</code> 해적 &mdash; <a href="https://maplestory.nexon.com/Guide/N23Job">메이플스토리 공식 직업소개</a> (2026-08-25)</li>
-</ul>
-</li>
-</ol></details></article>
-<article class="qa-example" data-sample-id="destiny-meanings" aria-labelledby="sample-destiny-meanings">
-<h3 class="title is-4" id="sample-destiny-meanings">Why entity types: one word, two different meanings</h3>
-<p class="qa-question" lang="ko"><strong>Q.</strong> 데스티니는 무기 이름이야, 보스 모드 이름이야? 지식 그래프에 등록된 관계를 찾아 두 의미를 구분해줘.</p>
-<p class="qa-output-label">Verbatim answer opening</p>
-<blockquote class="qa-opening" lang="ko"><strong>요약:</strong> &#x27;데스티니&#x27;는 메이플스토리에서 <strong>무기(무기 시스템)</strong>와 <strong>보스 모드(콘텐츠 모드)</strong> 두 가지 의미로 모두 사용되며, 지식 그래프 데이터에 따라 명확히 구분됩니다. &#x27;데스티니 무기&#x27;는 캐릭터의 성장 및 초월 시스템과 관련된 아이템이고, &#x27;데스티니 모드&#x27;는 특정 보스(선택받은 세렌, 감시자 칼로스, 카링 등)가 사용하는 전투 패턴이나 콘텐츠의 변형된 형태를 의미합니다.</blockquote>
-<p class="qa-review"><strong>Review of evidence, not model output:</strong> The returned graph distinguishes a weapon from a content_mode, with uses_mode edges on boss variants. One top_k=10 request was rejected by the input schema before a valid request succeeded. The base-boss shorthand in the answer is not a new database relation.</p>
-<p class="qa-run-meta">21.94 s application wall time &middot; 4 generation calls &middot; 2 tool attempts &middot; No final format error</p>
-<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
-<pre class="qa-transcript" lang="ko">**요약:** &#x27;데스티니&#x27;는 메이플스토리에서 **무기(무기 시스템)**와 **보스 모드(콘텐츠 모드)** 두 가지 의미로 모두 사용되며, 지식 그래프 데이터에 따라 명확히 구분됩니다. &#x27;데스티니 무기&#x27;는 캐릭터의 성장 및 초월 시스템과 관련된 아이템이고, &#x27;데스티니 모드&#x27;는 특정 보스(선택받은 세렌, 감시자 칼로스, 카링 등)가 사용하는 전투 패턴이나 콘텐츠의 변형된 형태를 의미합니다.
-
-**상세 구분 및 근거:**
-
-1. **무기로서의 데스티니 (Destiny Weapon)**
-   - **관계:** &#x27;데스티니 무기&#x27;는 `weapon` 타입으로 등록되어 있습니다.
-   - **설명:** 클라이언트 1.2.401 업데이트(2025-03-20)에서 도입된 새로운 무기 시스템입니다. &#x27;데스티니&#x27;라는 명칭은 이 무기 자체와 그 성장/초월 시스템(&#x27;데스티니 무기 초월&#x27;)을 지칭합니다.
-   - **근거:** `subject: &quot;데스티니 무기&quot;, object_type: &quot;weapon&quot;` (출처: NEXON 공식 업데이트 안내)
-
-2. **보스 모드로서의 데스티니 (Destiny Mode)**
-   - **관계:** &#x27;데스티니 모드&#x27;는 `content_mode` 타입으로 등록되어 있습니다.
-   - **설명:** 특정 보스들이 &#x27;데스티니 모드&#x27;라는 변형된 전투 패턴이나 콘텐츠 난이도/상태로 등장합니다. 이는 보스의 기본 형태가 아닌, 특정 조건이나 시스템(예: 데스티니 무기 초월 시스템과 연관)에 따라 활성화되는 모드입니다.
-   - **적용 보스:**&#32;
-     - 선택받은 세렌 (선택받은 세렌 uses_mode 데스티니 모드)
-     - 감시자 칼로스 (감시자 칼로스 uses_mode 데스티니 모드)
-     - 카링 (카링 uses_mode 데스티니 모드)
-   - **근거:** `subject: &quot;선택받은 세렌 (데스티니 모드)&quot;, predicate: &quot;uses_mode&quot;, object: &quot;데스티니 모드&quot;` (출처: NEXON 공식 업데이트 안내)
-
-**결론:**&#32;
-&#x27;데스티니&#x27;는 단독으로 쓰일 경우 문맥에 따라 다르지만, 지식 그래프상에서는 **&#x27;데스티니 무기&#x27;**와 **&#x27;데스티니 모드&#x27;**로 명확히 분리되어 있습니다.&#32;
-- **무기**를 말할 때는: &quot;데스티니 무기&quot; 또는 &quot;데스티니 무기 초월&quot;
-- **보스 패턴/모드**를 말할 때는: &quot;데스티니 모드&quot; (세렌, 칼로스, 카링 등 특정 보스에게 적용)
-
-**참고:** &#x27;데스티니 모드&#x27;는 &#x27;데스티니 무기 초월&#x27; 시스템의 일부(`part_of`)로 연결되어 있어, 두 개념은 시스템적으로 긴밀하게 연관되어 있습니다.
-
-Data based on Maple Chat knowledge graph</pre></details>
-<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
-<li><code>query_knowledge_graph</code> &mdash; rejected/error
-<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;데스티니&quot;, &quot;top_k&quot;: 10}</pre>
-<p lang="ko">툴 이름 또는 인자가 유효하지 않습니다.</p>
-</li>
-<li><code>query_knowledge_graph</code> &mdash; returned data
-<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;데스티니&quot;, &quot;top_k&quot;: 5}</pre>
-<ul lang="ko">
-<li>데티 <code>abbreviation_of</code> 데스티니 무기 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
-<li>선택받은 세렌 (데스티니 모드) <code>uses_mode</code> 데스티니 모드 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
-<li>감시자 칼로스 (데스티니 모드) <code>uses_mode</code> 데스티니 모드 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
-<li>카링 (데스티니 모드) <code>uses_mode</code> 데스티니 모드 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
-<li>데스티니 모드 <code>part_of</code> 데스티니 무기 초월 &mdash; <a href="https://maplestory.nexon.com/News/Update/767">클라이언트 1.2.401 업데이트 안내 - 데스티니 무기와 결전 퀘스트</a> (1.2.401-2025-03-20)</li>
-</ul>
-</li>
-</ol></details></article>
-<article class="qa-example" data-sample-id="equipment-evidence" aria-labelledby="sample-equipment-evidence">
-<h3 class="title is-4" id="sample-equipment-evidence">Observed failure: retrieval succeeded, final output did not</h3>
-<p class="qa-question" lang="ko"><strong>Q.</strong> 제논 방어구를 직접 만들 때 추옵, 주문서, 스타포스의 작업 순서는 어떻게 잡아야 해? 저장된 커뮤니티 글을 검색해서 근거와 예외를 설명해줘.</p>
-<p class="qa-output-label">Verbatim answer opening</p>
-<blockquote class="qa-opening" lang="ko">AI 응답 형식을 검증하지 못해 답변을 완료하지 못했습니다. 다시 시도해 주세요.</blockquote>
-<p class="qa-review"><strong>Review of evidence, not model output:</strong> Two community searches returned related records, but two decision generations ended with finish_reason=length and the Agent returned invalid_decision. This record is intentionally shown as a failure, not a successful procedural answer. Finding evidence does not guarantee valid or factually correct model output.</p>
-<p class="qa-run-meta">36.95 s application wall time &middot; 5 generation calls &middot; 2 tool attempts &middot; invalid_decision</p>
-<details class="qa-details"><summary>Read the complete, unedited returned answer</summary>
-<pre class="qa-transcript" lang="ko">AI 응답 형식을 검증하지 못해 답변을 완료하지 못했습니다. 다시 시도해 주세요.</pre></details>
-<details class="qa-details"><summary>Inspect observed tool calls and sources</summary><ol class="qa-trace">
-<li><code>search_community</code> &mdash; returned data
-<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;제논 방어구 제작 추옵 주문서 스타포스 순서&quot;, &quot;top_k&quot;: 5}</pre>
-<ul lang="ko">
-<li>제논 방어구 작 &mdash; 팁과 노하우 <code>article:2304:45829</code></li>
-<li>제논 추옵 작 스타포스 질문 &mdash; 해적 <code>comment:article:2298:226097:771920</code></li>
-<li>제논 추옵 질문이요! &mdash; 해적 <code>comment:article:2298:224286:765924</code></li>
-<li>제논 추옵 작 스타포스 질문 &mdash; 해적 <code>article:2298:226097</code></li>
-<li>제논 힘작질문 &mdash; 질문과 답변 <code>article:2300:363565</code></li>
-</ul>
-</li>
-<li><code>search_community</code> &mdash; returned data
-<pre class="qa-arguments" lang="ko">{&quot;query&quot;: &quot;제논 방어구 스타포스 별작 순서 예외&quot;, &quot;top_k&quot;: 5}</pre>
-<ul lang="ko">
-<li>제논 방어구 작 &mdash; 팁과 노하우 <code>article:2304:45829</code></li>
-<li>제논 추옵 작 스타포스 질문 &mdash; 해적 <code>comment:article:2298:226097:771920</code></li>
-<li>제논 방어구 스타포스 힘작 피드백 부탁드립니다 ㅜㅜ &mdash; 해적 <code>article:2298:225745</code></li>
-<li>제논 방어구 작 &mdash; 팁과 노하우 <code>comment:article:2304:45829:978681</code></li>
-<li>제논 방어구 작할때 &mdash; 해적 <code>article:2298:231312</code></li>
-</ul>
-</li>
-</ol></details></article>
-        </div></div></div>
-      </section>
+      <section class="section" id="discord-usage"><div class="container is-max-desktop"><div class="columns is-centered"><div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Discord: Select the Answer Path</h2>
+        <div class="content">
+          <p>In an allowed server channel, select the actual bot from Discord's <code>@</code> autocomplete. <code>@Bot</code> below is a placeholder, not a literal command prefix. Send a normal mention message, not a slash command or a direct message. Put options before the question and repeat them for each message.</p>
+          <p>Use <code>--qa</code> for a controlled path selection. Without it, the default Agent chooses its own tools. In particular, <code>--no-rag</code> alone does not disable Agent tool searches.</p>
+        </div>
+        <div class="table-container"><table class="table academic-table is-fullwidth"><thead><tr><th>Selected QA path</th><th>Document retrieval</th><th>Knowledge graph</th></tr></thead><tbody>
+          <tr><td>LLM only: <code>--qa --no-rag</code></td><td>No</td><td>No</td></tr>
+          <tr><td>Document RAG: <code>--qa --rag-mode naive</code></td><td>Yes</td><td>No</td></tr>
+          <tr><td>Document RAG + KG: <code>--qa --rag-mode mix</code></td><td>Yes</td><td>Yes</td></tr>
+        </tbody></table></div>
+        <p>Command syntax using the same recorded user question; these lines are not new model executions or recorded answers:</p>
+        <pre class="qa-arguments" lang="ko">@Bot --qa --no-rag 제논 방어구 직작 순서를 알려줘</pre>
+        <pre class="qa-arguments" lang="ko">@Bot --qa --rag-mode naive 제논 방어구 직작 순서를 알려줘</pre>
+        <pre class="qa-arguments" lang="ko">@Bot --qa --rag-mode mix 제논 방어구 직작 순서를 알려줘</pre>
+        <div class="content"><ul>
+          <li><code>naive</code> still uses the existing dense + lexical document retrieval and reranking; it is not vector-only search. It disables KG anchors and KG context.</li>
+          <li><code>mix</code> combines document evidence with graph relations, including entity linking on retrieved evidence.</li>
+          <li><code>--qa --rag-mode local</code> selects KG-only context with one graph hop; <code>--qa --rag-mode global</code> selects two hops. Neither retrieves document evidence.</li>
+          <li><code>--qa --rag-mode hybrid</code> combines documents with two-hop query KG context and KG anchors, but without the evidence-entity enrichment used by mix.</li>
+          <li><code>--qa --rag-mode bypass</code> is an alternative to <code>--qa --no-rag</code>. Use <code>@Bot question</code> or <code>--agent</code> for the ordinary tool-selecting Agent, not a fixed ablation.</li>
+          <li>QA does not receive the Agent's recent-turn context. Repeat needed conditions in each question. When a grounded QA route finds neither document nor graph evidence, it reports insufficient evidence instead of forcing a generated answer.</li>
+        </ul></div>
+        <p class="qa-run-meta">Verified against the deployed routing and QA source, with CPU-only route/plan assertions. No Discord messages, model inference, configuration changes or service restarts were performed for this update.</p>
+      </div></div></div></section>
+      <section class="section" id="examples"><div class="container is-max-desktop"><div class="columns is-centered"><div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Historical User Issues: What Failed and Why</h2>
+        <div class="content"><p>These are the existing Xenon crafting and item-abbreviation issues from the service quality log, discovered during Discord manual testing. They are issue-record excerpts, not complete original Discord transcripts. No replacement questions or answers were generated for this section.</p>
+        <p><a href="./static/data/historical-issues.json">Inspect recorded excerpts, exact source locations, hashes and Discord mode definitions (JSON)</a></p></div>
+<article class="qa-example" data-sample-id="SQ-2026-08-24-001"><h3 class="title is-4">Xenon: equivalent questions, contradictory crafting orders</h3><p class="qa-run-meta">SQ-2026-08-24-001 &middot; recorded status: monitoring &middot; <a href="https://github.com/Hyun-s/Maple_Chat/blob/d971e5f09995d816dd239e50fe9060de3a65be4a/docs/service-quality-log.md#L41-L122">Read the original issue record</a></p>
+<p class="qa-output-label">Original question A</p><pre class="qa-transcript" lang="ko" data-record-id="xenon-question-a">제논 방어구 직작할 때 어떻게 해야 할까?</pre>
+<p class="qa-output-label">Recorded response excerpt A</p><pre class="qa-transcript" lang="ko" data-record-id="xenon-result-a">놀긍 → 스타포스 → 추옵</pre>
+<p class="qa-output-label">Original question B</p><pre class="qa-transcript" lang="ko" data-record-id="xenon-question-b">제논 방어구 직작 순서를 알려줘</pre>
+<p class="qa-output-label">Recorded response excerpt B</p><pre class="qa-transcript" lang="ko" data-record-id="xenon-result-b">추옵 → 놀긍 → 스타포스</pre>
+<div class="content"><p><strong>What this shows:</strong> different wording caused inconsistent procedural answers. The issue already describes embedding and keyword retrieval, so this is not a controlled no-RAG versus RAG ablation. It motivates careful evidence selection and distinguishing a poster's question or assumption from a commenter's actual claim, rather than treating any retrieved text as a universal crafting rule.</p><p>The issue log rejects the first case-specific search-hint fix as insufficient. The subsequent evidence-role separation is documented in the same quality log and the retrieval textbook; these excerpts are historical failure evidence, not current gameplay instructions.</p></div>
+</article>
+<article class="qa-example" data-sample-id="SQ-2026-08-24-002"><h3 class="title is-4">Item abbreviation: a plausible expansion is not a canonical name</h3><p class="qa-run-meta">SQ-2026-08-24-002 &middot; recorded status: monitoring &middot; <a href="https://github.com/Hyun-s/Maple_Chat/blob/d971e5f09995d816dd239e50fe9060de3a65be4a/docs/service-quality-log.md#L123-L223">Read the original issue record</a></p>
+<p class="qa-output-label">Recorded incorrect expansion of the abbreviation</p><pre class="qa-transcript" lang="ko" data-record-id="abbreviation-error">놀러긍</pre>
+<p class="qa-output-label">Canonical item name recorded in the issue</p><pre class="qa-transcript" lang="ko" data-record-id="canonical-name">놀라운 긍정의 혼돈 주문서</pre>
+<p class="qa-output-label">Historical rerun summary copied from the issue log; not a complete answer</p><pre class="qa-transcript" lang="ko" data-record-id="canonical-recheck">  - case1: `추가 옵션`, `놀라운 긍정의 혼돈 주문서`, `아크 이노센트 주문서`,
+    `프리미엄 악세서리 공격력 주문서`로 정확히 생성
+  - case2: `놀라운 긍정의 혼돈 주문서(놀긍)`, `추가 옵션(추옵)`,
+    `아크 이노센트 주문서(아크이노)`로 정확히 생성</pre>
+<div class="content"><p><strong>Why the KG was added:</strong> community comments may contain only an abbreviation. Retrieval alone does not supply a trustworthy full name, and the model guessed a nonexistent expansion. The replacement is a reviewed abbreviation-to-item relation, not a string replacement for one known misspelling.</p></div>
+<pre class="qa-transcript" lang="ko">놀긍 — abbreviation_of → 놀라운 긍정의 혼돈 주문서</pre>
+<div class="content"><p><strong>Why question-only lookup was insufficient:</strong> the original equipment question did not contain the item abbreviations; they appeared in retrieved comments. The issue records additional failures after the first KG integration. The later fix links entities in both the question and retrieved evidence and validates generated expansions against canonical relation names.</p><p>The rerun summary above is historical verification recorded in the issue log. It is not a newly executed answer, a complete model transcript, or proof that every future answer is correct.</p></div>
+</article>
+      </div></div></div></section>
       <!-- KOREAN_EXAMPLES_END -->
 
       <!-- Retrieval & Operations Section -->
@@ -407,10 +306,12 @@ Data based on Maple Chat knowledge graph</pre></details>
       </section>
 
       <section class="section" id="results"><div class="container is-max-desktop"><div class="columns is-centered"><div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Execution Measurements, Not an Accuracy Benchmark</h2>
-        <div class="content"><p>Measured single-run application wall time includes planning, tool selection, retrieval when requested, and answer generation. It excludes Discord delivery. Generation calls include the plan and any format-repair attempts; tokens are summed from the actual API usage records. None of these values establishes factual accuracy, recall, or a latency SLA.</p></div>
-        <div class="table-container"><table class="table academic-table is-fullwidth"><thead><tr><th>Selected run</th><th>Wall time (s)</th><th>Generation calls</th><th>Total tokens</th><th>Observed outcome</th></tr></thead><tbody><tr><td>source-discovery</td><td>10.89</td><td>3</td><td>6,235</td><td>Returned answer; see review note</td></tr><tr><td>xenon-classes</td><td>12.58</td><td>3</td><td>4,794</td><td>Returned answer; see review note</td></tr><tr><td>destiny-meanings</td><td>21.94</td><td>4</td><td>8,119</td><td>Returned answer; see review note</td></tr><tr><td>equipment-evidence</td><td>36.95</td><td>5</td><td>19,857</td><td>invalid_decision</td></tr></tbody></table></div>
-        <p class="spatial-error-caption">The previous untraceable 150-question accuracy/ablation table has been replaced with these inspectable run records. A returned answer is not automatically a verified answer.</p>
+        <h2 class="title is-3 has-text-centered">Evidence Status and Remaining Limits</h2>
+        <div class="table-container"><table class="table academic-table is-fullwidth"><thead><tr><th>Historical issue</th><th>Recorded evidence</th><th>Limit</th></tr></thead><tbody>
+          <tr><td>SQ-2026-08-24-001</td><td>Two original question texts and contradictory response excerpts</td><td>Not a no-RAG/RAG ablation; complete answer text is not supplied</td></tr>
+          <tr><td>SQ-2026-08-24-002</td><td>Incorrect term, canonical relation, intermediate failures and later rerun summary</td><td>Historical verification; issue remains monitoring</td></tr>
+        </tbody></table></div>
+        <p class="spatial-error-caption">The earlier agent-authored demonstration prompts and their timing table have been withdrawn from this showcase. No accuracy improvement, latency result or guaranteed fix is inferred from these historical issue excerpts.</p>
       </div></div></div></section>
 
 
